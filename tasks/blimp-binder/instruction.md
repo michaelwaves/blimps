@@ -2,8 +2,8 @@ Gas vesicles are hollow, gas-filled protein shells built from the structural pro
 
 Design a de novo protein binder for each of two GvpA shell proteins:
 
-- `/app/foundry/pdbs/7r1c.pdb` — GvpA from *Priestia megaterium* (thick, pressure-resistant shell). No natural binder is known.
-- `/app/foundry/pdbs/8gbs.pdb` — GvpA from *Dolichospermum flos-aquae*. Its natural partner GvpC binds along the outer shell surface; a binder for a different surface would be new.
+- `/app/foundry/pdbs/7r1c.pdb` — GvpA from *Priestia megaterium* No natural binder is known. 7r1c is a 5 mer of GvPA
+- `/app/foundry/pdbs/8gbs.pdb` — GvpA from *Dolichospermum flos-aquae*. It is a 4 mer of GvPA and one subset repeat unit of GvpC. Its natural partner GvpC binds along the outer shell surface; a binder for a different surface would be new.
 
 Submit `/logs/outputs/binder_7r1c.pdb` and `/logs/outputs/binder_8gbs.pdb`: ATOM records for a single protein chain of 30-150 residues whose CA records, in file order, encode the binder sequence using the 20 standard amino acids.
 

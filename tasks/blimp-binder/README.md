@@ -20,14 +20,23 @@ per GvpA copy), rebuilt from RCSB by `authoring/build_targets.py`:
 
 `tests/test_outputs.py` reads each binder sequence from the CA records of
 `/logs/outputs/binder_<target>.pdb`, refolds it from sequence with fixed-seed
-RF3 alongside the GvpA copies (GvpC omitted — no sequence), and requires the
-best binder-to-GvpA chain-pair ipTM >= 0.60 for both targets, plus a 30-150
-residue length window. Scores land in `/logs/verifier/scores.json`.
+RF3 alongside the GvpA copies (GvpC omitted — no sequence), and requires a
+binder-GvpA interface PAE <= 10 A against the best-packed GvpA copy, plus a
+30-150 residue length window. Scores land in `/logs/verifier/scores.json`.
 
-Deliberately minimal: one seed, one diffusion sample, and a sequence-only fold —
-RF3 reassembles the GvpA copies itself rather than being held to the deposited
-lattice, so the score is a proxy for binding the real vesicle surface.
-Calibrate `MIN_IPTM` after the first real agent runs.
+Why PAE and not ipTM: RF3's `summary_confidences` exposes a single global
+`iptm` and no per-chain-pair version (keys are `chain_pair_pae`,
+`chain_pair_pae_min`, `chain_pair_pde`, `chain_pair_pde_min`, `chain_ptm`,
+`iptm`, `ptm`, `overall_pae/pde/plddt`, `has_clash`, `ranking_score`). Global
+ipTM here is dominated by GvpA-GvpA contacts: folded from sequence alone RF3
+does not reassemble the shell lattice, scoring ~0.20 regardless of the binder.
+The chain-pair PAE is local to the binder and unaffected by that.
+
+Deliberately minimal: one seed, one diffusion sample, sequence-only fold — the
+score is a proxy for binding the real vesicle surface, not a claim about it.
+`MAX_INTERFACE_PAE_ANGSTROM` is a guess until a real RFD3 binder has been
+scored; `scores.json` also records per-chain PAE, global ipTM, pLDDT and clash
+for recalibration.
 
 `solution/` is a smoke-test stub (a generic helix, expected to fail the ipTM
 gate), not an oracle.
@@ -41,4 +50,4 @@ uv run harbor run -p $T -a claude-code -m claude-opus-5 -e modal
 ```
 
 Smoke test of the full pipeline: `uv run harbor run -p $T -a oracle -e modal`
-(expect reward 0.0; the junk-helix control scored ipTM 0.16 / 0.31).
+(expect reward 0.0 — the junk-helix control fails the PAE gate).

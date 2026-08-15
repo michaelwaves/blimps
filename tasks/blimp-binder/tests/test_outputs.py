@@ -1,10 +1,12 @@
-"""Score each submitted binder by RF3 interface ipTM against its GvpA target.
+"""Score each submitted binder by RF3 interface PAE against its GvpA target.
 
 Binder sequences are read from the CA records of the submissions and refolded
 from sequence alone (no templates) together with the GvpA copies of the target
-assembly. The reported score is the best binder-to-GvpA chain-pair ipTM; the
-GvpC repeat in 8GBS is poly-UNK in the deposition and so has no sequence to
-fold. Scores are dumped to /logs/verifier/scores.json.
+assembly. RF3 reports no per-chain-pair ipTM - only a global one, which is
+dominated by the GvpA-GvpA contacts it cannot reassemble from sequence - so the
+score is the symmetrized chain-pair PAE between the binder and the GvpA copy it
+binds best. The GvpC repeat in 8GBS is poly-UNK in the deposition and so has no
+sequence to fold. Scores are dumped to /logs/verifier/scores.json.
 """
 
 import json
@@ -25,7 +27,7 @@ GVPA_CHAIN_IDS = {"7r1c": "ABCDE", "8gbs": "ABCD"}
 BINDER_CHAIN_ID = "Z"
 MIN_BINDER_LENGTH = 30
 MAX_BINDER_LENGTH = 150
-MIN_IPTM = 0.60
+MAX_INTERFACE_PAE_ANGSTROM = 10.0  # CALIBRATE against a real designed binder
 
 RF3_SETTINGS = dict(n_recycles=10, diffusion_batch_size=1, num_steps=50, seed=0)
 
@@ -64,17 +66,18 @@ def folded_chain_ids(output) -> list[str]:
     return ordered
 
 
-def binder_interface_iptm(output, target_chain_ids: str) -> float:
-    """Best chain-pair ipTM between the binder and any target chain."""
-    summary = output.summary_confidences
-    chain_pair_iptm = summary.get("chain_pair_iptm")
-    if chain_pair_iptm is None:
-        return float(summary["iptm"])
+def binder_interface_paes(output, target_chain_ids: str) -> dict[str, float]:
+    """Symmetrized chain-pair PAE between the binder and each target chain."""
     ordered = folded_chain_ids(output)
-    matrix = np.asarray(chain_pair_iptm, dtype=float)
+    matrix = np.asarray(output.summary_confidences["chain_pair_pae"], dtype=float)
+    assert matrix.shape == (len(ordered), len(ordered)), (
+        f"chain_pair_pae is {matrix.shape}, expected {len(ordered)} chains"
+    )
     binder = ordered.index(BINDER_CHAIN_ID)
-    return max(float(matrix[binder][ordered.index(chain_id)])
-               for chain_id in target_chain_ids)
+    return {
+        chain_id: float(matrix[binder][index] + matrix[index][binder]) / 2
+        for chain_id, index in ((c, ordered.index(c)) for c in target_chain_ids)
+    }
 
 
 @pytest.fixture(scope="session")
@@ -96,16 +99,23 @@ def interface_scores() -> dict:
     ]
     engine = RF3InferenceEngine(ckpt_path="rf3", verbose=False, **RF3_SETTINGS)
     outputs = engine.run(inputs=inputs, out_dir=None)
-    scores = {
-        name: {
-            "iptm": binder_interface_iptm(outs[0], GVPA_CHAIN_IDS[name]),
-            "global_iptm": float(outs[0].summary_confidences["iptm"]),
-            "plddt": float(outs[0].summary_confidences["overall_plddt"]),
-        }
-        for name, outs in outputs.items()
-    }
+    scores = {name: score_output(outs[0], GVPA_CHAIN_IDS[name])
+              for name, outs in outputs.items()}
     SCORES_PATH.write_text(json.dumps(scores, indent=2))
     return scores
+
+
+def score_output(output, target_chain_ids: str) -> dict:
+    """Gate metric plus the context needed to recalibrate it."""
+    interface_paes = binder_interface_paes(output, target_chain_ids)
+    summary = output.summary_confidences
+    return {
+        "interface_pae": min(interface_paes.values()),
+        "interface_pae_per_chain": interface_paes,
+        "global_iptm": float(summary["iptm"]),
+        "plddt": float(summary["overall_plddt"]),
+        "has_clash": bool(summary["has_clash"]),
+    }
 
 
 @pytest.mark.parametrize("target_name", GVPA_SEQUENCES)
@@ -120,6 +130,9 @@ def test_binder_format(target_name: str):
 
 @pytest.mark.parametrize("target_name", GVPA_SEQUENCES)
 def test_binder_interface_confidence(target_name: str, interface_scores: dict):
-    """The refolded binder-target complex is a confident interface."""
-    iptm = interface_scores[target_name]["iptm"]
-    assert iptm >= MIN_IPTM, f"{target_name} binder ipTM {iptm:.3f} < {MIN_IPTM}"
+    """The binder packs against a GvpA copy with a confident interface."""
+    interface_pae = interface_scores[target_name]["interface_pae"]
+    assert interface_pae <= MAX_INTERFACE_PAE_ANGSTROM, (
+        f"{target_name} binder interface PAE {interface_pae:.2f} A > "
+        f"{MAX_INTERFACE_PAE_ANGSTROM} A"
+    )

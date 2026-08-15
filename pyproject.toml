@@ -1,0 +1,13 @@
+[project]
+name = "blimps"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "harbor[modal]>=0.21.0",
+    "proto-tools",
+]
+
+[tool.uv.sources]
+proto-tools = { git = "https://github.com/michaelwaves/proto-tools.git" }

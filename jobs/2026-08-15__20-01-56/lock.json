@@ -1,0 +1,70 @@
+{
+    "schema_version": 1,
+    "created_at": "2026-08-15T20:01:57.266519Z",
+    "harbor": {
+        "version": "0.14.0",
+        "is_editable": false
+    },
+    "invocation": [
+        "/mnt/nw/home/m.yu/.local/bin/harbor",
+        "run",
+        "-p",
+        "tasks/ppi-design/",
+        "-m",
+        "openrouter/kimi-k3",
+        "-a",
+        "opencode",
+        "-e",
+        "modal"
+    ],
+    "n_concurrent_trials": 4,
+    "retry": {
+        "max_retries": 0,
+        "exclude_exceptions": [
+            "RewardFileEmptyError",
+            "VerifierOutputParseError",
+            "RewardFileNotFoundError",
+            "VerifierTimeoutError",
+            "AgentTimeoutError"
+        ],
+        "wait_multiplier": 1.0,
+        "min_wait_sec": 1.0,
+        "max_wait_sec": 60.0
+    },
+    "trials": [
+        {
+            "task": {
+                "name": "ppi-design",
+                "type": "local",
+                "digest": "sha256:724fbd40ed96556e5c867e97ca4fe5ad14d9d83ab93f5f7d02fb74ffd2c1c289",
+                "path": "tasks/ppi-design"
+            },
+            "timeout_multiplier": 1.0,
+            "agent": {
+                "name": "opencode",
+                "model_name": "openrouter/kimi-k3",
+                "skills": [],
+                "extra_allowed_hosts": [],
+                "kwargs": {},
+                "env": {},
+                "mcp_servers": []
+            },
+            "skills": [],
+            "environment": {
+                "type": "modal",
+                "force_build": false,
+                "delete": true,
+                "cpu_enforcement_policy": "auto",
+                "memory_enforcement_policy": "auto",
+                "extra_docker_compose": [],
+                "env": {},
+                "kwargs": {},
+                "extra_allowed_hosts": []
+            },
+            "verifier": {
+                "env": {},
+                "disable": false
+            }
+        }
+    ]
+}

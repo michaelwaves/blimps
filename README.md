@@ -20,11 +20,27 @@ versions. Credentials still come from your own environment (`modal token new`,
 proto-tools caches model weights and per-tool environments under `PROTO_HOME`
 (default `~/.proto`); set that variable to move them off your home volume.
 
+## making a task
+
+```sh
+uv run harbor init tasks/task_name
+```
+then, follow this tutorial 
+https://www.harborframework.com/docs/tasks/task-tutorial
+
 ## Running a task
 
 ```bash
-T=tasks/ppi-design
 
+#task path here
+T=tasks/demo
+
+##with docker
+uv run harbor -p $T -e docker        # run task
+uv run harbor task start-env -p $T -e docker       # interactive env with docker, opens bash shell in the docker container to debug
+
+
+##with modal, must setup modal first 
 uv run harbor task start-env -p $T -e modal          # interactive env
 uv run harbor run -p $T -a oracle -e modal           # reference solution
 uv run harbor run -p $T -a claude-code -m claude-opus-5 -e modal

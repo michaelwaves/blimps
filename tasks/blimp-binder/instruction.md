@@ -7,7 +7,7 @@ Design a de novo protein binder for each of two GvpA shell proteins:
 
 Submit `/logs/outputs/binder_7r1c.pdb` and `/logs/outputs/binder_8gbs.pdb`: ATOM records for a single protein chain of 30-150 residues whose CA records, in file order, encode the binder sequence using the 20 standard amino acids.
 
-Grading: each binder sequence is refolded with RoseTTAFold3 in complex with its target chain (sequence only, no templates). Both complexes must reach interface ipTM >= 0.6.
+Grading: each binder sequence is refolded with RoseTTAFold3 together with the GvpA copies of its target (sequence only, no templates; the GvpC repeat is modelled without a sequence in the deposition, so it is left out). Both binders must reach a binder-GvpA interface ipTM >= 0.6.
 
 The container provides the Foundry toolchain — the `rfd3`, `mpnn` and `rf3` command-line tools and their Python inference engines, with weights pre-downloaded and a single A100 GPU.
 

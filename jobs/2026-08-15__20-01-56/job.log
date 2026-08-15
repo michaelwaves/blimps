@@ -31,3 +31,6 @@ The container provides the Foundry protein-design toolchain - the `rfd3`, `mpnn`
 
 You have 7200 seconds to complete this task. Do not cheat by using online solutions or hints specific to this task.
 ' 2>&1 </dev/null | stdbuf -oL tee /logs/agent/opencode.txt
+Wrote opencode trajectory to jobs/2026-08-15__20-01-56/ppi-design__jibo7MQ/agent/trajectory.json
+Trial ppi-design__jibo7MQ cancelled
+Collecting main service artifacts

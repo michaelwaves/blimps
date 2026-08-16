@@ -16,10 +16,26 @@ from __future__ import annotations
 
 import hashlib
 import statistics
+import time
 from dataclasses import dataclass, field
 from typing import Any, Iterable, Sequence
 
 from .caseset import ComplexSpec
+
+# Transport-level failures worth one more attempt. Deliberately narrow: an unknown
+# tool, a malformed input or an out-of-credit account is not transient and must
+# surface immediately rather than be retried three times at cost.
+_MAX_RETRIES = 3
+_TRANSIENT_MARKERS = (
+    "upstream connect error", "remote reset", "disconnect/reset before headers",
+    "ServiceError", "connection reset", "timed out", "timeout",
+    "502", "503", "504", "temporarily unavailable",
+)
+
+
+def _is_transient(error: str) -> bool:
+    lowered = error.lower()
+    return any(marker.lower() in lowered for marker in _TRANSIENT_MARKERS)
 
 
 class Unavailable(RuntimeError):
@@ -159,28 +175,39 @@ class Boltz2Scorer(Scorer):
         for spec in specs:
             values, confidences, paes = [], [], []
             for seed in self.seeds:
-                result = run_tool(
-                    self.key,
-                    inputs={
-                        "complexes": [
-                            {
-                                "chains": [
-                                    {"id": "B", "sequence": spec.binder.sequence, "entity_type": "protein"},
-                                    {"id": "T", "sequence": spec.target.sequence, "entity_type": "protein"},
-                                ]
-                            }
-                        ]
-                    },
-                    config={
-                        "seed": seed,
-                        "recycling_steps": self.recycling_steps,
-                        "use_msa": self.use_msa,
-                        "diffusion_samples": 1,
-                    },
-                    device="modal",
-                )
-                if not result.get("ok", True):
-                    raise Unavailable(f"{spec.case_id}: {self.key} failed — {result.get('error')}")
+                # A sweep is dozens of independent calls over hours; a single reset upstream
+                # should cost one retry, not the whole run. Only transient transport failures
+                # are retried — a bad input or a missing tool still fails immediately.
+                for attempt in range(_MAX_RETRIES + 1):
+                    result = run_tool(
+                        self.key,
+                        inputs={
+                            "complexes": [
+                                {
+                                    "chains": [
+                                        {"id": "B", "sequence": spec.binder.sequence, "entity_type": "protein"},
+                                        {"id": "T", "sequence": spec.target.sequence, "entity_type": "protein"},
+                                    ]
+                                }
+                            ]
+                        },
+                        config={
+                            "seed": seed,
+                            "recycling_steps": self.recycling_steps,
+                            "use_msa": self.use_msa,
+                            "diffusion_samples": 1,
+                        },
+                        device="modal",
+                    )
+                    if result.get("ok", True):
+                        break
+                    error = str(result.get("error"))
+                    if not _is_transient(error) or attempt == _MAX_RETRIES:
+                        raise Unavailable(f"{spec.case_id}: {self.key} failed — {error}")
+                    delay = 2 ** (attempt + 1) * 15
+                    print(f"    {spec.case_id} seed {seed}: transient — {error[:80]}; "
+                          f"retry {attempt + 1}/{_MAX_RETRIES} in {delay}s", flush=True)
+                    time.sleep(delay)
                 metrics = result["result"]["structures"][0]["metrics"]
                 pair = metrics["pair_chains_iptm"]
                 values.append(100.0 * float(pair[0][1]))

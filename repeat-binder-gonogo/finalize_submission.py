@@ -256,8 +256,13 @@ def main() -> int:
             "| G1 is FAILED, not omitted: 2/8 Tier C complexes clear DockQ >= 0.49, median iRMSD 16.95 A. It "
             "is reported because task.md requires every gate reported and because the failure is the most "
             "informative result in the run. | Seeds were bought unevenly on purpose: 12 for B1/B4 where G2 "
-            "turns on them, 3 elsewhere. | Every dead end, including four aborted runs on a Modal billing "
-            "block and one veto override, remains in trajectory.jsonl."
+            "turns on them, 3 elsewhere. | PURCHASE ORDER: the Tier A and Tier C scores folded in here were "
+            "bought under --ignore-veto while G2 was still reported fail, i.e. out of the order the cost policy "
+            "prescribes. The submitted G2 now passes, so these are tiers the policy authorises and the results "
+            "stand -- but the spend preceded that authorisation, and the real sequence is in trajectory.jsonl "
+            "rather than implied by this file. | Every dead end remains in trajectory.jsonl: four runs aborted "
+            "on a Modal billing block, one deliberate veto override, and a Tier A sweep killed at 30/63 by an "
+            "upstream connection reset."
         ),
     }
 

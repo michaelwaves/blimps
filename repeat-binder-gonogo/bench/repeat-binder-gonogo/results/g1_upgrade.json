@@ -1,0 +1,46 @@
+{
+  "question": "is the Tier C epitope failure a sampling limit or a knowledge limit?",
+  "settings": {
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "diffusion_samples": 5,
+    "recycling_steps": 10,
+    "selection": "highest ipTM"
+  },
+  "leakage_guard": "poses are ranked by the model's own ipTM. DockQ is computed only after the pose is fixed, and never used to choose one.",
+  "per_case": [
+    {
+      "case_id": "C_1SVX",
+      "baseline_DockQ": 0.0105,
+      "baseline_iptm": null,
+      "upgraded_iptm": 0.9274,
+      "chosen_seed": 2,
+      "chosen_sample": 0,
+      "structure": "logs/g1_upgraded/C_1SVX/best.cif"
+    },
+    {
+      "case_id": "C_8RCI",
+      "baseline_DockQ": 0.0093,
+      "baseline_iptm": null,
+      "upgraded_iptm": 0.7289,
+      "chosen_seed": 3,
+      "chosen_sample": 0,
+      "structure": "logs/g1_upgraded/C_8RCI/best.cif"
+    },
+    {
+      "case_id": "C_7YCO",
+      "baseline_DockQ": 0.0217,
+      "baseline_iptm": null,
+      "upgraded_iptm": 0.558,
+      "chosen_seed": 0,
+      "chosen_sample": 0,
+      "structure": "logs/g1_upgraded/C_7YCO/best.cif"
+    }
+  ],
+  "next": "score logs/g1_upgraded/*/best.cif against the deposits with g1_dockq-style DockQ"
+}

@@ -318,8 +318,8 @@ def cmd_run(args: argparse.Namespace) -> int:
         justification = (
             f"justified by G2 passing with margin {g2.detail.get('margin')}"
             if g2.status == "pass"
-            else f"NOT justified by a gate: G2 failed with margin {g2.detail.get('margin')} and the veto was "
-                 f"overridden by request"
+            else f"NOT justified by a gate: G2 returned {g2.status} (margin {g2.detail.get('margin')}) and the "
+                 f"veto was overridden by request"
         )
         scribe.append("economist", "buy tiers A and C",
                       f"{len(tier_ac)} complexes, {justification}", cost=scorer.cost_estimate(len(tier_ac)))

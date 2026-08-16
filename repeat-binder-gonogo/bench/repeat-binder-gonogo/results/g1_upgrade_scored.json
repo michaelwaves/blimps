@@ -1,0 +1,36 @@
+{
+  "question": "sampling limit or knowledge limit?",
+  "selection": "highest ipTM, deposit not consulted until this file was produced",
+  "per_case": [
+    {
+      "case_id": "C_1SVX",
+      "baseline_DockQ": 0.0105,
+      "upgraded_DockQ": 0.0106,
+      "upgraded_iRMSD": 17.01,
+      "baseline_iptm": null,
+      "upgraded_iptm": 0.9274,
+      "DockQ_delta": 0.0001
+    },
+    {
+      "case_id": "C_8RCI",
+      "baseline_DockQ": 0.0093,
+      "upgraded_DockQ": 0.0124,
+      "upgraded_iRMSD": 17.18,
+      "baseline_iptm": null,
+      "upgraded_iptm": 0.7289,
+      "DockQ_delta": 0.0031
+    },
+    {
+      "case_id": "C_7YCO",
+      "baseline_DockQ": 0.0217,
+      "upgraded_DockQ": 0.0202,
+      "upgraded_iRMSD": 21.64,
+      "baseline_iptm": null,
+      "upgraded_iptm": 0.558,
+      "DockQ_delta": -0.0015
+    }
+  ],
+  "n_recovered_to_pass": 0,
+  "n_materially_improved": 0,
+  "verdict": "KNOWLEDGE LIMIT: confidence rose substantially while DockQ stayed at the floor. The model does not know where the epitope is, and more compute does not find it. Buying more sampling for this class of target is not justified; the pipeline needs a different input (an epitope prior, a co-evolution signal, or a docking stage), not a bigger budget."
+}

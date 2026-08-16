@@ -1,0 +1,92 @@
+{
+  "question": "for the complexes G1 failed, is the binder on the wrong face or the wrong part of the right face?",
+  "method": "heavy-atom contacts within 5.0 A; Jaccard overlap of the contacted TARGET residue set between prediction and deposit. Epitope error moves that set; register error preserves it.",
+  "not_a_feedback_signal": "this reads a finished run. It is not used to constrain, select or re-score any prediction \u2014 the deposited interface must not enter a metric measured against the deposited interface.",
+  "per_case": [
+    {
+      "case_id": "C_1SVX",
+      "DockQ": 0.0105,
+      "n_target_epitope": 17,
+      "n_predicted_target_contacts": 41,
+      "target_epitope_jaccard": 0.0,
+      "target_epitope_recovered": 0.0,
+      "binder_paratope_jaccard": 0.362,
+      "diagnosis": "wrong epitope entirely \u2014 different face of the target"
+    },
+    {
+      "case_id": "C_4CJ0",
+      "DockQ": 0.8187,
+      "n_target_epitope": 26,
+      "n_predicted_target_contacts": 26,
+      "target_epitope_jaccard": 0.793,
+      "target_epitope_recovered": 0.885,
+      "binder_paratope_jaccard": 0.769,
+      "diagnosis": "recovered"
+    },
+    {
+      "case_id": "C_4CJ2",
+      "DockQ": 0.8871,
+      "n_target_epitope": 23,
+      "n_predicted_target_contacts": 25,
+      "target_epitope_jaccard": 0.846,
+      "target_epitope_recovered": 0.957,
+      "binder_paratope_jaccard": 0.792,
+      "diagnosis": "recovered"
+    },
+    {
+      "case_id": "C_6G4J",
+      "DockQ": 0.0132,
+      "n_target_epitope": 21,
+      "n_predicted_target_contacts": 27,
+      "target_epitope_jaccard": 0.021,
+      "target_epitope_recovered": 0.048,
+      "binder_paratope_jaccard": 0.513,
+      "diagnosis": "epitope partially overlapping \u2014 drifted off site"
+    },
+    {
+      "case_id": "C_7QNP",
+      "DockQ": 0.0097,
+      "n_target_epitope": 11,
+      "n_predicted_target_contacts": 23,
+      "target_epitope_jaccard": 0.133,
+      "target_epitope_recovered": 0.364,
+      "binder_paratope_jaccard": 0.0,
+      "diagnosis": "epitope partially overlapping \u2014 drifted off site"
+    },
+    {
+      "case_id": "C_7YCO",
+      "DockQ": 0.0217,
+      "n_target_epitope": 33,
+      "n_predicted_target_contacts": 27,
+      "target_epitope_jaccard": 0.579,
+      "target_epitope_recovered": 0.667,
+      "binder_paratope_jaccard": 0.326,
+      "diagnosis": "right epitope, wrong register/orientation"
+    },
+    {
+      "case_id": "C_8RCI",
+      "DockQ": 0.0093,
+      "n_target_epitope": 21,
+      "n_predicted_target_contacts": 25,
+      "target_epitope_jaccard": 0.0,
+      "target_epitope_recovered": 0.0,
+      "binder_paratope_jaccard": 0.5,
+      "diagnosis": "wrong epitope entirely \u2014 different face of the target"
+    },
+    {
+      "case_id": "C_9SPO",
+      "DockQ": 0.0157,
+      "n_target_epitope": 21,
+      "n_predicted_target_contacts": 24,
+      "target_epitope_jaccard": 0.0,
+      "target_epitope_recovered": 0.0,
+      "binder_paratope_jaccard": 0.538,
+      "diagnosis": "wrong epitope entirely \u2014 different face of the target"
+    }
+  ],
+  "tally_over_failures": {
+    "wrong epitope entirely \u2014 different face of the target": 3,
+    "epitope partially overlapping \u2014 drifted off site": 2,
+    "right epitope, wrong register/orientation": 1
+  }
+}

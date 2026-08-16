@@ -1,0 +1,18 @@
+demo/selftest/score_cache/
+demo/full-sweep/score_cache/
+
+# Local/runtime artifacts; never part of the submission.
+.DS_Store
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.inspect.ndjson
+
+# Raw remote-model payloads are reproducible but noisy. Commit the materialized
+# RFdiffusion backbones and compact result tables instead.
+designs/gvpa/rfd3_constrained/
+designs/gvpa/rfd3_free/
+designs/gvpa/full_pipeline/mpnn/
+designs/gvpa/full_pipeline/boltz/
+reagent_gvpa_pipeline_demo.pptx
+submission/artifacts/reagent_gvpa_pipeline_demo.pptx

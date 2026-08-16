@@ -1,0 +1,521 @@
+{
+  "predictions": [
+    {
+      "case_id": "decoy_shuffle_B1_r0",
+      "score": 25.0282,
+      "confidence": 0.2503,
+      "confidence_metric": "synthetic_pseudo_iptm",
+      "tool": "synthetic-demo-scorer",
+      "ran_on": "local(synthetic)",
+      "uncertainty": {
+        "band": 3.3895,
+        "source": "spread across independent seeds",
+        "replicates": [
+          23.5766,
+          25.3562,
+          25.2738,
+          26.9661,
+          23.9683
+        ]
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "decoy_shuffle_B1_r1",
+      "score": 24.4581,
+      "confidence": 0.2446,
+      "confidence_metric": "synthetic_pseudo_iptm",
+      "tool": "synthetic-demo-scorer",
+      "ran_on": "local(synthetic)",
+      "uncertainty": {
+        "band": 5.4766,
+        "source": "spread across independent seeds",
+        "replicates": [
+          25.5644,
+          27.6793,
+          22.9388,
+          22.2027,
+          23.9055
+        ]
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "decoy_shuffle_B2_r0",
+      "score": 24.3757,
+      "confidence": 0.2438,
+      "confidence_metric": "synthetic_pseudo_iptm",
+      "tool": "synthetic-demo-scorer",
+      "ran_on": "local(synthetic)",
+      "uncertainty": {
+        "band": 5.7103,
+        "source": "spread across independent seeds",
+        "replicates": [
+          25.7378,
+          24.2772,
+          27.7354,
+          22.0251,
+          22.1032
+        ]
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "decoy_shuffle_B2_r1",
+      "score": 24.6135,
+      "confidence": 0.2461,
+      "confidence_metric": "synthetic_pseudo_iptm",
+      "tool": "synthetic-demo-scorer",
+      "ran_on": "local(synthetic)",
+      "uncertainty": {
+        "band": 5.5,
+        "source": "spread across independent seeds",
+        "replicates": [
+          23.4784,
+          22.3743,
+          24.8184,
+          24.5222,
+          27.8744
+        ]
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "decoy_noncognate_C_1SVX_x_B1",
+      "score": 25.5862,
+      "confidence": 0.2559,
+      "confidence_metric": "synthetic_pseudo_iptm",
+      "tool": "synthetic-demo-scorer",
+      "ran_on": "local(synthetic)",
+      "uncertainty": {
+        "band": 2.13,
+        "source": "spread across independent seeds",
+        "replicates": [
+          26.8517,
+          24.7598,
+          26.6749,
+          24.9231,
+          24.7217
+        ]
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "decoy_noncognate_C_4CJ2_x_B1",
+      "score": 24.493,
+      "confidence": 0.2449,
+      "confidence_metric": "synthetic_pseudo_iptm",
+      "tool": "synthetic-demo-scorer",
+      "ran_on": "local(synthetic)",
+      "uncertainty": {
+        "band": 3.6567,
+        "source": "spread across independent seeds",
+        "replicates": [
+          25.393,
+          25.2291,
+          22.3624,
+          26.019,
+          23.4613
+        ]
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "decoy_noncognate_C_7YCO_x_B1",
+      "score": 24.5522,
+      "confidence": 0.2455,
+      "confidence_metric": "synthetic_pseudo_iptm",
+      "tool": "synthetic-demo-scorer",
+      "ran_on": "local(synthetic)",
+      "uncertainty": {
+        "band": 1.7148,
+        "source": "spread across independent seeds",
+        "replicates": [
+          23.5652,
+          25.1103,
+          25.28,
+          24.1877,
+          24.6177
+        ]
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "decoy_noncognate_B1_x_C_1SVX",
+      "score": 24.5098,
+      "confidence": 0.2451,
+      "confidence_metric": "synthetic_pseudo_iptm",
+      "tool": "synthetic-demo-scorer",
+      "ran_on": "local(synthetic)",
+      "uncertainty": {
+        "band": 4.0603,
+        "source": "spread across independent seeds",
+        "replicates": [
+          25.7245,
+          26.6442,
+          24.7831,
+          22.8131,
+          22.5839
+        ]
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "decoy_noncognate_B1_x_C_4CJ2",
+      "score": 25.2025,
+      "confidence": 0.252,
+      "confidence_metric": "synthetic_pseudo_iptm",
+      "tool": "synthetic-demo-scorer",
+      "ran_on": "local(synthetic)",
+      "uncertainty": {
+        "band": 4.4723,
+        "source": "spread across independent seeds",
+        "replicates": [
+          24.5012,
+          26.8702,
+          22.4617,
+          26.9339,
+          25.2457
+        ]
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "B1",
+      "score": 69.4391,
+      "confidence": 0.6944,
+      "confidence_metric": "synthetic_pseudo_iptm",
+      "tool": "synthetic-demo-scorer",
+      "ran_on": "local(synthetic)",
+      "uncertainty": {
+        "band": 5.4282,
+        "source": "spread across independent seeds",
+        "replicates": [
+          67.3126,
+          68.0107,
+          69.0844,
+          70.0469,
+          72.7408
+        ]
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "B2",
+      "score": 70.9845,
+      "confidence": 0.7098,
+      "confidence_metric": "synthetic_pseudo_iptm",
+      "tool": "synthetic-demo-scorer",
+      "ran_on": "local(synthetic)",
+      "uncertainty": {
+        "band": 3.7884,
+        "source": "spread across independent seeds",
+        "replicates": [
+          68.5313,
+          72.3197,
+          71.4096,
+          70.9928,
+          71.6693
+        ]
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "B3",
+      "score": 72.1309,
+      "confidence": 0.7213,
+      "confidence_metric": "synthetic_pseudo_iptm",
+      "tool": "synthetic-demo-scorer",
+      "ran_on": "local(synthetic)",
+      "uncertainty": {
+        "band": 0.6193,
+        "source": "spread across independent seeds",
+        "replicates": [
+          72.1455,
+          72.4716,
+          71.8523,
+          71.9389,
+          72.2464
+        ]
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "B4",
+      "score": 44.5597,
+      "confidence": 0.4456,
+      "confidence_metric": "synthetic_pseudo_iptm",
+      "tool": "synthetic-demo-scorer",
+      "ran_on": "local(synthetic)",
+      "uncertainty": {
+        "band": 3.5859,
+        "source": "spread across independent seeds",
+        "replicates": [
+          46.684,
+          43.3548,
+          46.389,
+          43.0982,
+          43.2726
+        ]
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "B5",
+      "score": 44.5093,
+      "confidence": 0.4451,
+      "confidence_metric": "synthetic_pseudo_iptm",
+      "tool": "synthetic-demo-scorer",
+      "ran_on": "local(synthetic)",
+      "uncertainty": {
+        "band": 3.826,
+        "source": "spread across independent seeds",
+        "replicates": [
+          42.9394,
+          44.7954,
+          46.7654,
+          44.0315,
+          44.0149
+        ]
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "B6",
+      "score": 44.0652,
+      "confidence": 0.4407,
+      "confidence_metric": "synthetic_pseudo_iptm",
+      "tool": "synthetic-demo-scorer",
+      "ran_on": "local(synthetic)",
+      "uncertainty": {
+        "band": 3.694,
+        "source": "spread across independent seeds",
+        "replicates": [
+          43.9731,
+          46.3162,
+          42.6222,
+          42.9494,
+          44.4649
+        ]
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "C_7YCO",
+      "score": 68.9903,
+      "confidence": 0.6899,
+      "confidence_metric": "synthetic_pseudo_iptm",
+      "tool": "synthetic-demo-scorer",
+      "ran_on": "local(synthetic)",
+      "uncertainty": {
+        "band": 3.917,
+        "source": "spread across independent seeds",
+        "replicates": [
+          67.7945,
+          70.8385,
+          71.2192,
+          67.3022,
+          67.7969
+        ]
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "C_4CJ0",
+      "score": 70.5972,
+      "confidence": 0.706,
+      "confidence_metric": "synthetic_pseudo_iptm",
+      "tool": "synthetic-demo-scorer",
+      "ran_on": "local(synthetic)",
+      "uncertainty": {
+        "band": 4.3916,
+        "source": "spread across independent seeds",
+        "replicates": [
+          72.4685,
+          71.4003,
+          69.5999,
+          68.0769,
+          71.4406
+        ]
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "C_4CJ2",
+      "score": 69.5169,
+      "confidence": 0.6952,
+      "confidence_metric": "synthetic_pseudo_iptm",
+      "tool": "synthetic-demo-scorer",
+      "ran_on": "local(synthetic)",
+      "uncertainty": {
+        "band": 4.6725,
+        "source": "spread across independent seeds",
+        "replicates": [
+          69.7911,
+          67.8475,
+          69.9154,
+          67.6791,
+          72.3516
+        ]
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "C_7QNP",
+      "score": 69.0398,
+      "confidence": 0.6904,
+      "confidence_metric": "synthetic_pseudo_iptm",
+      "tool": "synthetic-demo-scorer",
+      "ran_on": "local(synthetic)",
+      "uncertainty": {
+        "band": 3.5662,
+        "source": "spread across independent seeds",
+        "replicates": [
+          67.6929,
+          68.8891,
+          71.1779,
+          67.6117,
+          69.8276
+        ]
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "C_6G4J",
+      "score": 70.1069,
+      "confidence": 0.7011,
+      "confidence_metric": "synthetic_pseudo_iptm",
+      "tool": "synthetic-demo-scorer",
+      "ran_on": "local(synthetic)",
+      "uncertainty": {
+        "band": 4.2545,
+        "source": "spread across independent seeds",
+        "replicates": [
+          71.7585,
+          67.504,
+          68.5421,
+          71.3689,
+          71.3611
+        ]
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "C_1SVX",
+      "score": 70.1097,
+      "confidence": 0.7011,
+      "confidence_metric": "synthetic_pseudo_iptm",
+      "tool": "synthetic-demo-scorer",
+      "ran_on": "local(synthetic)",
+      "uncertainty": {
+        "band": 3.2263,
+        "source": "spread across independent seeds",
+        "replicates": [
+          68.1187,
+          69.1669,
+          70.7343,
+          71.3449,
+          71.1834
+        ]
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "C_8RCI",
+      "score": 69.6665,
+      "confidence": 0.6967,
+      "confidence_metric": "synthetic_pseudo_iptm",
+      "tool": "synthetic-demo-scorer",
+      "ran_on": "local(synthetic)",
+      "uncertainty": {
+        "band": 4.7384,
+        "source": "spread across independent seeds",
+        "replicates": [
+          69.9466,
+          71.3584,
+          67.7988,
+          67.2453,
+          71.9837
+        ]
+      },
+      "synthetic": true
+    },
+    {
+      "case_id": "C_9SPO",
+      "score": 69.631,
+      "confidence": 0.6963,
+      "confidence_metric": "synthetic_pseudo_iptm",
+      "tool": "synthetic-demo-scorer",
+      "ran_on": "local(synthetic)",
+      "uncertainty": {
+        "band": 1.8081,
+        "source": "spread across independent seeds",
+        "replicates": [
+          70.0586,
+          69.0545,
+          70.7453,
+          68.9372,
+          69.3593
+        ]
+      },
+      "synthetic": true
+    }
+  ],
+  "gates": [
+    {
+      "gate_id": "G5",
+      "status": "pass",
+      "evidence": "9 decoys scored against the weakest true positive (B1 = 69.439); all scored below it",
+      "detail": {
+        "weakest_positive": "B1",
+        "offenders": {}
+      }
+    },
+    {
+      "gate_id": "G2",
+      "status": "pass",
+      "evidence": "score(B1, mouse cathepsin B, K_D 65.7 nM) = 69.439, score(B4, human cathepsin B, no binding at 1000x) = 44.560, margin 24.879 > band 2.879 (95% CI half-width on the difference of means, Welch df=7.8, pre-registered 2026-08-15)",
+      "uncertainty_band": 2.8788,
+      "detail": {
+        "margin": 24.8794,
+        "replicates_B1": [
+          67.313,
+          68.011,
+          69.084,
+          70.047,
+          72.741
+        ],
+        "replicates_B4": [
+          46.684,
+          43.355,
+          46.389,
+          43.098,
+          43.273
+        ],
+        "band_retired_sample_range": 5.4282,
+        "verdict_under_retired_band": "pass"
+      }
+    },
+    {
+      "gate_id": "G1",
+      "status": "not_run",
+      "evidence": "no predicted structures were produced (the structure-prediction tool is not deployed), so no interface could be compared to a deposit"
+    },
+    {
+      "gate_id": "G3",
+      "status": "not_run",
+      "evidence": "no Tier A variants were scored. The per-variant K_D table itself is available \u2014 it was extracted from Table S1 of PMC12202725 into gonogo/data/tier_a_kd.yaml (63 variants across 5 pockets) \u2014 so the blocker is model runs, not ground truth"
+    },
+    {
+      "gate_id": "G4",
+      "status": "fail",
+      "evidence": "AUC=0.550 of confidence separating 20 correct from 3 incorrect calls, at decision threshold 25.586 (the highest decoy score, fixed by G5)",
+      "detail": {
+        "auc": 0.55,
+        "n_correct": 20,
+        "n_wrong": 3
+      }
+    }
+  ],
+  "notes": "SYNTHETIC HARNESS SELF-TEST. Every number below is a hash of the input sequences and has no physical meaning. This file exists to exercise the gate arithmetic and the verifier wiring; it is not a scientific result. | score convention: higher is better; deterministic hash of the input sequences \u2014 carries no physical meaning. No energies are submitted, so no sign flip. | uncertainty band = spread of the score across independent seeds of the same model. It measures run-to-run instability, not model error; it is the only band a single model can honestly report. | checkpointing: 0 complexes reused from demo/selftest/score_cache, 23 newly computed"
+}

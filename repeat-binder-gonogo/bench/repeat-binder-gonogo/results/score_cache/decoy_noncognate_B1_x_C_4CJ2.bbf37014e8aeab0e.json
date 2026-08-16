@@ -1,0 +1,1 @@
+{"case_id": "decoy_noncognate_B1_x_C_4CJ2", "score": 60.993717114130654, "confidence": 0.611692080895106, "confidence_metric": "iptm", "tool": "boltz2-prediction", "ran_on": "modal", "band": 19.26419734954834, "replicates": [67.4208402633667, 48.15664291381836, 67.40366816520691], "extras": {"avg_pae": 7.765, "seeds": [0, 1, 2]}}

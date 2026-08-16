@@ -1,0 +1,395 @@
+{
+  "predictions": [
+    {
+      "case_id": "decoy_shuffle_B1_r0",
+      "score": 56.4412,
+      "confidence": 0.6749,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 25.965,
+        "source": "spread across independent seeds",
+        "replicates": [
+          39.8654,
+          63.6278,
+          65.8304
+        ]
+      },
+      "avg_pae": 8.664,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "decoy_shuffle_B1_r1",
+      "score": 54.1518,
+      "confidence": 0.6365,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 57.2702,
+        "source": "spread across independent seeds",
+        "replicates": [
+          84.1428,
+          51.44,
+          26.8726
+        ]
+      },
+      "avg_pae": 9.317,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "decoy_shuffle_B2_r0",
+      "score": 60.3777,
+      "confidence": 0.7711,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 48.0057,
+        "source": "spread across independent seeds",
+        "replicates": [
+          39.1797,
+          54.7678,
+          87.1854
+        ]
+      },
+      "avg_pae": 8.019,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "decoy_shuffle_B2_r1",
+      "score": 40.8478,
+      "confidence": 0.4847,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 57.3486,
+        "source": "spread across independent seeds",
+        "replicates": [
+          26.4912,
+          19.3517,
+          76.7003
+        ]
+      },
+      "avg_pae": 11.511,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "decoy_noncognate_C_1SVX_x_B1",
+      "score": 55.9396,
+      "confidence": 0.5594,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 7.4101,
+        "source": "spread across independent seeds",
+        "replicates": [
+          60.8386,
+          53.4285,
+          53.5517
+        ]
+      },
+      "avg_pae": 7.72,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "decoy_noncognate_C_4CJ2_x_B1",
+      "score": 42.2044,
+      "confidence": 0.422,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 12.8453,
+        "source": "spread across independent seeds",
+        "replicates": [
+          45.7838,
+          33.9921,
+          46.8374
+        ]
+      },
+      "avg_pae": 6.981,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "decoy_noncognate_C_7YCO_x_B1",
+      "score": 42.2894,
+      "confidence": 0.523,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 31.0297,
+        "source": "spread across independent seeds",
+        "replicates": [
+          22.8143,
+          53.844,
+          50.21
+        ]
+      },
+      "avg_pae": 10.112,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "decoy_noncognate_B1_x_C_1SVX",
+      "score": 52.4804,
+      "confidence": 0.5248,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 3.9091,
+        "source": "spread across independent seeds",
+        "replicates": [
+          49.8939,
+          53.7445,
+          53.803
+        ]
+      },
+      "avg_pae": 8.855,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "decoy_noncognate_B1_x_C_4CJ2",
+      "score": 60.9937,
+      "confidence": 0.6117,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 19.2642,
+        "source": "spread across independent seeds",
+        "replicates": [
+          67.4208,
+          48.1566,
+          67.4037
+        ]
+      },
+      "avg_pae": 7.765,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "B1",
+      "score": 78.6877,
+      "confidence": 0.7869,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 6.5621,
+        "source": "spread across independent seeds",
+        "replicates": [
+          80.7628,
+          74.3691,
+          80.9312
+        ]
+      },
+      "avg_pae": 4.571,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "B2",
+      "score": 66.7482,
+      "confidence": 0.6823,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 7.6563,
+        "source": "spread across independent seeds",
+        "replicates": [
+          63.6219,
+          65.3443,
+          71.2782
+        ]
+      },
+      "avg_pae": 6.272,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "B3",
+      "score": 73.6918,
+      "confidence": 0.7389,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 6.105,
+        "source": "spread across independent seeds",
+        "replicates": [
+          75.7394,
+          75.7015,
+          69.6344
+        ]
+      },
+      "avg_pae": 5.423,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "B4",
+      "score": 39.7466,
+      "confidence": 0.4128,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 52.671,
+        "source": "spread across independent seeds",
+        "replicates": [
+          67.2891,
+          14.6181,
+          37.3328
+        ]
+      },
+      "avg_pae": 9.747,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "B5",
+      "score": 60.4242,
+      "confidence": 0.6042,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 26.0428,
+        "source": "spread across independent seeds",
+        "replicates": [
+          61.5815,
+          46.8241,
+          72.867
+        ]
+      },
+      "avg_pae": 7.747,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "B6",
+      "score": 29.3587,
+      "confidence": 0.2937,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 14.9543,
+        "source": "spread across independent seeds",
+        "replicates": [
+          28.6662,
+          37.182,
+          22.2278
+        ]
+      },
+      "avg_pae": 11.19,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    }
+  ],
+  "gates": [
+    {
+      "gate_id": "G5",
+      "status": "pass",
+      "evidence": "9 decoys scored against the weakest true positive (B2 = 66.748); all scored below it",
+      "detail": {
+        "weakest_positive": "B2",
+        "offenders": {}
+      }
+    },
+    {
+      "gate_id": "G2",
+      "status": "fail",
+      "evidence": "score(B1, mouse cathepsin B, K_D 65.7 nM) = 78.688, score(B4, human cathepsin B, no binding at 1000x) = 39.747, margin 38.941 <= band 52.671 (widest seed spread of the two cases)",
+      "uncertainty_band": 52.671,
+      "detail": {
+        "margin": 38.9411,
+        "replicates_B1": [
+          80.763,
+          74.369,
+          80.931
+        ],
+        "replicates_B4": [
+          67.289,
+          14.618,
+          37.333
+        ]
+      }
+    },
+    {
+      "gate_id": "G1",
+      "status": "not_run",
+      "evidence": "not run: G2 did not pass and the cost policy stops the run there"
+    },
+    {
+      "gate_id": "G3",
+      "status": "not_run",
+      "evidence": "not run: G2 did not pass and the cost policy stops the run there"
+    },
+    {
+      "gate_id": "G4",
+      "status": "not_run",
+      "evidence": "not run: G2 did not pass and the cost policy stops the run there"
+    }
+  ],
+  "notes": "score convention: higher is better; 100 * pair_chains_iptm[binder][target]. No energies are submitted, so no sign flip. | uncertainty band = spread of the score across independent seeds of the same model. It measures run-to-run instability, not model error; it is the only band a single model can honestly report. | G1/G3/G4 were not run because G2 did not pass. The task's cost policy makes this the required behaviour, not an omission."
+}

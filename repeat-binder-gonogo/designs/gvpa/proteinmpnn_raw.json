@@ -1,0 +1,19 @@
+{
+  "tool_id": null,
+  "execution_time": null,
+  "timestamp": "2026-08-16T00:42:02.605223",
+  "success": true,
+  "warnings": [],
+  "errors": [],
+  "metadata": {},
+  "design_sets": [
+    {
+      "complexes": {
+        "_saved_to": "/Users/jeewonyang/Documents/reAgent/proto_tools_outputs/design_sets_0_complexes.json",
+        "_kind": "json",
+        "_items": 32,
+        "_bytes": 32974
+      }
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "superposition": {
+    "patch_chain": "m",
+    "ca_rmsd_A": 1.761,
+    "n_atoms": 65
+  },
+  "contact_cutoff_A": 8.0,
+  "gvpc_footprint_residues": [
+    "A55",
+    "A59",
+    "A64",
+    "B52",
+    "B55",
+    "B56",
+    "B59",
+    "B60",
+    "B64",
+    "B65",
+    "B66",
+    "C55",
+    "C56",
+    "C57",
+    "C59",
+    "C60",
+    "C64",
+    "C65",
+    "C66",
+    "D56",
+    "D59",
+    "D60",
+    "D64",
+    "D65",
+    "D66",
+    "E59",
+    "E60",
+    "E66"
+  ],
+  "footprint_chains": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E"
+  ],
+  "target_chains": [
+    "l",
+    "m",
+    "n",
+    "o",
+    "p"
+  ],
+  "target_n_residues": 325,
+  "caveat": "GvpC in 8GBS is a backbone-only poly-UNK trace with 3 GvpA residues inside 5 A. It localises the natural binder; it is not a resolved interface and must not be scored with DockQ."
+}

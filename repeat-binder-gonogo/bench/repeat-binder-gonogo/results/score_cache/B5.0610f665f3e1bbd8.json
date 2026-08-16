@@ -1,0 +1,1 @@
+{"case_id": "B5", "score": 60.424200693766274, "confidence": 0.6042420069376627, "confidence_metric": "iptm", "tool": "boltz2-prediction", "ran_on": "modal", "band": 26.042819023132324, "replicates": [61.58149242401123, 46.82414531707764, 72.86696434020996], "extras": {"avg_pae": 7.747, "seeds": [0, 1, 2]}}

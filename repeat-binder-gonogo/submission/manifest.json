@@ -1,0 +1,76 @@
+{
+  "submission": "repeat-binder-gonogo + GvpA design run",
+  "trajectory": {
+    "path": "trajectory.jsonl",
+    "records": 181,
+    "phases": {
+      "control-run": 89,
+      "full-sweep-demo": 38,
+      "harness-selftest": 36,
+      "gvpa-design": 18
+    },
+    "outcomes": {
+      "ok": 149,
+      "blocked": 9,
+      "veto": 14,
+      "gap": 9
+    },
+    "note": "seventeen invocations of the control run are segmented by run_id rather than merged or pruned; t restarts within each. Nothing was removed."
+  },
+  "validation": {
+    "every line parses as JSON": true,
+    "seq is strictly increasing": true,
+    "every record has role/step/outcome": true,
+    "failures retained (blocked/veto present)": true
+  },
+  "artifacts": [
+    "REFERENCES.md",
+    "best_binders.fasta",
+    "candidates.csv",
+    "candidates.json",
+    "cases.yaml",
+    "constrained_winner.png",
+    "curvature.json",
+    "demo.html",
+    "designed_sequences.json",
+    "free_winner.png",
+    "g1_diagnosis.json",
+    "g1_dockq.json",
+    "g1_upgrade_scored.json",
+    "g2_seed_depth.json",
+    "inputs.json",
+    "patch_axial.png",
+    "patch_side.png",
+    "pipeline_results.json",
+    "predictions.json",
+    "predictions.n3-range-band.json",
+    "site.json",
+    "target_gvpc.png",
+    "target_gvpc_rot90.png"
+  ],
+  "sha256": {
+    "REFERENCES.md": "153578aa3aa1fb06",
+    "best_binders.fasta": "f5540297d13ba4a2",
+    "candidates.csv": "99a73d45b7dff33b",
+    "candidates.json": "d63fe6bb542d4dd9",
+    "cases.yaml": "918e39bf6302d5f8",
+    "constrained_winner.png": "dc7a75319fe1be76",
+    "curvature.json": "cdb91134e1cc8622",
+    "demo.html": "94a89cf4a40f7e15",
+    "designed_sequences.json": "b0ad0afa4f0dc034",
+    "free_winner.png": "3853bd9830e91c3b",
+    "g1_diagnosis.json": "6d846e85fb833356",
+    "g1_dockq.json": "f732f432fae02957",
+    "g1_upgrade_scored.json": "e28d02db32aac9b0",
+    "g2_seed_depth.json": "01ae760d82c97c48",
+    "inputs.json": "eca7f3594c1215bd",
+    "patch_axial.png": "829e37dc4a24c18c",
+    "patch_side.png": "19461ac34e58908b",
+    "pipeline_results.json": "32c6ad954c136963",
+    "predictions.json": "97c9f6d77faaa995",
+    "predictions.n3-range-band.json": "23f451acec362ccb",
+    "site.json": "7ed1f4b0da52358c",
+    "target_gvpc.png": "89fa6d14e128d347",
+    "target_gvpc_rot90.png": "afd3b76c5b5c141f"
+  }
+}

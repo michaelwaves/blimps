@@ -1,0 +1,144 @@
+# Tier A per-variant K_D — closes the `status: TODO` in
+# bench/repeat-binder-gonogo/cases.yaml.
+#
+# Extracted verbatim from Table S1 of:
+#   Ayyildiz, M., Noske, J., Gisdon, F. J., Kynast, J. P. & Höcker, B.
+#   "Evaluation of Physics-Based Protein Design Methods for Predicting Single
+#   Residue Effects on Peptide Binding Specificities."
+#   J Comput Chem (2025). doi:10.1002/jcc.70160
+#   https://paperclip.gxl.ai/citations/papers/PMC12202725#L547-L629
+#
+# Nothing here is estimated, interpolated, or filled in. Where the paper reports
+# no error it is recorded as `null`, not as zero. `-` in the source means the
+# measurement was published without an error margin.
+#
+# READ THIS BEFORE SCORING TIER A
+# ------------------------------------------------------------------------
+# The ladder varies ONE residue of a 10-mer peptide at ONE pocket position. It
+# does not vary repeat count and does not vary peptide length, contrary to the
+# rationale given in cases.yaml ("repeat count and peptide length can be varied
+# independently"). Whatever scores this tier has to resolve a factor-of-two K_D
+# difference caused by a single side chain in a 10-mer. See baselines.yaml for
+# the paper's own statement that this is at or below the resolution of large
+# structure-prediction models.
+
+source_doc: PMC12202725
+source_table: "Table S1"
+source_lines: "L547-L629"
+units: nM
+n_variants: 63
+n_pockets: 5
+
+# The 7 scaffold residues that define each pocket, in the order they appear at
+# the mutated positions. Verified against the deposited coordinates: chain A
+# residues [155, 159, 162, 194, 197, 198, 201] of 5AEI and [364, 368, 371, 403,
+# 406, 407, 410] of 6SA8 both read QWSQQEW, which is the Arg-binder pocket, so
+# the paper's position lists (L56) map onto the structures as stated.
+pockets:
+  arg:
+    pocket_residues: QWSQQEW
+    variants:
+      - {residue: R, kd_nM: 2.8, error_nM: 0.9}
+      - {residue: K, kd_nM: 2.9, error_nM: 0.4}
+      - {residue: Q, kd_nM: 37.3, error_nM: 10.4}
+      - {residue: V, kd_nM: 41.1, error_nM: 25.5}
+      - {residue: A, kd_nM: 57.6, error_nM: 4.8}
+      - {residue: S, kd_nM: 57.6, error_nM: 13.0}
+      - {residue: H, kd_nM: 61.8, error_nM: 23.5}
+      - {residue: I, kd_nM: 63.6, error_nM: 4.1}
+      - {residue: G, kd_nM: 65.7, error_nM: 24.2}
+      - {residue: Y, kd_nM: 82.5, error_nM: 1.9}
+      - {residue: F, kd_nM: 105.9, error_nM: 29.8}
+      - {residue: L, kd_nM: 114.0, error_nM: 1.6}
+      - {residue: M, kd_nM: 128.6, error_nM: 44.9}
+      - {residue: N, kd_nM: 136.1, error_nM: 23.9}
+      - {residue: W, kd_nM: 176.3, error_nM: 26.5}
+      - {residue: D, kd_nM: 1334.0, error_nM: 652.0}
+      - {residue: E, kd_nM: 1343.5, error_nM: 323.2}
+  tyr:
+    pocket_residues: KEVLIRQ
+    variants:
+      - {residue: Y, kd_nM: 5, error_nM: null}
+      - {residue: W, kd_nM: 62, error_nM: null}
+      - {residue: M, kd_nM: 111, error_nM: null}
+      - {residue: H, kd_nM: 127, error_nM: null}
+      - {residue: F, kd_nM: 148, error_nM: null}
+      - {residue: R, kd_nM: 162, error_nM: null}
+      - {residue: I, kd_nM: 199, error_nM: null}
+      - {residue: L, kd_nM: 327, error_nM: null}
+      - {residue: A, kd_nM: 636, error_nM: null}
+      - {residue: V, kd_nM: 731, error_nM: null}
+      - {residue: T, kd_nM: 1296, error_nM: null}
+  trp:
+    pocket_residues: TATAWRT
+    variants:
+      - {residue: W, kd_nM: 64, error_nM: 21}
+      - {residue: Y, kd_nM: 135, error_nM: 11}
+      - {residue: F, kd_nM: 176, error_nM: 15}
+      - {residue: H, kd_nM: 218, error_nM: 73}
+      - {residue: I, kd_nM: 223, error_nM: 42}
+      - {residue: N, kd_nM: 230, error_nM: null}
+      - {residue: T, kd_nM: 236, error_nM: 46}
+      - {residue: L, kd_nM: 241, error_nM: 119}
+      - {residue: V, kd_nM: 340, error_nM: 80}
+      - {residue: R, kd_nM: 428, error_nM: 28}
+      - {residue: M, kd_nM: 435, error_nM: null}
+      - {residue: S, kd_nM: 500, error_nM: null}
+      - {residue: A, kd_nM: 806, error_nM: null}
+  ile:
+    pocket_residues: FALYDRV
+    variants:
+      - {residue: I, kd_nM: 28, error_nM: 1}
+      - {residue: L, kd_nM: 43, error_nM: 8}
+      - {residue: M, kd_nM: 61, error_nM: null}
+      - {residue: V, kd_nM: 73, error_nM: 34}
+      - {residue: Y, kd_nM: 90, error_nM: 12}
+      - {residue: R, kd_nM: 93, error_nM: null}
+      - {residue: W, kd_nM: 155, error_nM: 36}
+      - {residue: A, kd_nM: 173, error_nM: null}
+      - {residue: H, kd_nM: 227, error_nM: 63}
+      - {residue: F, kd_nM: 241, error_nM: 150}
+      - {residue: T, kd_nM: 325, error_nM: 100}
+      - {residue: Q, kd_nM: 470, error_nM: null}
+      - {residue: S, kd_nM: 507, error_nM: null}
+  his:
+    pocket_residues: DYTDWQA
+    variants:
+      - {residue: H, kd_nM: 8, error_nM: null}
+      - {residue: R, kd_nM: 104, error_nM: null}
+      - {residue: Y, kd_nM: 292, error_nM: null}
+      - {residue: M, kd_nM: 425, error_nM: null}
+      - {residue: W, kd_nM: 430, error_nM: null}
+      - {residue: A, kd_nM: 436, error_nM: null}
+      - {residue: N, kd_nM: 727, error_nM: null}
+      - {residue: I, kd_nM: 740, error_nM: null}
+      - {residue: T, kd_nM: 930, error_nM: null}
+
+# How to turn a row into a scorable complex. From the Materials and Methods
+# (L55, L57) of the source.
+construct_recipe:
+  scaffold_5aei:
+    chain: A
+    residue_range: [11, 291]        # "residues 11-291 of chain A were taken"
+    pocket_positions: [155, 159, 162, 194, 197, 198, 201]
+    ligand_chain: D
+    ligand_residue_range: [1, 10]
+    variable_ligand_position: 4     # "In 5AEI, the respective residue ... is residue 4"
+    flanking_alanine_positions: [2, 6]
+    flanking_alanine_status: inferred
+  scaffold_6sa8:
+    chain: A
+    residue_range: [179, 514]       # DARPin fusion excluded, per L55
+    pocket_positions: [364, 368, 371, 403, 406, 407, 410]
+    ligand_chain: B
+    ligand_residue_range: [1, 10]
+    variable_ligand_position: 6
+    flanking_alanine_positions: [4, 8]
+    flanking_alanine_status: stated  # "residue 4 and 8 of the ligand were modeled as alanines" (L57)
+  base_peptide: KRKRKRKRKR
+  inference_note: >
+    The paper states the flanking alanines explicitly only in 6SA8 numbering
+    (variable position 6, alanines at 4 and 8 — the immediate i±2 neighbours).
+    The 5AEI mapping to positions 2 and 6 applies the same i±2 rule around its
+    variable position 4 and is an inference, not a quotation. Any Tier A result
+    built on the 5AEI scaffold inherits that assumption and must say so.

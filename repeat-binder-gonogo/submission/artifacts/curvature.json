@@ -1,0 +1,49 @@
+{
+  "method": "sagitta of subunit centroids along each rib; R = L^2/8s. Replaces an earlier cylinder-axis sweep that returned radius 63 A / 137 deg of arc \u2014 PyMOL rendering showed the patch is a flat sheet, so that fit was locking onto internal scatter, not global curvature.",
+  "reference": {
+    "source": "Dutka et al. 2023, PMC10185304 L22 and L83",
+    "ana_gv_diameter_nm": 85.0,
+    "ana_shell_thickness_nm": 2.8
+  },
+  "per_rib": [
+    {
+      "rib": 0,
+      "chord_A": 121.3,
+      "sagitta_A": 10.35,
+      "implied_radius_A": 177.9,
+      "implied_diameter_nm": 35.6
+    },
+    {
+      "rib": 1,
+      "chord_A": 121.3,
+      "sagitta_A": 10.35,
+      "implied_radius_A": 177.9,
+      "implied_diameter_nm": 35.6
+    },
+    {
+      "rib": 2,
+      "chord_A": 121.3,
+      "sagitta_A": 10.35,
+      "implied_radius_A": 177.9,
+      "implied_diameter_nm": 35.6
+    },
+    {
+      "rib": 3,
+      "chord_A": 121.3,
+      "sagitta_A": 10.35,
+      "implied_radius_A": 177.9,
+      "implied_diameter_nm": 35.6
+    },
+    {
+      "rib": 4,
+      "chord_A": 121.3,
+      "sagitta_A": 10.35,
+      "implied_radius_A": 177.9,
+      "implied_diameter_nm": 35.6
+    }
+  ],
+  "mean_chord_A": 121.3,
+  "sagitta_observed_A": 10.35,
+  "sagitta_expected_for_85nm_A": 4.328,
+  "verdict": "MORE curved than a real Ana GV"
+}

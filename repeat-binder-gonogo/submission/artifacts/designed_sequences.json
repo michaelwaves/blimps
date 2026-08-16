@@ -1,0 +1,133 @@
+{
+  "native_gvpc_85_117": "HKELQETSQQFLSATAQARIAQAEKQAQELLAF",
+  "designs": [
+    {
+      "sequence": "DEEKKKQEEKEKEKKEEEKKAEEEKKKEEEKAK",
+      "native_recovery": 0.1818
+    },
+    {
+      "sequence": "KKEEEEQKKKKEEEAKEKEKEEEEKKKEKEKAK",
+      "native_recovery": 0.1818
+    },
+    {
+      "sequence": "AEEEERRREEEEERRRRQEELEAQERLRREKAK",
+      "native_recovery": 0.0909
+    },
+    {
+      "sequence": "AAAAAAAAAAAAAQAAAEAAAAAAAAQAAALAA",
+      "native_recovery": 0.1515
+    },
+    {
+      "sequence": "AAAEAAAAAAAAAAAAAAEEERKAAEAAAAAAA",
+      "native_recovery": 0.1515
+    },
+    {
+      "sequence": "SEEQEKKKREQEKKKQEKEEEEKRKKEEEEKKK",
+      "native_recovery": 0.0909
+    },
+    {
+      "sequence": "KKKEEEEKKKEEAKEEEKKKKKKKEEEKKKKKE",
+      "native_recovery": 0.0606
+    },
+    {
+      "sequence": "AEEKKKEKEKKEKKKKEEEEKKKKEKEKKKKAE",
+      "native_recovery": 0.0606
+    },
+    {
+      "sequence": "EQAQQQAAQQQQQQQQQQQQQQAQQQQQQQQKQ",
+      "native_recovery": 0.2424
+    },
+    {
+      "sequence": "QEEQEKQQQQEELEKQKQKEQAQKEQQEKLKAE",
+      "native_recovery": 0.1818
+    },
+    {
+      "sequence": "EEREREREREERAREEERRREEEEERRKEEEKE",
+      "native_recovery": 0.1212
+    },
+    {
+      "sequence": "EEEKKKEEEKKEEEKKKEEEKEKEEKEKKKKEK",
+      "native_recovery": 0.0606
+    },
+    {
+      "sequence": "AAAAAAERARAAAAAAAAAEEAARLAAARARAA",
+      "native_recovery": 0.1818
+    },
+    {
+      "sequence": "EEKKKQEEKEKEEKKKKEEEKKKKEEEKKKEEK",
+      "native_recovery": 0.0
+    },
+    {
+      "sequence": "EEQRREAERRREAEERARREAAAEAEERERRAR",
+      "native_recovery": 0.2121
+    },
+    {
+      "sequence": "AEEKERKKKAEEAEKKKKEEEKAKEAEKEKKAK",
+      "native_recovery": 0.1212
+    },
+    {
+      "sequence": "KEEEEKKKKEEEKKKEEEKKKKEEEQKKKEKEK",
+      "native_recovery": 0.0909
+    },
+    {
+      "sequence": "EEELKKKEEEEQKEEEKKKEEKKKEEEKKKLAK",
+      "native_recovery": 0.1212
+    },
+    {
+      "sequence": "KEEEKKEKEKKKEEEKKKKEEEKKEKEKKKKEE",
+      "native_recovery": 0.0303
+    },
+    {
+      "sequence": "DKEKEQRKKEEEKKKEEEKKEKEEKEEKEKKKK",
+      "native_recovery": 0.1515
+    },
+    {
+      "sequence": "EEEEERRKREEEKREEEERRRKEEERKREEEKK",
+      "native_recovery": 0.1212
+    },
+    {
+      "sequence": "KEEEEKKKEEKKKEEEKKKKKEEEEKKKEEEEK",
+      "native_recovery": 0.0909
+    },
+    {
+      "sequence": "KEKEEERKREEEEKKKEEEKRKEEEKLKQEKAK",
+      "native_recovery": 0.0909
+    },
+    {
+      "sequence": "EEEKKKKEEEEKKKKEEEKKKEEEEKKKKEEEK",
+      "native_recovery": 0.0606
+    },
+    {
+      "sequence": "KEEEEKKKKKEEEKKKEEEKKKKEEKKKEELKE",
+      "native_recovery": 0.1212
+    },
+    {
+      "sequence": "EEQKKEEQKKKEEEKKAEAEKKKEEEEKKKKAE",
+      "native_recovery": 0.0909
+    },
+    {
+      "sequence": "KEEEEKKKKEEKKKEEEKKEKEKKEAEKEKKAK",
+      "native_recovery": 0.0909
+    },
+    {
+      "sequence": "EEEKEKEKEREEEKKKEEERRKEEEKEKKEKEK",
+      "native_recovery": 0.0606
+    },
+    {
+      "sequence": "AEEEERRREEERRRREREEERRREEERRLEEAR",
+      "native_recovery": 0.0909
+    },
+    {
+      "sequence": "AEEEKKKKAEEEKKKEKKAKEEAEKEKKKKEAE",
+      "native_recovery": 0.1515
+    },
+    {
+      "sequence": "EEEREREKERQKREEEQRREEERRREEERRRAE",
+      "native_recovery": 0.1212
+    },
+    {
+      "sequence": "AELAAALAALLAQLAAAARAAAAAAAAAAAAAA",
+      "native_recovery": 0.2121
+    }
+  ]
+}

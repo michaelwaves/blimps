@@ -1,0 +1,609 @@
+{
+  "cases": [
+    {
+      "case_id": "B1",
+      "tier": "B",
+      "expectation": "binder",
+      "binder": {
+        "name": "DARPin 4m3",
+        "len": 161,
+        "source": "pdb:9S60:B/B2",
+        "edits": [
+          "removed purification tag: C-terminal LEVLFQGPLEHHHHHH"
+        ]
+      },
+      "target": {
+        "name": "mouse cathepsin B (mature)",
+        "len": 254,
+        "source": "uniprot:P10605 Chain[80-333] 'Cathepsin B'",
+        "edits": []
+      },
+      "truth": {
+        "KD_nM": {
+          "pH6": 65.7,
+          "pH7": 108.3
+        },
+        "Ki_nM": {
+          "competitive": 26.7,
+          "noncompetitive": 47.25
+        },
+        "method": "SPR + kinetics"
+      },
+      "notes": [
+        "mature-chain construct identical to the 9S60 deposit"
+      ]
+    },
+    {
+      "case_id": "B4",
+      "tier": "B",
+      "expectation": "non_binder",
+      "binder": {
+        "name": "DARPin 4m3",
+        "len": 161,
+        "source": "pdb:9S60:B/B2",
+        "edits": [
+          "removed purification tag: C-terminal LEVLFQGPLEHHHHHH"
+        ]
+      },
+      "target": {
+        "name": "human cathepsin B (mature)",
+        "len": 254,
+        "source": "uniprot:P07858 Chain[80-333] 'Cathepsin B'",
+        "edits": []
+      },
+      "truth": {
+        "outcome": "no binding, no inhibition at 1000x molar excess",
+        "selectivity_residues": {
+          "mouse": [
+            "I65",
+            "Q66"
+          ],
+          "human": [
+            "S65",
+            "M66"
+          ]
+        }
+      },
+      "notes": [
+        "same construct boundaries as B1 \u2014 the only variable is the ortholog"
+      ]
+    },
+    {
+      "case_id": "B2",
+      "tier": "B",
+      "expectation": "binder",
+      "binder": {
+        "name": "DARPin 81",
+        "len": 159,
+        "source": "pdb:5MBL:B",
+        "edits": [
+          "removed purification tag: N-terminal MRGSHHHHHHGS"
+        ]
+      },
+      "target": {
+        "name": "Cathepsin B",
+        "len": 256,
+        "source": "pdb:5MBL:A",
+        "edits": []
+      },
+      "truth": {
+        "pdb": "5MBL",
+        "note": "cross-reactive DARPin; the deposited target is HUMAN cathepsin B"
+      },
+      "notes": []
+    },
+    {
+      "case_id": "B3",
+      "tier": "B",
+      "expectation": "binder",
+      "binder": {
+        "name": "DARPin 8h6",
+        "len": 159,
+        "source": "pdb:5MBM:C/D",
+        "edits": [
+          "removed purification tag: N-terminal MRGSHHHHHHGS"
+        ]
+      },
+      "target": {
+        "name": "Cathepsin B",
+        "len": 256,
+        "source": "pdb:5MBM:A/B",
+        "edits": []
+      },
+      "truth": {
+        "pdb": "5MBM",
+        "note": "cross-reactive DARPin; the deposited target is HUMAN cathepsin B"
+      },
+      "notes": []
+    },
+    {
+      "case_id": "B5",
+      "tier": "B",
+      "expectation": "non_binder",
+      "binder": {
+        "name": "DARPin 4m3",
+        "len": 161,
+        "source": "pdb:9S60:B/B2",
+        "edits": [
+          "removed purification tag: C-terminal LEVLFQGPLEHHHHHH"
+        ]
+      },
+      "target": {
+        "name": "mouse pro-cathepsin B",
+        "len": 316,
+        "source": "uniprot:P10605 Propeptide[18-79] 'Activation peptide' + uniprot:P10605 Chain[80-333] 'Cathepsin B'",
+        "edits": []
+      },
+      "truth": {
+        "outcome": "no complex by SEC"
+      },
+      "notes": [
+        "propeptide fused to the mature chain; the deposited zymogen structure is not in the case set"
+      ]
+    },
+    {
+      "case_id": "B6",
+      "tier": "B",
+      "expectation": "non_binder",
+      "binder": {
+        "name": "SANK E3_5 Protein",
+        "len": 154,
+        "source": "pdb:1MJ0:A",
+        "edits": [
+          "removed purification tag: N-terminal MRGSHHHHHHGS"
+        ]
+      },
+      "target": {
+        "name": "mouse cathepsin B (mature)",
+        "len": 254,
+        "source": "uniprot:P10605 Chain[80-333] 'Cathepsin B'",
+        "edits": []
+      },
+      "truth": {
+        "outcome": "no thermal stabilisation in CETSA (off-target control used in [1])"
+      },
+      "notes": [
+        "E3_5 sequence taken from its own deposit (1MJ0); cases.yaml cites no structure for B6"
+      ]
+    },
+    {
+      "case_id": "C_7YCO",
+      "tier": "C",
+      "expectation": "binder",
+      "binder": {
+        "name": "Repebody (A6)",
+        "len": 267,
+        "source": "pdb:7YCO:B",
+        "edits": []
+      },
+      "target": {
+        "name": "Spike protein S1",
+        "len": 198,
+        "source": "pdb:7YCO:A",
+        "edits": []
+      },
+      "truth": {
+        "pdb": "7YCO",
+        "resolution_A": 1.96,
+        "complex": "A6 repebody (LRR scaffold) + SARS-CoV-2 receptor binding domain"
+      },
+      "notes": []
+    },
+    {
+      "case_id": "C_4CJ0",
+      "tier": "C",
+      "expectation": "binder",
+      "binder": {
+        "name": "E12 AFFITIN",
+        "len": 69,
+        "source": "pdb:4CJ0:B",
+        "edits": [
+          "removed purification tag: N-terminal MRGSHHHHHHGS"
+        ]
+      },
+      "target": {
+        "name": "ENDOGLUCANASE D",
+        "len": 625,
+        "source": "pdb:4CJ0:A",
+        "edits": []
+      },
+      "truth": {
+        "pdb": "4CJ0",
+        "resolution_A": 1.1,
+        "complex": "affitin E12 + CelD"
+      },
+      "notes": []
+    },
+    {
+      "case_id": "C_4CJ2",
+      "tier": "C",
+      "expectation": "binder",
+      "binder": {
+        "name": "AFFITIN H4",
+        "len": 66,
+        "source": "pdb:4CJ2:C/D",
+        "edits": [
+          "removed purification tag: N-terminal MRGSHHHHHHGS"
+        ]
+      },
+      "target": {
+        "name": "LYSOZYME C",
+        "len": 147,
+        "source": "pdb:4CJ2:A/B",
+        "edits": []
+      },
+      "truth": {
+        "pdb": "4CJ2",
+        "resolution_A": 1.5,
+        "complex": "affitin H4 + hen egg white lysozyme"
+      },
+      "notes": []
+    },
+    {
+      "case_id": "C_7QNP",
+      "tier": "C",
+      "expectation": "binder",
+      "binder": {
+        "name": "Designed Armadillo Repeat Protein N(A4)M4C(AII)",
+        "len": 240,
+        "source": "pdb:7QNP:AAA",
+        "edits": []
+      },
+      "target": {
+        "name": "Lysozyme",
+        "len": 129,
+        "source": "pdb:7QNP:BBB",
+        "edits": []
+      },
+      "truth": {
+        "pdb": "7QNP",
+        "resolution_A": 1.586,
+        "complex": "dArmRP N(A4)M4C(AII) + hen egg white lysozyme"
+      },
+      "notes": []
+    },
+    {
+      "case_id": "C_6G4J",
+      "tier": "C",
+      "expectation": "binder",
+      "binder": {
+        "name": "alphaREP bE8",
+        "len": 138,
+        "source": "pdb:6G4J:B",
+        "edits": [
+          "removed purification tag: N-terminal MRGSHHHHHH"
+        ]
+      },
+      "target": {
+        "name": "Probable serine/threonine-protein kinase YabT",
+        "len": 315,
+        "source": "pdb:6G4J:A",
+        "edits": []
+      },
+      "truth": {
+        "pdb": "6G4J",
+        "resolution_A": 1.599,
+        "complex": "alphaRep + protein kinase YabT (B. subtilis)"
+      },
+      "notes": []
+    },
+    {
+      "case_id": "C_1SVX",
+      "tier": "C",
+      "expectation": "binder",
+      "binder": {
+        "name": "Ankyrin Repeat Protein off7",
+        "len": 157,
+        "source": "pdb:1SVX:A",
+        "edits": [
+          "removed purification tag: N-terminal MRGSHHHHHHGS"
+        ]
+      },
+      "target": {
+        "name": "Maltose-binding periplasmic protein",
+        "len": 381,
+        "source": "pdb:1SVX:B",
+        "edits": [
+          "removed purification tag: N-terminal MRGSHHHHHHGSGS"
+        ]
+      },
+      "truth": {
+        "pdb": "1SVX",
+        "resolution_A": 2.24,
+        "complex": "DARPin off7 + maltose binding protein"
+      },
+      "notes": []
+    },
+    {
+      "case_id": "C_8RCI",
+      "tier": "C",
+      "expectation": "binder",
+      "binder": {
+        "name": "DARPin C10",
+        "len": 126,
+        "source": "pdb:8RCI:E",
+        "edits": []
+      },
+      "target": {
+        "name": "Cellular tumor antigen p53",
+        "len": 202,
+        "source": "pdb:8RCI:A",
+        "edits": []
+      },
+      "truth": {
+        "pdb": "8RCI",
+        "resolution_A": 1.5,
+        "complex": "DARPin C10 + human p53 DNA-binding domain"
+      },
+      "notes": []
+    },
+    {
+      "case_id": "C_9SPO",
+      "tier": "C",
+      "expectation": "binder",
+      "binder": {
+        "name": "DARPin C10",
+        "len": 126,
+        "source": "pdb:9SPO:E",
+        "edits": []
+      },
+      "target": {
+        "name": "Cellular tumor antigen p53",
+        "len": 202,
+        "source": "pdb:9SPO:A",
+        "edits": []
+      },
+      "truth": {
+        "pdb": "9SPO",
+        "resolution_A": 1.48,
+        "complex": "DARPin C10 + p53 Y220C cancer mutant"
+      },
+      "notes": []
+    },
+    {
+      "case_id": "decoy_shuffle_B1_r0",
+      "tier": "decoy",
+      "expectation": "decoy",
+      "binder": {
+        "name": "DARPin 4m3 [shuffled r0]",
+        "len": 161,
+        "source": "pdb:9S60:B/B2",
+        "edits": [
+          "sequence shuffled, python random seed 0, replicate 0"
+        ]
+      },
+      "target": {
+        "name": "mouse cathepsin B (mature)",
+        "len": 254,
+        "source": "uniprot:P10605 Chain[80-333] 'Cathepsin B'",
+        "edits": []
+      },
+      "truth": {},
+      "notes": [
+        "composition-preserving shuffle: same residues, no fold"
+      ]
+    },
+    {
+      "case_id": "decoy_shuffle_B1_r1",
+      "tier": "decoy",
+      "expectation": "decoy",
+      "binder": {
+        "name": "DARPin 4m3 [shuffled r1]",
+        "len": 161,
+        "source": "pdb:9S60:B/B2",
+        "edits": [
+          "sequence shuffled, python random seed 0, replicate 1"
+        ]
+      },
+      "target": {
+        "name": "mouse cathepsin B (mature)",
+        "len": 254,
+        "source": "uniprot:P10605 Chain[80-333] 'Cathepsin B'",
+        "edits": []
+      },
+      "truth": {},
+      "notes": [
+        "composition-preserving shuffle: same residues, no fold"
+      ]
+    },
+    {
+      "case_id": "decoy_shuffle_B2_r0",
+      "tier": "decoy",
+      "expectation": "decoy",
+      "binder": {
+        "name": "DARPin 81 [shuffled r0]",
+        "len": 159,
+        "source": "pdb:5MBL:B",
+        "edits": [
+          "sequence shuffled, python random seed 0, replicate 0"
+        ]
+      },
+      "target": {
+        "name": "Cathepsin B",
+        "len": 256,
+        "source": "pdb:5MBL:A",
+        "edits": []
+      },
+      "truth": {},
+      "notes": [
+        "composition-preserving shuffle: same residues, no fold"
+      ]
+    },
+    {
+      "case_id": "decoy_shuffle_B2_r1",
+      "tier": "decoy",
+      "expectation": "decoy",
+      "binder": {
+        "name": "DARPin 81 [shuffled r1]",
+        "len": 159,
+        "source": "pdb:5MBL:B",
+        "edits": [
+          "sequence shuffled, python random seed 0, replicate 1"
+        ]
+      },
+      "target": {
+        "name": "Cathepsin B",
+        "len": 256,
+        "source": "pdb:5MBL:A",
+        "edits": []
+      },
+      "truth": {},
+      "notes": [
+        "composition-preserving shuffle: same residues, no fold"
+      ]
+    },
+    {
+      "case_id": "decoy_noncognate_C_1SVX_x_B1",
+      "tier": "decoy",
+      "expectation": "decoy",
+      "binder": {
+        "name": "Ankyrin Repeat Protein off7",
+        "len": 157,
+        "source": "pdb:1SVX:A",
+        "edits": [
+          "removed purification tag: N-terminal MRGSHHHHHHGS"
+        ]
+      },
+      "target": {
+        "name": "mouse cathepsin B (mature)",
+        "len": 254,
+        "source": "uniprot:P10605 Chain[80-333] 'Cathepsin B'",
+        "edits": []
+      },
+      "truth": {},
+      "notes": [
+        "anti-MBP DARPin off7 against mouse cathepsin B",
+        "both chains are real, folded proteins; only the pairing is wrong"
+      ]
+    },
+    {
+      "case_id": "decoy_noncognate_C_4CJ2_x_B1",
+      "tier": "decoy",
+      "expectation": "decoy",
+      "binder": {
+        "name": "AFFITIN H4",
+        "len": 66,
+        "source": "pdb:4CJ2:C/D",
+        "edits": [
+          "removed purification tag: N-terminal MRGSHHHHHHGS"
+        ]
+      },
+      "target": {
+        "name": "mouse cathepsin B (mature)",
+        "len": 254,
+        "source": "uniprot:P10605 Chain[80-333] 'Cathepsin B'",
+        "edits": []
+      },
+      "truth": {},
+      "notes": [
+        "anti-lysozyme affitin H4 against mouse cathepsin B",
+        "both chains are real, folded proteins; only the pairing is wrong"
+      ]
+    },
+    {
+      "case_id": "decoy_noncognate_C_7YCO_x_B1",
+      "tier": "decoy",
+      "expectation": "decoy",
+      "binder": {
+        "name": "Repebody (A6)",
+        "len": 267,
+        "source": "pdb:7YCO:B",
+        "edits": []
+      },
+      "target": {
+        "name": "mouse cathepsin B (mature)",
+        "len": 254,
+        "source": "uniprot:P10605 Chain[80-333] 'Cathepsin B'",
+        "edits": []
+      },
+      "truth": {},
+      "notes": [
+        "anti-RBD repebody A6 against mouse cathepsin B",
+        "both chains are real, folded proteins; only the pairing is wrong"
+      ]
+    },
+    {
+      "case_id": "decoy_noncognate_B1_x_C_1SVX",
+      "tier": "decoy",
+      "expectation": "decoy",
+      "binder": {
+        "name": "DARPin 4m3",
+        "len": 161,
+        "source": "pdb:9S60:B/B2",
+        "edits": [
+          "removed purification tag: C-terminal LEVLFQGPLEHHHHHH"
+        ]
+      },
+      "target": {
+        "name": "Maltose-binding periplasmic protein",
+        "len": 381,
+        "source": "pdb:1SVX:B",
+        "edits": [
+          "removed purification tag: N-terminal MRGSHHHHHHGSGS"
+        ]
+      },
+      "truth": {},
+      "notes": [
+        "DARPin 4m3 against maltose binding protein",
+        "both chains are real, folded proteins; only the pairing is wrong"
+      ]
+    },
+    {
+      "case_id": "decoy_noncognate_B1_x_C_4CJ2",
+      "tier": "decoy",
+      "expectation": "decoy",
+      "binder": {
+        "name": "DARPin 4m3",
+        "len": 161,
+        "source": "pdb:9S60:B/B2",
+        "edits": [
+          "removed purification tag: C-terminal LEVLFQGPLEHHHHHH"
+        ]
+      },
+      "target": {
+        "name": "LYSOZYME C",
+        "len": 147,
+        "source": "pdb:4CJ2:A/B",
+        "edits": []
+      },
+      "truth": {},
+      "notes": [
+        "DARPin 4m3 against hen egg white lysozyme",
+        "both chains are real, folded proteins; only the pairing is wrong"
+      ]
+    }
+  ],
+  "gaps": [],
+  "checks": [
+    {
+      "check": "mouse/human cathepsin B identity",
+      "claimed": "83%",
+      "observed": "83.07%",
+      "ok": true
+    },
+    {
+      "check": "selectivity residues 65/66",
+      "claimed": "mouse I65/Q66, human S65/M66",
+      "observed": "mouse IQ, human SM",
+      "ok": true
+    },
+    {
+      "check": "B1 target construct",
+      "claimed": "deposited 9S60 target is the mature mouse enzyme",
+      "observed": "identical",
+      "ok": true
+    },
+    {
+      "check": "tier A pocket mapping in 5AEI",
+      "claimed": "pocket positions from the paper read the Arg-binder pocket QWSQQEW",
+      "observed": "confirmed",
+      "ok": true
+    },
+    {
+      "check": "tier A pocket mapping in 6SA8",
+      "claimed": "pocket positions from the paper read the Arg-binder pocket QWSQQEW",
+      "observed": "confirmed",
+      "ok": true
+    }
+  ]
+}

@@ -29,9 +29,10 @@ python gvpa_full_pipeline.py boltz --top-per-arm 2
 ```
 
 The repository commits the 16 materialized RFdiffusion backbones, compact
-candidate/result tables, and the browser demo. Raw Modal response payloads are
-excluded. The new stages require `numpy`, `biotite`, and `proto-tools` in
-addition to the benchmark dependencies below.
+candidate/result tables, and the browser demo, including rotating constrained
+and free winner overlays against the GvpC-derived footprint. Raw Modal response
+payloads are excluded. The new stages require `numpy`, `biotite`, and
+`proto-tools` in addition to the benchmark dependencies below.
 
 ## Result
 

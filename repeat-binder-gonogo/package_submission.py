@@ -95,7 +95,8 @@ GVPA_STEPS = [
      "per backbone across 16 backbones, producing 64 sequence-backbone candidates.", "ok",
      "designs/gvpa/full_pipeline/candidates.csv"),
     ("economist", "screen and replicate finalists with Boltz-2", "screened two distinct clash-free backbones "
-     "per arm at seed 0, then confirmed one winner per arm at seeds 1 and 2; six total co-fold evaluations.",
+     "per arm at seed 0, then confirmed one winner per arm at seeds 1 and 2; eight total co-fold evaluations "
+     "across four unique candidates.",
      "ok", "designs/gvpa/full_pipeline/pipeline_results.json"),
     ("referee", "limit the final binder claim", "the constrained winner mean binder-target ipTM is 0.2605 "
      "versus 0.0951 free (2.7x), but its seed range is 0.1998 and the repeat-protein interface-recovery gate "
@@ -202,7 +203,10 @@ def main() -> int:
                 "designs/gvpa/full_pipeline/best_binders.fasta",
                 "designs/gvpa/full_pipeline/demo.html",
                 "designs/gvpa/full_pipeline/constrained_winner.png",
-                "designs/gvpa/full_pipeline/free_winner.png"]:
+                "designs/gvpa/full_pipeline/free_winner.png",
+                "designs/gvpa/full_pipeline/constrained_winner_rotating.gif",
+                "designs/gvpa/full_pipeline/free_winner_rotating.gif",
+                "designs/gvpa/full_pipeline/render_rotating_winners.pml"]:
         src = REPO / rel
         if src.exists():
             shutil.copyfile(src, artifacts / src.name)

@@ -9,7 +9,9 @@
   *{box-sizing:border-box} body{margin:0;background:#fff;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
   main{max-width:1180px;margin:auto;padding:38px 42px 70px}.eyebrow{font-size:13px;font-weight:750;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
   h1{font-size:44px;line-height:1.04;max-width:930px;margin:9px 0 14px;letter-spacing:-.035em} .lead{font-size:20px;line-height:1.42;max-width:910px;color:var(--muted);margin:0 0 34px}
+  .proof{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:26px 0 12px}.proof div{padding:18px 20px 18px 0}.proof div+div{border-left:1px solid var(--line);padding-left:20px}.proof strong{display:block;font-size:30px;letter-spacing:-.03em}.proof span{display:block;color:var(--muted);font-size:13px;line-height:1.35;margin-top:3px}
   h2{font-size:27px;letter-spacing:-.02em;margin:50px 0 18px}.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:stretch}
+  .applications{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.application{border-top:5px solid var(--cyan);padding-top:13px}.application:nth-child(2){border-color:#7c4dff}.application:nth-child(3){border-color:var(--orange)}.application:nth-child(4){border-color:var(--green)}.application b{display:block;font-size:17px;margin-bottom:6px}.application span{display:block;color:var(--muted);font-size:13px;line-height:1.4}.application em{display:block;font-style:normal;font-weight:700;margin-top:9px}
   .stage{border-top:5px solid var(--ink);background:var(--paper);padding:15px 14px;min-height:132px;position:relative}.stage:not(:last-child):after{content:"→";position:absolute;right:-15px;top:48px;font-weight:800;font-size:22px;z-index:2}
   .stage b{display:block;font-size:17px;margin-bottom:8px}.stage small{display:block;color:var(--muted);font-size:13px;line-height:1.35}.stage strong{color:var(--cyan)}
   .gates{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.gate{border:1px solid var(--line);padding:12px 13px}.gate span{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}.gate b{font-size:20px}.pass b{color:var(--green)}.fail b{color:var(--red)}
@@ -20,7 +22,7 @@
   .metric strong{display:block;font-size:28px;letter-spacing:-.03em}.metric span{display:block;font-size:13px;color:var(--muted);margin-top:4px;line-height:1.3}.arm-note{font-size:16px;line-height:1.5;color:var(--muted);margin:19px 0 0}
   .result-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px}.bars{border-left:1px solid var(--line);padding-left:22px}.bar-row{display:grid;grid-template-columns:104px 1fr 48px;align-items:center;gap:10px;margin:14px 0;font-size:14px}.track{height:18px;background:#edf1f3;position:relative}.fill{height:100%}.seed-plot{width:100%;height:auto;border:1px solid var(--line);background:#fff}.claim{border-left:7px solid var(--amber);background:#fff8e8;padding:20px 22px;font-size:20px;line-height:1.4;margin-top:34px}.claim b{display:block;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:6px}
   footer{color:var(--muted);font-size:13px;margin-top:48px;padding-top:16px;border-top:1px solid var(--line)}
-  @media(max-width:820px){main{padding:28px 22px}h1{font-size:35px}.flow,.gates{grid-template-columns:1fr}.stage:not(:last-child):after{display:none}.experiment,.result-grid{grid-template-columns:1fr}}
+  @media(max-width:820px){main{padding:28px 22px}h1{font-size:35px}.flow,.gates,.applications,.proof{grid-template-columns:1fr}.proof div+div{border-left:0;border-top:1px solid var(--line);padding-left:0}.stage:not(:last-child):after{display:none}.experiment,.result-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -28,6 +30,20 @@
   <div class="eyebrow">re:AGENT · Track C bio design</div>
   <h1>Constraints steer a binder to the lattice. Controls stop us from calling it validated.</h1>
   <p class="lead">A matched constrained-versus-free experiment on a five-chain GvpA patch, with evidence gates deciding what each model output is allowed to mean.</p>
+
+  <section class="proof" aria-label="Demo proof points">
+    <div><strong>2.4%</strong><span>diameter error: 35.6 nm generated patch versus 36.5 nm source assembly</span></div>
+    <div><strong>4 / 64</strong><span>unique candidates reached expensive co-fold screening (6.25%)</span></div>
+    <div><strong>8 / 8 vs 0 / 8</strong><span>constrained versus free backbones localized to the GvpC-derived footprint</span></div>
+  </section>
+
+  <h2>Assembly changes what can be bound</h2>
+  <section class="applications" aria-label="Repeated lattice applications">
+    <div class="application"><b>HIV capsid</b><span>Adjacent subunits complete a high-affinity ligand pocket.</span><em>Antiviral targeting</em></div>
+    <div class="application"><b>α-synuclein fibrils</b><span>Helical repetition creates polymorph-specific grooves.</span><em>Selective labels and diagnostics</em></div>
+    <div class="application"><b>Microtubules</b><span>The polymer lattice encodes nucleotide state.</span><em>Dynamic lattice sensors</em></div>
+    <div class="application"><b>AAV capsids</b><span>A repeated 60-subunit surface supports broad capture ligands.</span><em>Affinity purification and capsid QC</em></div>
+  </section>
 
   <h2>Model architecture</h2>
   <section class="flow" aria-label="Pipeline architecture">
@@ -54,8 +70,8 @@
         <button id="tab-c" role="tab" aria-selected="true" style="--arm:var(--cyan)">Constrained arm</button>
         <button id="tab-f" role="tab" aria-selected="false" style="--arm:var(--orange)">Free arm</button>
       </div>
-      <img id="molecule" class="molecule" src="constrained_winner.png" alt="Constrained binder on GvpA lattice patch">
-      <div class="legend"><span><i class="dot" id="binder-dot" style="background:var(--cyan)"></i>Designed binder</span><span><i class="dot" style="background:var(--red)"></i>Hypothesized site</span><span><i class="dot" style="background:#b7bdc1"></i>GvpA patch</span></div>
+      <img id="molecule" class="molecule" src="constrained_winner_rotating.gif" alt="Rotating constrained binder aligned to the GvpC-derived footprint on the GvpA lattice patch">
+      <div class="legend"><span><i class="dot" style="background:var(--cyan)"></i>Designed binder</span><span><i class="dot" style="background:#f000f0"></i>GvpC-derived footprint</span><span><i class="dot" style="background:var(--orange)"></i>Aligned GvpC backbone trace</span><span><i class="dot" style="background:#b7bdc1"></i>GvpA patch</span></div>
     </div>
     <div>
       <div class="metrics">
@@ -91,10 +107,10 @@
 </main>
 <script>
 const arms={
-  c:{img:'constrained_winner.png',alt:'Constrained binder on GvpA lattice patch',color:'var(--cyan)',hits:'6–10',distance:'0.7–2.5 Å',clashes:'4 / 8',iptm:'0.2605',note:'The site constraint changes where all eight backbones land, but creates a 50% steric-clash failure rate.'},
-  f:{img:'free_winner.png',alt:'Free binder away from hypothesized GvpC site',color:'var(--orange)',hits:'0',distance:'14.5–22.7 Å',clashes:'0 / 8',iptm:'0.0951',note:'Without hotspots, every backbone misses the hypothesized site; none has a sub-2 Å backbone clash.'}
+  c:{img:'constrained_winner_rotating.gif',alt:'Rotating constrained binder aligned to the GvpC-derived footprint on the GvpA lattice patch',hits:'6–10',distance:'0.7–2.5 Å',clashes:'4 / 8',iptm:'0.2605',note:'The cyan design and orange cross-species GvpC trace co-localize over the magenta footprint. The constraint changes where all eight backbones land, but creates a 50% steric-clash failure rate.'},
+  f:{img:'free_winner_rotating.gif',alt:'Rotating free binder away from the GvpC-derived footprint on the GvpA lattice patch',hits:'0',distance:'14.5–22.7 Å',clashes:'0 / 8',iptm:'0.0951',note:'Without hotspots, every backbone misses the hypothesized footprint; none has a sub-2 Å backbone clash.'}
 };
-function showArm(key){const a=arms[key];document.getElementById('molecule').src=a.img;document.getElementById('molecule').alt=a.alt;document.getElementById('binder-dot').style.background=a.color;for(const id of ['hits','distance','clashes','iptm'])document.getElementById(id).textContent=a[id];document.getElementById('arm-note').textContent=a.note;document.getElementById('tab-c').setAttribute('aria-selected',String(key==='c'));document.getElementById('tab-f').setAttribute('aria-selected',String(key==='f'));}
+function showArm(key){const a=arms[key];document.getElementById('molecule').src=a.img;document.getElementById('molecule').alt=a.alt;for(const id of ['hits','distance','clashes','iptm'])document.getElementById(id).textContent=a[id];document.getElementById('arm-note').textContent=a.note;document.getElementById('tab-c').setAttribute('aria-selected',String(key==='c'));document.getElementById('tab-f').setAttribute('aria-selected',String(key==='f'));}
 document.getElementById('tab-c').addEventListener('click',()=>showArm('c'));document.getElementById('tab-f').addEventListener('click',()=>showArm('f'));
 </script>
 </body>

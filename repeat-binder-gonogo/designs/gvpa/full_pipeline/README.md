@@ -73,6 +73,10 @@ sequences and a useful localization experiment, **not a validated binder**.
 - `best_binders.fasta` — constrained and free winners.
 - `rfd3_inputs/*.cif` — the 16 generated complexes with format-correct names.
 - `boltz/` — cached raw outputs and parsed scores; reruns reuse completed calls.
+- `demo.html` — browser-ready results view with constrained/free toggling.
+- `*_winner_rotating.gif` — 72-frame molecular comparisons: gray GvpA,
+  magenta GvpC-derived footprint, cyan design, and the aligned orange GvpC
+  backbone trace. `render_rotating_winners.pml` is the PyMOL source.
 
 ## Reproduce
 
@@ -85,4 +89,6 @@ sequences and a useful localization experiment, **not a validated binder**.
 ```
 
 The Boltz stage is intentionally cost-gated: it screens two distinct,
-clash-free backbones per arm and only replicates the winner from each arm.
+clash-free backbones per arm and only replicates the winner from each arm. That
+is four unique candidates and eight total co-fold evaluations, rather than
+co-folding all 64 sequence candidates.

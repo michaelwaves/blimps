@@ -7,6 +7,7 @@
       "iRMSD": 17.027727889555475,
       "LRMSD": 39.18597347749353,
       "fnat": 0.0125,
+      "pairing": "B->B, T->A",
       "case_id": "C_7YCO",
       "pdb": "7YCO"
     },
@@ -15,11 +16,38 @@
       "iRMSD": 1.0095343545340558,
       "LRMSD": 2.661044137953017,
       "fnat": 0.8571428571428571,
+      "pairing": "B->B, T->A",
       "case_id": "C_4CJ0",
       "pdb": "4CJ0"
     },
     {
-      "error": "ERROR:root:Could not find interfaces in the native model. Please double check the inputs or select different chains with the --mapping flag.",
+      "DockQ": 0.8871208376651613,
+      "iRMSD": 0.6598209462013191,
+      "LRMSD": 0.970803702811218,
+      "fnat": 0.8363636363636363,
+      "pairing": "B->C, T->B",
+      "pairings_tried": [
+        {
+          "pairing": "B->C, T->A",
+          "DockQ": null,
+          "error": "ERROR:root:Could not find interfaces in the native model. Please double check the inputs or select different chains with the --mapping flag."
+        },
+        {
+          "pairing": "B->C, T->B",
+          "DockQ": 0.8871208376651613,
+          "error": null
+        },
+        {
+          "pairing": "B->D, T->A",
+          "DockQ": 0.8804240806599261,
+          "error": null
+        },
+        {
+          "pairing": "B->D, T->B",
+          "DockQ": null,
+          "error": "ERROR:root:Could not find interfaces in the native model. Please double check the inputs or select different chains with the --mapping flag."
+        }
+      ],
       "case_id": "C_4CJ2",
       "pdb": "4CJ2"
     },
@@ -28,6 +56,7 @@
       "iRMSD": 17.301644690078906,
       "LRMSD": 57.23720332338876,
       "fnat": 0,
+      "pairing": "B->AAA, T->BBB",
       "case_id": "C_7QNP",
       "pdb": "7QNP"
     },
@@ -36,6 +65,7 @@
       "iRMSD": 17.438964693246522,
       "LRMSD": 46.637680068421574,
       "fnat": 0,
+      "pairing": "B->B, T->A",
       "case_id": "C_6G4J",
       "pdb": "6G4J"
     },
@@ -44,6 +74,7 @@
       "iRMSD": 17.04883791362105,
       "LRMSD": 54.4855138909264,
       "fnat": 0,
+      "pairing": "B->A, T->B",
       "case_id": "C_1SVX",
       "pdb": "1SVX"
     },
@@ -52,6 +83,7 @@
       "iRMSD": 16.874587186308688,
       "LRMSD": 59.41762158686868,
       "fnat": 0,
+      "pairing": "B->E, T->A",
       "case_id": "C_8RCI",
       "pdb": "8RCI"
     },
@@ -60,6 +92,7 @@
       "iRMSD": 13.777563048114,
       "LRMSD": 44.43448881919296,
       "fnat": 0,
+      "pairing": "B->E, T->A",
       "case_id": "C_9SPO",
       "pdb": "9SPO"
     }
@@ -67,11 +100,11 @@
   "verdict": {
     "gate_id": "G1",
     "status": "fail",
-    "evidence": "DockQ >= 0.49 on 1/7 Tier C positives (14%, needs 70%); median iRMSD 17.03 A (needs <= 2.0)",
+    "evidence": "DockQ >= 0.49 on 2/8 Tier C positives (25%, needs 70%); median iRMSD 16.95 A (needs <= 2.0)",
     "detail": {
-      "fraction_acceptable": 0.143,
-      "median_irmsd": 17.028,
-      "n_scored": 7,
+      "fraction_acceptable": 0.25,
+      "median_irmsd": 16.951,
+      "n_scored": 8,
       "n_attempted": 8
     }
   }

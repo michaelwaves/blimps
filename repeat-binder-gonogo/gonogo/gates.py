@@ -40,6 +40,42 @@ def _by_id(scores: Sequence[Score]) -> dict[str, Score]:
     return {score.case_id: score for score in scores}
 
 
+# Student t, two-sided 95%, by rounded degrees of freedom. Enough resolution for a
+# gate verdict; the band moves by less than a point across neighbouring df up here.
+_T95 = {1: 12.71, 2: 4.30, 3: 3.18, 4: 2.78, 5: 2.57, 6: 2.45, 7: 2.36, 8: 2.31, 9: 2.26,
+        10: 2.23, 11: 2.20, 12: 2.18, 14: 2.14, 16: 2.12, 18: 2.10, 20: 2.09, 25: 2.06,
+        30: 2.04, 40: 2.02, 60: 2.00}
+
+
+def _t_crit(df: float) -> float:
+    return _T95[min(_T95, key=lambda k: abs(k - df))]
+
+
+def _band_spec() -> dict[str, Any]:
+    """The pre-registered G2 uncertainty band, read from cases.yaml.
+
+    The estimator is part of the gate, not an implementation detail, so it lives
+    in the case set beside the pass condition rather than in this file. An older
+    case set without the key gets the original behaviour.
+    """
+    from .caseset import TASK_DIR
+
+    cases = yaml.safe_load((TASK_DIR / "cases.yaml").read_text())
+    g2 = next((g for g in cases.get("gates", []) if g.get("id") == "G2"), {})
+    return g2.get("uncertainty_band") or {}
+
+
+def _welch(a: Sequence[float], b: Sequence[float]) -> tuple[float, float]:
+    """Standard error of the difference of means, and Welch-Satterthwaite df."""
+    import statistics as st
+
+    sea = st.stdev(a) / math.sqrt(len(a))
+    seb = st.stdev(b) / math.sqrt(len(b))
+    se = math.hypot(sea, seb)
+    df = (sea**2 + seb**2) ** 2 / (sea**4 / (len(a) - 1) + seb**4 / (len(b) - 1))
+    return se, df
+
+
 # --------------------------------------------------------------------------
 
 
@@ -73,12 +109,30 @@ def g2_specificity(scores: Sequence[Score]) -> Verdict:
 
     binder, non_binder = table["B1"], table["B4"]
     margin = binder.score - non_binder.score
-    # Conservative combination: the wider of the two per-case seed spreads. Two
-    # independent runs of the same model disagreeing by more than the margin is
-    # what "the margin is inside the noise" means.
-    band = max(
+    spec = _band_spec()
+
+    # The retired estimator: the wider of the two per-case seed ranges. Kept so the
+    # 2026-08-15 submission stays reproducible and so both numbers can be reported.
+    legacy = max(
         b for b in (binder.band, non_binder.band) if not math.isnan(b)
     ) if not (math.isnan(binder.band) and math.isnan(non_binder.band)) else float("nan")
+
+    if not spec:
+        band, how = legacy, "widest seed spread of the two cases"
+    else:
+        n = min(len(binder.replicates), len(non_binder.replicates))
+        floor = int(spec.get("min_seeds_per_case", 5))
+        if n < floor:
+            return Verdict(
+                "G2", "not_run",
+                f"{n} seeds per case is below the pre-registered minimum of {floor}: at this sample size "
+                f"the t critical value dominates and the band reports the thinness of the sample rather "
+                f"than the model's uncertainty. cases.yaml requires not_run here rather than a fail.",
+                detail={"margin": round(margin, 4), "seeds_per_case": n, "min_seeds_per_case": floor},
+            )
+        se, df = _welch(binder.replicates, non_binder.replicates)
+        band = _t_crit(df) * se
+        how = f"95% CI half-width on the difference of means, Welch df={df:.1f}, pre-registered {spec.get('effective_from')}"
 
     if math.isnan(band):
         return Verdict(
@@ -93,20 +147,18 @@ def g2_specificity(scores: Sequence[Score]) -> Verdict:
     evidence = (
         f"score(B1, mouse cathepsin B, K_D 65.7 nM) = {binder.score:.3f}, "
         f"score(B4, human cathepsin B, no binding at 1000x) = {non_binder.score:.3f}, "
-        f"margin {margin:.3f} {'>' if margin > band else '<='} band {band:.3f} "
-        f"(widest seed spread of the two cases)"
+        f"margin {margin:.3f} {'>' if margin > band else '<='} band {band:.3f} ({how})"
     )
-    return Verdict(
-        "G2",
-        status,
-        evidence,
-        uncertainty_band=band,
-        detail={
-            "margin": round(margin, 4),
-            "replicates_B1": [round(v, 3) for v in binder.replicates],
-            "replicates_B4": [round(v, 3) for v in non_binder.replicates],
-        },
-    )
+    detail = {
+        "margin": round(margin, 4),
+        "replicates_B1": [round(v, 3) for v in binder.replicates],
+        "replicates_B4": [round(v, 3) for v in non_binder.replicates],
+    }
+    if spec and not math.isnan(legacy):
+        # Both estimators, always, so a reader can see which one the verdict turned on.
+        detail["band_retired_sample_range"] = round(legacy, 4)
+        detail["verdict_under_retired_band"] = "pass" if margin > legacy else "fail"
+    return Verdict("G2", status, evidence, uncertainty_band=band, detail=detail)
 
 
 def g1_interface_recovery(scores: Sequence[Score], structures_available: bool) -> Verdict:

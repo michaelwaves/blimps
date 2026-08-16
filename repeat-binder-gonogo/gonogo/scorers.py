@@ -219,7 +219,10 @@ class SyntheticScorer(Scorer):
     confidence_metric = "synthetic_pseudo_iptm"
     score_definition = "deterministic hash of the input sequences — carries no physical meaning"
 
-    def __init__(self, seeds: Sequence[int] = (0, 1, 2), separate_known_outcomes: bool = True) -> None:
+    # Five, not three: a seed costs nothing here (the value is a hash, not a fold), and
+    # G2's pre-registered band declines to issue a verdict below five seeds per case.
+    # A self-test that stopped short of that would exercise the abstention, not the gate.
+    def __init__(self, seeds: Sequence[int] = (0, 1, 2, 3, 4), separate_known_outcomes: bool = True) -> None:
         self.seeds = list(seeds)
         self.separate_known_outcomes = separate_known_outcomes
 

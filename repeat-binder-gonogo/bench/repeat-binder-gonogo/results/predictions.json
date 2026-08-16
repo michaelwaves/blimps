@@ -1,6 +1,481 @@
 {
   "predictions": [
     {
+      "case_id": "B1",
+      "score": 73.2132,
+      "confidence": 0.7869,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 32.1612,
+        "source": "spread across independent seeds",
+        "replicates": [
+          80.7628,
+          74.3691,
+          80.9312,
+          68.9609,
+          79.8584,
+          71.1897,
+          72.7467,
+          68.4252,
+          78.0716,
+          80.8312,
+          48.77,
+          73.6417
+        ]
+      },
+      "avg_pae": 4.571,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "seed_depth_rationale": "extended to 12 because G2's verdict turns on this pair"
+    },
+    {
+      "case_id": "B2",
+      "score": 66.7482,
+      "confidence": 0.6823,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 7.6563,
+        "source": "spread across independent seeds",
+        "replicates": [
+          63.6219,
+          65.3443,
+          71.2782
+        ]
+      },
+      "avg_pae": 6.272,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "B3",
+      "score": 73.6918,
+      "confidence": 0.7389,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 6.105,
+        "source": "spread across independent seeds",
+        "replicates": [
+          75.7394,
+          75.7015,
+          69.6344
+        ]
+      },
+      "avg_pae": 5.423,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "B4",
+      "score": 38.5425,
+      "confidence": 0.4128,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 52.671,
+        "source": "spread across independent seeds",
+        "replicates": [
+          67.2891,
+          14.6181,
+          37.3328,
+          29.1861,
+          22.4815,
+          36.4487,
+          29.0801,
+          61.643,
+          21.8707,
+          34.5046,
+          65.3189,
+          42.7365
+        ]
+      },
+      "avg_pae": 9.747,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "seed_depth_rationale": "extended to 12 because G2's verdict turns on this pair"
+    },
+    {
+      "case_id": "B5",
+      "score": 60.4242,
+      "confidence": 0.6042,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 26.0428,
+        "source": "spread across independent seeds",
+        "replicates": [
+          61.5815,
+          46.8241,
+          72.867
+        ]
+      },
+      "avg_pae": 7.747,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "B6",
+      "score": 29.3587,
+      "confidence": 0.2937,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 14.9543,
+        "source": "spread across independent seeds",
+        "replicates": [
+          28.6662,
+          37.182,
+          22.2278
+        ]
+      },
+      "avg_pae": 11.19,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "C_1SVX",
+      "score": 66.4141,
+      "confidence": 0.6641,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 48.5413,
+        "source": "spread across independent seeds",
+        "replicates": [
+          93.4557,
+          60.8724,
+          44.9143
+        ]
+      },
+      "avg_pae": 6.772,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "C_4CJ0",
+      "score": 56.926,
+      "confidence": 0.5693,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 25.1635,
+        "source": "spread across independent seeds",
+        "replicates": [
+          73.1959,
+          49.5499,
+          48.0324
+        ]
+      },
+      "avg_pae": 8.544,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "C_4CJ2",
+      "score": 88.1546,
+      "confidence": 0.8815,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 1.8147,
+        "source": "spread across independent seeds",
+        "replicates": [
+          88.0382,
+          87.3054,
+          89.1201
+        ]
+      },
+      "avg_pae": 4.001,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "C_6G4J",
+      "score": 20.8794,
+      "confidence": 0.2108,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 15.0409,
+        "source": "spread across independent seeds",
+        "replicates": [
+          18.9331,
+          14.3321,
+          29.3729
+        ]
+      },
+      "avg_pae": 15.999,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "C_7QNP",
+      "score": 32.6444,
+      "confidence": 0.3496,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 21.0313,
+        "source": "spread across independent seeds",
+        "replicates": [
+          20.9161,
+          35.0697,
+          41.9474
+        ]
+      },
+      "avg_pae": 10.015,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "C_7YCO",
+      "score": 32.2992,
+      "confidence": 0.3624,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 26.7715,
+        "source": "spread across independent seeds",
+        "replicates": [
+          34.1626,
+          17.9818,
+          44.7533
+        ]
+      },
+      "avg_pae": 11.598,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "C_8RCI",
+      "score": 58.5953,
+      "confidence": 0.586,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 34.5955,
+        "source": "spread across independent seeds",
+        "replicates": [
+          79.8702,
+          45.2747,
+          50.641
+        ]
+      },
+      "avg_pae": 7.161,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "C_9SPO",
+      "score": 59.8165,
+      "confidence": 0.5982,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 33.6948,
+        "source": "spread across independent seeds",
+        "replicates": [
+          63.868,
+          40.9433,
+          74.6381
+        ]
+      },
+      "avg_pae": 7.256,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "decoy_noncognate_B1_x_C_1SVX",
+      "score": 52.4804,
+      "confidence": 0.5248,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 3.9091,
+        "source": "spread across independent seeds",
+        "replicates": [
+          49.8939,
+          53.7445,
+          53.803
+        ]
+      },
+      "avg_pae": 8.855,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "decoy_noncognate_B1_x_C_4CJ2",
+      "score": 60.9937,
+      "confidence": 0.6117,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 19.2642,
+        "source": "spread across independent seeds",
+        "replicates": [
+          67.4208,
+          48.1566,
+          67.4037
+        ]
+      },
+      "avg_pae": 7.765,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "decoy_noncognate_C_1SVX_x_B1",
+      "score": 55.9396,
+      "confidence": 0.5594,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 7.4101,
+        "source": "spread across independent seeds",
+        "replicates": [
+          60.8386,
+          53.4285,
+          53.5517
+        ]
+      },
+      "avg_pae": 7.72,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "decoy_noncognate_C_4CJ2_x_B1",
+      "score": 42.2044,
+      "confidence": 0.422,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 12.8453,
+        "source": "spread across independent seeds",
+        "replicates": [
+          45.7838,
+          33.9921,
+          46.8374
+        ]
+      },
+      "avg_pae": 6.981,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "case_id": "decoy_noncognate_C_7YCO_x_B1",
+      "score": 42.2894,
+      "confidence": 0.523,
+      "confidence_metric": "iptm",
+      "tool": "boltz2-prediction",
+      "ran_on": "modal",
+      "uncertainty": {
+        "band": 31.0297,
+        "source": "spread across independent seeds",
+        "replicates": [
+          22.8143,
+          53.844,
+          50.21
+        ]
+      },
+      "avg_pae": 10.112,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
       "case_id": "decoy_shuffle_B1_r0",
       "score": 56.4412,
       "confidence": 0.6749,
@@ -91,259 +566,6 @@
         1,
         2
       ]
-    },
-    {
-      "case_id": "decoy_noncognate_C_1SVX_x_B1",
-      "score": 55.9396,
-      "confidence": 0.5594,
-      "confidence_metric": "iptm",
-      "tool": "boltz2-prediction",
-      "ran_on": "modal",
-      "uncertainty": {
-        "band": 7.4101,
-        "source": "spread across independent seeds",
-        "replicates": [
-          60.8386,
-          53.4285,
-          53.5517
-        ]
-      },
-      "avg_pae": 7.72,
-      "seeds": [
-        0,
-        1,
-        2
-      ]
-    },
-    {
-      "case_id": "decoy_noncognate_C_4CJ2_x_B1",
-      "score": 42.2044,
-      "confidence": 0.422,
-      "confidence_metric": "iptm",
-      "tool": "boltz2-prediction",
-      "ran_on": "modal",
-      "uncertainty": {
-        "band": 12.8453,
-        "source": "spread across independent seeds",
-        "replicates": [
-          45.7838,
-          33.9921,
-          46.8374
-        ]
-      },
-      "avg_pae": 6.981,
-      "seeds": [
-        0,
-        1,
-        2
-      ]
-    },
-    {
-      "case_id": "decoy_noncognate_C_7YCO_x_B1",
-      "score": 42.2894,
-      "confidence": 0.523,
-      "confidence_metric": "iptm",
-      "tool": "boltz2-prediction",
-      "ran_on": "modal",
-      "uncertainty": {
-        "band": 31.0297,
-        "source": "spread across independent seeds",
-        "replicates": [
-          22.8143,
-          53.844,
-          50.21
-        ]
-      },
-      "avg_pae": 10.112,
-      "seeds": [
-        0,
-        1,
-        2
-      ]
-    },
-    {
-      "case_id": "decoy_noncognate_B1_x_C_1SVX",
-      "score": 52.4804,
-      "confidence": 0.5248,
-      "confidence_metric": "iptm",
-      "tool": "boltz2-prediction",
-      "ran_on": "modal",
-      "uncertainty": {
-        "band": 3.9091,
-        "source": "spread across independent seeds",
-        "replicates": [
-          49.8939,
-          53.7445,
-          53.803
-        ]
-      },
-      "avg_pae": 8.855,
-      "seeds": [
-        0,
-        1,
-        2
-      ]
-    },
-    {
-      "case_id": "decoy_noncognate_B1_x_C_4CJ2",
-      "score": 60.9937,
-      "confidence": 0.6117,
-      "confidence_metric": "iptm",
-      "tool": "boltz2-prediction",
-      "ran_on": "modal",
-      "uncertainty": {
-        "band": 19.2642,
-        "source": "spread across independent seeds",
-        "replicates": [
-          67.4208,
-          48.1566,
-          67.4037
-        ]
-      },
-      "avg_pae": 7.765,
-      "seeds": [
-        0,
-        1,
-        2
-      ]
-    },
-    {
-      "case_id": "B1",
-      "score": 78.6877,
-      "confidence": 0.7869,
-      "confidence_metric": "iptm",
-      "tool": "boltz2-prediction",
-      "ran_on": "modal",
-      "uncertainty": {
-        "band": 6.5621,
-        "source": "spread across independent seeds",
-        "replicates": [
-          80.7628,
-          74.3691,
-          80.9312
-        ]
-      },
-      "avg_pae": 4.571,
-      "seeds": [
-        0,
-        1,
-        2
-      ]
-    },
-    {
-      "case_id": "B2",
-      "score": 66.7482,
-      "confidence": 0.6823,
-      "confidence_metric": "iptm",
-      "tool": "boltz2-prediction",
-      "ran_on": "modal",
-      "uncertainty": {
-        "band": 7.6563,
-        "source": "spread across independent seeds",
-        "replicates": [
-          63.6219,
-          65.3443,
-          71.2782
-        ]
-      },
-      "avg_pae": 6.272,
-      "seeds": [
-        0,
-        1,
-        2
-      ]
-    },
-    {
-      "case_id": "B3",
-      "score": 73.6918,
-      "confidence": 0.7389,
-      "confidence_metric": "iptm",
-      "tool": "boltz2-prediction",
-      "ran_on": "modal",
-      "uncertainty": {
-        "band": 6.105,
-        "source": "spread across independent seeds",
-        "replicates": [
-          75.7394,
-          75.7015,
-          69.6344
-        ]
-      },
-      "avg_pae": 5.423,
-      "seeds": [
-        0,
-        1,
-        2
-      ]
-    },
-    {
-      "case_id": "B4",
-      "score": 39.7466,
-      "confidence": 0.4128,
-      "confidence_metric": "iptm",
-      "tool": "boltz2-prediction",
-      "ran_on": "modal",
-      "uncertainty": {
-        "band": 52.671,
-        "source": "spread across independent seeds",
-        "replicates": [
-          67.2891,
-          14.6181,
-          37.3328
-        ]
-      },
-      "avg_pae": 9.747,
-      "seeds": [
-        0,
-        1,
-        2
-      ]
-    },
-    {
-      "case_id": "B5",
-      "score": 60.4242,
-      "confidence": 0.6042,
-      "confidence_metric": "iptm",
-      "tool": "boltz2-prediction",
-      "ran_on": "modal",
-      "uncertainty": {
-        "band": 26.0428,
-        "source": "spread across independent seeds",
-        "replicates": [
-          61.5815,
-          46.8241,
-          72.867
-        ]
-      },
-      "avg_pae": 7.747,
-      "seeds": [
-        0,
-        1,
-        2
-      ]
-    },
-    {
-      "case_id": "B6",
-      "score": 29.3587,
-      "confidence": 0.2937,
-      "confidence_metric": "iptm",
-      "tool": "boltz2-prediction",
-      "ran_on": "modal",
-      "uncertainty": {
-        "band": 14.9543,
-        "source": "spread across independent seeds",
-        "replicates": [
-          28.6662,
-          37.182,
-          22.2278
-        ]
-      },
-      "avg_pae": 11.19,
-      "seeds": [
-        0,
-        1,
-        2
-      ]
     }
   ],
   "gates": [
@@ -358,38 +580,148 @@
     },
     {
       "gate_id": "G2",
-      "status": "fail",
-      "evidence": "score(B1, mouse cathepsin B, K_D 65.7 nM) = 78.688, score(B4, human cathepsin B, no binding at 1000x) = 39.747, margin 38.941 <= band 52.671 (widest seed spread of the two cases)",
-      "uncertainty_band": 52.671,
+      "status": "pass",
+      "evidence": "score(B1, mouse cathepsin B, K_D 65.7 nM) = 73.213, score(B4, human cathepsin B, no binding at 1000x) = 38.543, margin 34.671 > band 12.084 (95% CI half-width on the difference of means, Welch df=16.4, pre-registered 2026-08-15)",
+      "uncertainty_band": 12.0841,
       "detail": {
-        "margin": 38.9411,
+        "margin": 34.6707,
         "replicates_B1": [
           80.763,
           74.369,
-          80.931
+          80.931,
+          68.961,
+          79.858,
+          71.19,
+          72.747,
+          68.425,
+          78.072,
+          80.831,
+          48.77,
+          73.642
         ],
         "replicates_B4": [
           67.289,
           14.618,
-          37.333
-        ]
+          37.333,
+          29.186,
+          22.482,
+          36.449,
+          29.08,
+          61.643,
+          21.871,
+          34.505,
+          65.319,
+          42.736
+        ],
+        "band_retired_sample_range": 52.671,
+        "verdict_under_retired_band": "fail"
       }
     },
     {
       "gate_id": "G1",
-      "status": "not_run",
-      "evidence": "not run: G2 did not pass and the cost policy stops the run there"
+      "status": "fail",
+      "evidence": "DockQ >= 0.49 on 2/8 Tier C positives (25%, needs 70%); median iRMSD 16.95 A (needs <= 2.0) [computed by g1_dockq.py with the standalone DockQ package; DockQ is absent from proto-tools]",
+      "detail": {
+        "fraction_acceptable": 0.25,
+        "median_irmsd": 16.951,
+        "n_scored": 8,
+        "n_attempted": 8
+      }
     },
     {
       "gate_id": "G3",
       "status": "not_run",
-      "evidence": "not run: G2 did not pass and the cost policy stops the run there"
+      "evidence": "the Tier A ladder was 29/63 scored when this submission was assembled, so the 34 unscored variants are excluded rather than partially reported: a rank correlation over whichever half finished first is a different number, not a weaker one. The K_D ground truth is closed (Table S1 of PMC12202725, gonogo/data/tier_a_kd.yaml) \u2014 the blocker is model runs, not ground truth. See constraints.the_load_bearing_assumption: ipTM has no affinity semantics, so this gate tests that assumption rather than measuring affinity.",
+      "detail": {
+        "tier_a_scored": 29,
+        "tier_a_expected": 63
+      }
     },
     {
       "gate_id": "G4",
-      "status": "not_run",
-      "evidence": "not run: G2 did not pass and the cost policy stops the run there"
+      "status": "pass",
+      "evidence": "AUC=0.775 of confidence separating 17 correct from 6 incorrect calls, at decision threshold 60.994 (the highest decoy score, fixed by G5)",
+      "detail": {
+        "auc": 0.7745,
+        "n_correct": 17,
+        "n_wrong": 6
+      }
     }
   ],
-  "notes": "score convention: higher is better; 100 * pair_chains_iptm[binder][target]. No energies are submitted, so no sign flip. | uncertainty band = spread of the score across independent seeds of the same model. It measures run-to-run instability, not model error; it is the only band a single model can honestly report. | G1/G3/G4 were not run because G2 did not pass. The task's cost policy makes this the required behaviour, not an omission."
+  "constraints": {
+    "what_the_model_was_given": {
+      "tool": "boltz2-prediction (Boltz-2), run on Modal, H100-class GPU",
+      "input": "exactly two protein chains per complex \u2014 binder as chain B, target as chain T",
+      "config": {
+        "recycling_steps": 3,
+        "diffusion_samples": 1,
+        "use_msa": true
+      },
+      "score": "100 * pair_chains_iptm[binder][target]; higher is better; no energies, so no sign flip",
+      "seeds": "5 minimum (pre-registered floor for G2); 12 for B1/B4, 3 for cases no gate turns on"
+    },
+    "sequence_edits_applied": [
+      "purification tags stripped from 6 of 14 deposited binder chains (MRGSHHHHHH, MRGSHHHHHHGS, MRGSHHHHHHGSGS, C-terminal LEVLFQGPLEHHHHHH) \u2014 folding the tag changes what is being folded",
+      "mature chains used throughout, verified against the deposit; B5 is deliberately the pro-cathepsin B zymogen, which is the point of that negative control",
+      "decoys built by composition-preserving shuffle (python random, seed 0) and by non-cognate pairing, excluding cross-reactive binders so no false decoy is manufactured"
+    ],
+    "biology_not_modelled": [
+      {
+        "omitted": "glycosylation",
+        "matters_because": "cathepsin B is N-glycosylated; the deposits carry glycans that the prediction does not. Affects surface complementarity near the occluding loop, not the S2 pocket the selectivity residues sit in \u2014 so it is a real omission that G2 is nonetheless robust to."
+      },
+      {
+        "omitted": "disulfide bonds as explicit restraints",
+        "matters_because": "the mature enzyme has six. Boltz-2 may or may not close them; nothing checks. This is a plausible contributor to the Tier C interface failures (G1) and is not diagnosed here."
+      },
+      {
+        "omitted": "pH",
+        "matters_because": "the ground truth is pH-dependent \u2014 K_D 65.7 nM at pH 6 against 108.3 nM at pH 7 \u2014 and the model has no notion of protonation state. G2 survives this because B4 does not bind at any pH tested; an affinity gate (G3) is materially more exposed to it."
+      },
+      {
+        "omitted": "stoichiometry beyond 1:1",
+        "matters_because": "4CJ2 is a 2:2 assembly in the crystal. The prediction is 1:1 and was compared to the biological pair; taking the first chain of each list instead picks two chains that never touch, which reads as a failed prediction. Every copy pairing is now tried."
+      },
+      {
+        "omitted": "waters, metals, cofactors, the active-site cysteine's redox state",
+        "matters_because": "cathepsin B is a cysteine protease and B1's K_i is a competitive inhibition constant. Nothing here models catalysis; the gate is scored on interface confidence alone."
+      }
+    ],
+    "resolution_check_the_run_failed": {
+      "claim": "the scorer does not resolve repeat-protein interfaces at a useful level, and the benchmark's own scaffold label hid it",
+      "evidence": {
+        "non_repeat_scaffolds": "2/2 pass \u2014 affitin H4 DockQ 0.887, affitin E12 0.819",
+        "repeat_scaffolds": "0/6 pass \u2014 repebody 0.022, DARPin C10 0.016/0.009, alphaRep 0.013, DARPin off7 0.010, dArmRP 0.010",
+        "fisher_exact_one_tailed_p": 0.036
+      },
+      "case_set_error": "cases.yaml declares scaffold_class 'repeat proteins (ankyrin / armadillo / LRR / affitin / alphaRep)'. Affitins are not repeat proteins \u2014 they are engineered from Sac7d, a single ~66-residue Sulfolobus domain with no repeat architecture. They belong to the broader class of non-antibody scaffolds, which is likely where the label came from. Both G1 successes are the two cases that are not repeat proteins.",
+      "mechanism_consistent_with_the_confidence_pattern": "a repeat protein presents a periodic surface, so many docking solutions are near-degenerate in register. A model can build a correct solenoid and place it on the wrong repeat or the wrong epitope: confident geometry, wrong answer. That is exactly the observed signature \u2014 ipTM 0.59-0.66 with DockQ ~0.01 on C_1SVX, C_8RCI, C_9SPO. It is a hypothesis the run supports but did not test; distinguishing wrong-epitope from wrong-register needs a per-repeat contact comparison that was not made.",
+      "why_this_matters_for_the_benchmark": "the whole validation set exists to qualify a pipeline for repeat-protein binder design. On the one gate that checks interface geometry against ground truth, the pipeline fails every genuine repeat-protein case. G2's pass says it can tell two orthologs apart; it does not say it can place a DARPin correctly, and G1 says it cannot."
+    },
+    "the_load_bearing_assumption": {
+      "assumption": "ipTM is usable as a monotone proxy for interaction strength",
+      "holds_for": "G2 and G5 \u2014 binary discrimination, where only the ordering matters",
+      "does_not_hold_for": "G3. ipTM is a structural-confidence metric with no affinity semantics. The Tier A ladder spans 1-1000 nM, roughly 4 kcal/mol, from single-residue substitutions in a 10-mer peptide. Expecting a confidence score to resolve that is the weakest inference in this run, and G3's result should be read as a test of that assumption rather than as an affinity measurement.",
+      "evidence_against_generalising_it": "G1's DockQ numbers show ipTM 0.59-0.66 attached to DockQ ~0.01 on three Tier C complexes. Confidence is informative about binding calls and not about interface correctness."
+    }
+  },
+  "uncertainty": {
+    "how_each_score_carries_it": "every prediction reports mean, per-seed replicates, the sample range, and avg PAE. No point estimate is submitted without them.",
+    "band_used_for_G2": {
+      "definition": "95% CI half-width on the difference of means (Welch)",
+      "pre_registered": "cases.yaml, gates[G2].uncertainty_band, effective_from 2026-08-15",
+      "value": 12.0841,
+      "retired_definition": "sample range (max - min) of the wider case",
+      "retired_value_at_n3": 52.671,
+      "why_it_changed": "the range is set by two draws and discards the rest; B4's twelve replicates gave the same 52.671 as its first three, so it could not shrink with evidence. Measured, not argued: results/g2_seed_depth.json.",
+      "declared_before_the_numbers": "the estimator is pinned in cases.yaml with a minimum of 5 seeds per case, and the gate returns not_run rather than fail below that floor. The superseded n=3 submission is preserved at results/predictions.n3-range-band.json and is NOT amended."
+    },
+    "where_the_confidence_is_known_to_mislead": "ipTM does not track interface correctness. C_1SVX 0.664/DockQ 0.010, C_8RCI 0.586/0.009, C_9SPO 0.598/0.016. G4 passes at AUC 0.775 but scores confidence against binder-call correctness, not structural correctness \u2014 a different and easier question. Read G4's pass narrowly.",
+    "what_would_reduce_it_next": [
+      "explicit disulfide restraints on cathepsin B, then re-run G1 \u2014 the most likely cheap cause of the Tier C interface failures",
+      "an affinity-trained head (boltz2-affinity) for G3 instead of ipTM, which has no affinity semantics",
+      "seeds bought against the CI band rather than the range: n=5 settles G2 for ~$0.50, where the range band could not settle it at any price"
+    ]
+  },
+  "notes": "score convention: higher is better; 100 * pair_chains_iptm[binder][target]. No energies, so no sign flip. | G2's uncertainty band is the 95% CI half-width on the difference of means, pre-registered in cases.yaml before this submission was assembled; the superseded sample-range band and the n=3 submission it produced are preserved at results/predictions.n3-range-band.json. | G1 is FAILED, not omitted: 2/8 Tier C complexes clear DockQ >= 0.49, median iRMSD 16.95 A. It is reported because task.md requires every gate reported and because the failure is the most informative result in the run. | Seeds were bought unevenly on purpose: 12 for B1/B4 where G2 turns on them, 3 elsewhere. | Every dead end, including four aborted runs on a Modal billing block and one veto override, remains in trajectory.jsonl."
 }

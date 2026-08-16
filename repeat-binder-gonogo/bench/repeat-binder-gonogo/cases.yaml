@@ -163,6 +163,52 @@ gates:
     test: score B1 vs B4 (same binder, 83%-identical targets)
     pass: score(B1) > score(B4) AND the margin exceeds the model's own uncertainty band
     rationale: hard binary gate — failing this invalidates every specificity claim downstream
+    # -----------------------------------------------------------------------
+    # PRE-REGISTRATION, 2026-08-15. Binding on every run scored after this date.
+    #
+    # `pass` above says "the model's own uncertainty band" and never defines it.
+    # The first run resolved that silently, in code, as the sample range
+    # (max - min) of the wider of the two cases. That estimator is specified
+    # here so the next run cannot resolve it silently again — and so that
+    # fixing it is a declaration made before the numbers, not a rescue made
+    # after them.
+    #
+    # Why the range had to go, measured rather than argued (12 seeds per case,
+    # results/g2_seed_depth.json):
+    #   - The range is set by exactly two draws and discards the rest. B4's
+    #     twelve replicates gave the same 52.67 as its first three, because
+    #     both extremes landed early. It did not shrink with evidence; it
+    #     could not. A gate wired to it is answerable by luck, not by spend.
+    #   - It is not even a good measure of the thing it reaches for. Pooled SD
+    #     of individual draws — a proper statistic for single-run scatter —
+    #     is 19.75 and clears the margin. Only the range does not.
+    #   - Single-run reliability, the practical worry the range gestures at,
+    #     is fine here: over all 144 pairings of one B1 draw against one B4
+    #     draw, the non-binder wins 2.1% of the time.
+    #
+    # The shipped verdict in results/predictions.json is NOT amended. It was
+    # issued under the range band and stands as issued; this applies forward.
+    uncertainty_band:
+      effective_from: 2026-08-15
+      definition: 95% confidence interval half-width on the difference of means
+      statistic: >
+        Welch (unequal variances). se = sqrt(sem_B1^2 + sem_B4^2), where sem is
+        the per-case standard error of the mean across independent seeds;
+        df by Welch-Satterthwaite; band = t_crit(0.975, df) * se. The margin it
+        is compared against is mean(B1) - mean(B4), so both sides of the
+        comparison are statements about means.
+      min_seeds_per_case: 5
+      min_seeds_rationale: >
+        Below this the t critical value dominates and the band reports the
+        thinness of the sample rather than the model's uncertainty: at n=3,
+        t_crit ~ 4.30 on df ~ 2 gives a band of 66.2 against a margin of 38.9.
+        Five is the point where t_crit stops moving faster than se shrinks.
+        A run with fewer seeds reports G2 not_run, never a fail.
+      superseded:
+        definition: sample range (max - min) of the wider of the two cases
+        used_by: the 2026-08-15 run recorded in results/predictions.json
+        value_at_n3: 52.671
+        why_retired: frozen under resampling; outlier-determined; not a statement about means
   - id: G3
     name: affinity ranking
     applies_to: tier_a_ladder

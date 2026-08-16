@@ -39,11 +39,24 @@ does not mean "nothing worked" — it means the one gate the exercise exists for
 did not clear, which is exactly the signal the cap is designed to send.
 
 Stated plainly: Boltz-2 ranks the true binder above the true non-binder
-(78.688 vs 39.747), but it does not do so *reliably*. B4's three seeds are
-14.618, 37.333 and 67.289 — one of them scores the human ortholog, a case with
-no binding at 1000× molar excess, above B1's own weakest replicate. The gate
-refused to certify specificity on a signal that unstable, which is the correct
-verdict and the useful one (§4).
+(78.688 vs 39.747), but at three seeds it does not do so *reliably*. B4's three
+seeds are 14.618, 37.333 and 67.289 — one of them scores the human ortholog, a
+case with no binding at 1000× molar excess, above B1's own weakest replicate.
+The gate refused to certify specificity on a signal that unstable.
+
+Three follow-on runs then bought what the veto had withheld, so the harness
+could be examined rather than just obeyed. They are reported beside the
+submission, never inside it:
+
+| Follow-on | Cost | Finding |
+|---|---|---|
+| `g2_seed_depth.py` — B1/B4 to twelve seeds | ~$1.53 | the band, not the model, failed G2. At n=12 the separation is Welch t = 6.08. The range band is *frozen* at 52.67 and cannot be moved by evidence (§4) |
+| `g1_dockq.py` — DockQ against the deposits | ~$0.83 | **G1 fails on its own terms**: 2/8 complexes clear DockQ ≥ 0.49, median iRMSD 16.95 Å (§3) |
+| `--ignore-veto` sweep over Tiers A and C | ~$15 | **G4 passes at AUC 0.775** — but on binder-call correctness, not interface correctness, and the DockQ numbers show ipTM 0.59–0.66 attached to DockQ ≈ 0.01 (§3) |
+
+The short version: the scorer is better at specificity than the shipped verdict
+says, and worse at structure than its own confidence says. Neither of those was
+visible from the gate results alone.
 
 ---
 
@@ -103,7 +116,7 @@ Tier B positives are B1 (mouse) plus B2/B3 (whose deposited targets, 5MBL and
 across two orthologs. That is defensible but should be deliberate, not
 accidental.
 
-### G1: the metric does not exist in this stack
+### G1: the metric is not in the stack, so it was brought in from outside
 
 `search_tools("dockq")` returns nothing; the catalogue's structure-alignment
 tools are TMalign, USalign, FoldMason, Foldseek and PyMOL RMSD. Three honest
@@ -116,6 +129,44 @@ options, in order of preference:
 
 What is not acceptable is silently reporting a different metric under the DockQ
 threshold, so the harness refuses to.
+
+**Option 1 was taken.** `g1_dockq.py` installs the standalone package, re-folds
+each Tier C complex once with the structure kept rather than discarded, and runs
+DockQ against the deposit. Results in `results/g1_dockq.json`:
+
+| case | DockQ | iRMSD | ipTM |
+|---|---|---|---|
+| C_4CJ2 | **0.887** | 0.66 Å | 0.881 |
+| C_4CJ0 | **0.819** | 1.01 Å | 0.569 |
+| C_7YCO | 0.022 | 17.03 Å | 0.362 |
+| C_9SPO | 0.016 | 13.78 Å | 0.598 |
+| C_6G4J | 0.013 | 17.44 Å | 0.211 |
+| C_1SVX | 0.010 | 17.05 Å | 0.664 |
+| C_7QNP | 0.010 | 17.30 Å | 0.350 |
+| C_8RCI | 0.009 | 16.87 Å | 0.586 |
+
+**G1: fail** — DockQ ≥ 0.49 on 2/8 (25%, needs 70%); median iRMSD 16.95 Å
+(needs ≤ 2.0). Note that `gates.g1_interface_recovery` still reports `not_run`,
+because DockQ is not reachable from inside the harness; the gate is closed by a
+companion script and reported separately rather than by pretending the stack
+grew a tool it does not have.
+
+Two things this cost, both worth recording:
+
+- **Chain selection is part of the metric.** 4CJ2 is a 2:2 assembly. Taking the
+  first chain of the binder list and the first of the target list picks C and A,
+  which never touch, and DockQ reports "could not find interfaces" — which reads
+  as a failed prediction. The biological pairs (C–B, D–A) give 0.887. The script
+  now tries every copy pairing and takes the best. The other seven cases are
+  single-copy and reproduce under DockQ's own independent chain search, so their
+  failures are real.
+- **ipTM is not tracking interface correctness.** C_1SVX, C_8RCI and C_9SPO all
+  sit at ipTM 0.59–0.66 with DockQ ≈ 0.01: confidently wrong. G4 passes at
+  AUC 0.775, but it scores confidence against *binder-call* correctness on Tier B
+  and the decoys, not against whether the interface is right. Those are different
+  questions, and the gate as written only asks the easier one. **G4's pass should
+  not be read as "the confidence is informative"** — on the evidence here it is
+  informative about binding calls and not about structures.
 
 ### G3: ground truth is closed, but the gate may be underpowered
 
@@ -214,22 +265,61 @@ tuning that this task guards against elsewhere, where it fixes the G4 decision
 threshold at the highest decoy score precisely "so that it cannot be tuned after
 the fact".
 
-The honest split, and what this document recommends:
+### What n=12 actually showed
 
-1. **Leave the shipped verdict as it stands.** The range band is what was
-   declared, and it says fail. Two of three defensible bands agree.
-2. **Fix the definition for the next run, before that run is scored** — a CI
-   half-width on the difference of means, which *shrinks* as `1/√n` and is
-   therefore answerable by more seeds. Declare it in `cases.yaml` first.
-3. **Re-run B1/B4 at n≥10 only under the new, pre-declared band.** Under the
-   current one the extra seeds cannot help, and buying GPU for a foregone
-   conclusion is the Economist's job to refuse.
+The argument above was written at n=3 and made a prediction: under the range
+band more seeds cannot help. That prediction was then tested — `g2_seed_depth.py`
+extended B1 and B4 to twelve seeds each, reusing the three already paid for and
+buying eighteen more folds for ~$1.53. The result is in
+`results/g2_seed_depth.json`:
+
+| n | margin | range band | | 95% CI half-width | | Welch t |
+|---|---|---|---|---|---|---|
+| 3 | 38.94 | 52.67 | fail | 66.24 | fail | 2.53 |
+| 4 | 39.15 | 52.67 | fail | 36.47 | **pass** | 3.41 |
+| 6 | 41.45 | 52.67 | fail | 18.94 | **pass** | 5.36 |
+| 9 | 39.48 | 52.67 | fail | 14.02 | **pass** | 6.36 |
+| 12 | 34.67 | 52.67 | fail | 12.14 | **pass** | 6.08 |
+
+The range band is worse than merely non-shrinking: it is **frozen**. B4's
+extreme replicates both landed inside the first three seeds, so nine further
+folds moved the band not at all. It sits at 52.67 from n=3 to n=12 and would sit
+there at n=100. A gate wired to it cannot be answered by evidence, only by luck
+in which seeds ran first.
+
+The CI half-width falls from 66.24 to 12.14 and crosses the margin at n=4.
+By n=12 the separation is Welch t = 6.08 — p < 0.001, on a comparison the
+shipped run reported as a failure.
+
+**This changes the conclusion, and it is worth being precise about how.** The
+earlier reading of this run — that Boltz-2 is too unstable to be trusted on
+specificity — was wrong. At twelve seeds the model separates mouse from human
+cathepsin B decisively. What failed was the harness's estimator, not the
+scorer's discrimination.
+
+What does *not* change: the shipped verdict. The range band was pre-declared,
+and re-issuing G2 against a band selected after seeing the numbers is the tuning
+this task forbids elsewhere. `bench/.../results/predictions.json` still reports
+G2 as `fail` at n=3, and `g2_seed_depth.json` sits beside it as a diagnostic
+rather than an amendment. The next run gets the better estimator; this one keeps
+the verdict it declared.
+
+So the recommendation, revised by its own experiment:
+
+1. **Leave the shipped verdict as it stands.** Still true, and now for a sharper
+   reason: the verdict is honest about what the pre-declared band could see.
+2. **Replace the estimator before the next run is scored** — a 95% CI
+   half-width on the difference of means. Declare it in `cases.yaml` first, so
+   the swap is a pre-registration and not a rescue.
+3. **Budget seeds against the estimator.** Under a CI band, n=4 would have
+   settled this for ~$0.50. Under the range band, no amount of money settles it.
+   Choosing the estimator *is* choosing whether the gate is purchasable.
 
 The general lesson for `design-loop-sketch.md`: a gate that compares a margin to
 an uncertainty band is only as good as the estimator behind the band, and that
 estimator has to be pinned down at the same time as the threshold — before any
 numbers are seen. The harness pinned the threshold and left the estimator
-implicit. That is the gap this control run found in itself.
+implicit. That is the gap this control run found in itself, and then measured.
 
 ---
 

@@ -1,0 +1,1 @@
+{"case_id": "decoy_shuffle_B2_r1", "score": 40.84775596857071, "confidence": 0.48472049832344055, "confidence_metric": "iptm", "tool": "boltz2-prediction", "ran_on": "modal", "band": 57.34860450029373, "replicates": [26.491212844848633, 19.35172528028488, 76.70032978057861], "extras": {"avg_pae": 11.511, "seeds": [0, 1, 2]}}

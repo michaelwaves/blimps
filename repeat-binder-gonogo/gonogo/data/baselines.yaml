@@ -1,0 +1,75 @@
+# Published physics-based baselines for Tier A / gate G3.
+#
+# G3's pass condition is "rho >= 0.5 AND not worse than the published physics
+# baselines on the same pockets". That second clause is only meaningful against
+# numbers that were actually published — these. All values are quoted from
+# Ayyildiz et al., J Comput Chem (2025), doi:10.1002/jcc.70160.
+#
+# Two things to notice before using them as a bar:
+#   1. The paper reports Pearson R in most places and Spearman rho in a few.
+#      G3 is specified in Spearman rho. Where only Pearson is published, the
+#      comparison is not like-for-like and the harness says so instead of
+#      silently comparing across statistics.
+#   2. Correlations are per-pocket and per-input-structure. There is no single
+#      scalar "baseline" to beat.
+
+source_doc: PMC12202725
+
+# rho = Spearman, R = Pearson. `null` where the paper does not report it.
+per_pocket:
+  arg:
+    scaffold_6sa8:
+      - {method: "BBK*", statistic: pearson_R, value: 0.86, comparator: ">", line: L31}
+      - {method: "flex ddG", statistic: pearson_R, value: 0.317, line: L32}
+    scaffold_5aei:
+      - {method: "flex ddG", statistic: pearson_R, value: 0.048, line: L32}
+    notes: >
+      PocketOptimizer is reported as "a reasonably high Pearson R value of 0.54
+      on average" (L33) rather than per-scaffold, so it is recorded as an
+      average, not as a per-scaffold bar.
+  tyr:
+    scaffold_6sa8:
+      - {method: "BBK*", statistic: spearman_rho, value: 0.709, line: L41}
+      - {method: "PocketOptimizer", statistic: pearson_R, value: 0.647, line: L41}
+  trp:
+    scaffold_6sa8:
+      - {method: "BBK*", statistic: spearman_rho, value: 0.610, line: L41}
+      - {method: "flex ddG", statistic: pearson_R, value: 0.760, line: L41}
+      - {method: "PocketOptimizer", statistic: pearson_R, value: 0.548, line: L41}
+  his:
+    scaffold_6sa8:
+      - {method: "BBK*", statistic: pearson_R, value: 0.813, line: L41}
+      - {method: "flex ddG", statistic: spearman_rho, value: 0.667, line: L41}
+      - {method: "PocketOptimizer", statistic: pearson_R, value: 0.624, line: L41}
+  ile:
+    scaffold_6sa8:
+      - {method: "BBK*", statistic: spearman_rho, value: 0.253, line: L42}
+      - {method: "PocketOptimizer", statistic: spearman_rho, value: 0.291, line: L42}
+      - {method: "flex ddG", statistic: spearman_rho, value: 0.143, line: L42}
+    notes: >
+      All three methods fail this pocket. G3's rho >= 0.5 floor is therefore
+      strictly harder than "not worse than the baselines" here: a model can beat
+      every published method on the Ile pocket and still miss the absolute floor.
+      The harness reports both clauses separately rather than collapsing them.
+
+# Directly relevant caveats the paper states about its own numbers.
+caveats:
+  - line: L15
+    claim: >
+      "single residue resolution is still a challenge even for large structure
+      prediction models" — the authors' stated reason for not benchmarking a
+      folding model on this data. A co-folding confidence metric (ipTM/PAE) is
+      being asked here to resolve K_D differences of a factor of 2 between
+      single-residue peptide variants; that is below the resolution the metric
+      is known to have.
+  - line: L43
+    claim: >
+      Predictions differ between the 6SA8 and 5AEI inputs for the same pocket
+      and the same method, which is why cases.yaml asks for both. Treat the
+      spread between scaffolds as a floor on input-structure sensitivity.
+  - line: L31
+    claim: >
+      Within the Arg pocket, everything except R/K at the top and D/E at the
+      bottom is "clustered in between with similar K_D values" with
+      "partially overlapping error margins". Most of the ladder's rank order is
+      inside experimental error, so a perfect predictor cannot reach rho = 1.

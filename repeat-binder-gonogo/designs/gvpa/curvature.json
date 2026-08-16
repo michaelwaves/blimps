@@ -45,5 +45,20 @@
   "mean_chord_A": 121.3,
   "sagitta_observed_A": 10.35,
   "sagitta_expected_for_85nm_A": 4.328,
-  "verdict": "MORE curved than a real Ana GV"
+  "verdict": "FAITHFUL to its source: 35.6 nm measured vs 36.5 nm deposited (2.4%). Biologically plausible too -- Dutka et al. put the smallest Mega GVs near 36 nm (largest Halo ~7x smallest Mega, PMC10185304 L34).",
+  "CORRECTION": "An earlier version of this file compared the patch against Anabaena GVs (85 nm) and reported it as 2.4x over-curved. That was wrong: the patch sequence is an EXACT match to 7R1C, Bacillus megaterium, not to 8GBS/Anabaena. Against its actual source the patch is faithful -- 7R1C deposits a shell radius of 182.3 A (36.5 nm diameter) and the patch measures 177.9 A (35.6 nm), a 2.4% difference. There is no curvature defect.",
+  "source_structure": {
+    "pdb": "7R1C",
+    "title": "Cryo-EM structure of Bacillus megaterium gas vesicles",
+    "sequence_match": "exact to patch chain m",
+    "deposited_shell_radius_A": 182.3,
+    "deposited_diameter_nm": 36.5,
+    "helical_operator": {
+      "twist_deg": 3.874,
+      "rise_A": 0.5257,
+      "subunits_per_turn": 92.9,
+      "arc_per_subunit_A": 12.3
+    }
+  },
+  "superseded_verdict": "MORE curved than a real Ana GV -- withdrawn, wrong species reference"
 }

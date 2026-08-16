@@ -76,8 +76,14 @@ limit, not sampling limit.
 
 ## Part 2 — the GvpA design run
 
-Target: a generated 5-rib GvpA surface patch. Reference: the native *Anabaena*
-gas vesicle shell, 8GBS.
+Target: a generated 5-rib GvpA surface patch — sequence-identical to **7R1C,
+*Bacillus megaterium***. Reference for the natural binder: **8GBS, *Anabaena***.
+
+That is a cross-species pairing, and it is a weakness of the setup rather than a
+detail. The GvpC footprint used below was obtained by superimposing *Anabaena*
+GvpC onto a *Megaterium* GvpA surface (1.76 Å Cα RMSD between the two GvpAs,
+72% identity). Any site derived that way is a hypothesis about where a
+*Megaterium* binder might go, not a measured *Megaterium* epitope.
 
 **It is not de novo design, and is not reported as such.** RFdiffusion3 was
 declined at the approval prompt three times, so no backbone was generated. What
@@ -89,25 +95,42 @@ no positional signal. The cause was visible in advance: GvpC in 8GBS is a
 backbone-only poly-UNK trace with three GvpA residues inside 5 Å. There was no
 interface to design against, and DockQ against it would have been meaningless.
 
-**The result worth showing is the curvature check.** A patch cut from an 85 nm
-cylinder has to bow like one, and curvature is a property the generator never
-optimised against:
+**The curvature check, and the error it exposed in my own work.** A patch cut
+from a cylinder has to bow like one, and curvature is a property the generator
+never optimised against. Measuring the sagitta of subunit centroids along each
+rib gives an implied diameter of **35.6 nm**, with all five ribs agreeing
+exactly.
 
-| | generated patch | Ana GV, measured |
+I first compared that against *Anabaena* GVs (85 ± 4 nm) and reported the patch
+as **2.4× over-curved**. That was wrong. The patch sequence is an exact match to
+**7R1C, *Bacillus megaterium***, not to 8GBS/*Anabaena* — I had assumed the
+species from the wrong reference file.
+
+Against its actual source the patch is faithful:
+
+| | radius | diameter |
 |---|---|---|
-| implied diameter | **35.6 nm** | **85 ± 4 nm** |
-| rib sagitta over 121 Å | 10.35 Å | 4.33 Å expected |
+| 7R1C deposited | 182.3 Å | **36.5 nm** |
+| generated patch | 177.9 Å | **35.6 nm** |
 
-**2.4× over-curved for its own species.** All five ribs agree exactly, which is
-what makes the number trustworthy — a cylinder curves the same way in every rib.
-Reference values are line-cited to Dutka et al. 2023, PMC10185304 L22 and L83 —
-the source study for 8GBS itself.
+2.4% apart. Arc-per-subunit at that radius is 12.3 Å, matching the 12.4 Å
+nearest-neighbour spacing measured independently. It is biologically plausible
+as well — the same paper puts the smallest Mega GVs near 36 nm (largest Halo
+≈ 7× smallest Mega, PMC10185304 L34). **There is no curvature defect.**
 
-My first attempt at this returned 12.6 nm and was wrong. It swept cylinder axes
-and fitted circles, reporting a "well constrained" 137° arc; rendering the patch
-in PyMOL showed a flat sheet, and a 137° arc would look like a letter C. The fit
-had locked onto internal scatter. Both the error and the correction are in the
-trajectory.
+Two errors were caught on the way to that number, both by an external check
+rather than by more analysis:
+
+- A first cylinder-axis sweep returned 12.6 nm over a "well constrained" 137°
+  arc. **PyMOL rendering** showed the patch is a flat sheet; a 137° arc would
+  look like a letter C. The fit had locked onto internal scatter.
+- The species mix-up above was caught by `docs/devils-advocate.md` C3, which
+  independently measured 183 Å and 362 Å radii for the two targets. The 183 Å
+  is 7R1C, and it matched what I had measured while attributing it to the wrong
+  organism.
+
+The honest summary of this part: the geometry validated, and the validation of
+the validation is what found the mistakes.
 
 ## Reproducing
 
@@ -126,6 +149,11 @@ set, at zero cost.
 
 Specificity claims, and triage of binding calls. **Not** epitope-directed design
 and **not** affinity ranking — G1 and G3 both fail, and those are the two a
-repeat-protein binder campaign actually needs. The GvpA run then found the
-target structure itself to be 2.4× over-curved, which is a problem upstream of
-any binder.
+repeat-protein binder campaign actually needs.
+
+The GvpA run adds a second constraint. Its target geometry checked out, but the
+reference it was scored against did not: a poly-UNK backbone with three contacts
+inside 5 Å, transferred across species. Two of the three headline numbers I
+produced there were wrong on first pass, and both were caught by something
+outside the analysis — a rendering and an independent document. Neither was
+caught by running more of the same pipeline.

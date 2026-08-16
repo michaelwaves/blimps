@@ -99,8 +99,10 @@ Deployed before this: boltz2 (prediction + affinity), esm2, esmfold, proteinmpnn
 Script exists and is syntax-checked; it has **never been executed** — the deploy
 only landed at the end. Expect to debug the contig string on first run:
 `60-90,/0,A2-66,/0,B2-66,/0,C2-66,/0,D2-66,/0,E2-66` against a 325-residue,
-5-chain target. RFdiffusion3's schema is in §9 of this file's sibling notes; get
-it with `tools.get_tool_schema('rfdiffusion3-design')`.
+5-chain target. Get the schema with
+`tools.get_tool_schema('rfdiffusion3-design')` — the fields that matter are
+`input_structure`, `contig`, `select_hotspots`, and the `infer_ori_strategy`
+config (`'hotspots'` for the constrained arm, `'com'` for the free one).
 
 Both arms deliberately — G1 showed the scorer cannot localise an epitope on a
 repeat protein (0/6). If that carries over, the free arm scatters and the

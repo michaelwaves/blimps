@@ -211,7 +211,7 @@ def cmd_run(args: argparse.Namespace) -> int:
     print("\n== run: gates in cost order, Referee veto live ==\n")
 
     scorer_class = SCORERS[args.scorer]
-    scorer: Scorer = scorer_class()
+    scorer: Scorer = scorer_class(seeds=args.seeds) if args.seeds else scorer_class()
     if not args.no_cache:
         scorer = CachedScorer(scorer, out / "score_cache")
     if args.scorer == "synthetic":
@@ -223,6 +223,11 @@ def cmd_run(args: argparse.Namespace) -> int:
             print(f"refusing: synthetic output may not be written to the bench submission path "
                   f"({DEFAULT_OUT}). Use --out demo/selftest.", file=sys.stderr)
             return 2
+
+    if args.ignore_veto and Path(args.out).resolve() == DEFAULT_OUT.resolve():
+        print(f"refusing: --ignore-veto violates the task's cost policy, so its output may not be written to "
+              f"the bench submission path ({DEFAULT_OUT}). Use --out demo/full-sweep.", file=sys.stderr)
+        return 2
 
     specs, gaps = resolve_inputs(scribe, with_tier_a=args.tier_a, tier_a_scaffold=args.scaffold)
     by_id = {spec.case_id: spec for spec in specs}
@@ -275,7 +280,7 @@ def cmd_run(args: argparse.Namespace) -> int:
     scribe.append("referee", "G2", g2.evidence, outcome="ok" if g2.status == "pass" else "veto")
 
     verdicts = [g5, g2]
-    if g2.status != "pass":
+    if g2.status != "pass" and not args.ignore_veto:
         scribe.append("referee", "veto", "G2 did not pass; the remaining tiers are not bought", outcome="veto")
         notes.append("G1/G3/G4 were not run because G2 did not pass. The task's cost policy makes this the "
                      "required behaviour, not an omission.")
@@ -287,6 +292,19 @@ def cmd_run(args: argparse.Namespace) -> int:
         write_submission(out, all_scores, verdicts, notes, scribe)
         return 1
 
+    if g2.status != "pass":
+        # The veto is the task's rule, not the harness's preference. Overriding it produces
+        # a demonstration of the downstream gates, not a submission — say so loudly, in the
+        # file itself, so the artefact cannot be mistaken for a compliant run later.
+        scribe.append("referee", "veto overridden", "G2 did not pass; buying the remaining tiers anyway "
+                      "by explicit request (--ignore-veto). This is a demo sweep, not a submission.",
+                      outcome="veto")
+        notes.append("NOT A VALID SUBMISSION. G2 failed and the remaining tiers were bought anyway by explicit "
+                     "request (--ignore-veto), to exercise G1/G3/G4 for demonstration. task.md requires the run "
+                     "to stop at a failed G2 — 'If G2 fails, stop and report'. Every gate verdict below G2 is "
+                     "therefore reported against a scorer that already failed the gate qualifying it, and should "
+                     "be read as a capability demo of the harness, not as evidence about the pipeline.")
+
     # ---- everything past here is only bought because G2 passed
     tier_ac = [spec for spec in specs if spec.tier in {"A", "C"}]
     if args.stop_after_g2:
@@ -297,9 +315,14 @@ def cmd_run(args: argparse.Namespace) -> int:
             gates.g4_calibration(all_scores, specs, threshold),
         ]
     else:
+        justification = (
+            f"justified by G2 passing with margin {g2.detail.get('margin')}"
+            if g2.status == "pass"
+            else f"NOT justified by a gate: G2 failed with margin {g2.detail.get('margin')} and the veto was "
+                 f"overridden by request"
+        )
         scribe.append("economist", "buy tiers A and C",
-                      f"{len(tier_ac)} complexes, justified by G2 passing with margin "
-                      f"{g2.detail.get('margin')}", cost=scorer.cost_estimate(len(tier_ac)))
+                      f"{len(tier_ac)} complexes, {justification}", cost=scorer.cost_estimate(len(tier_ac)))
         all_scores += list(scorer.score(tier_ac))
         verdicts += [
             gates.g1_interface_recovery(all_scores, structures_available=args.scorer != "synthetic"),
@@ -357,6 +380,13 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--scorer", default="boltz2", choices=sorted(SCORERS), help="which scorer to use")
     parser.add_argument("--tier-a", action="store_true", help="include the Tier A affinity ladder (63 variants/scaffold)")
     parser.add_argument("--scaffold", default="scaffold_5aei", choices=["scaffold_5aei", "scaffold_6sa8"])
+    parser.add_argument(
+        "--seeds", type=int, nargs="+", metavar="N",
+        help="seeds to average over (default: 0 1 2). More seeds is a different cache key, so it "
+             "re-scores every complex. Note that G2's band is a sample range, whose expectation grows "
+             "with seed count — see docs/gonogo-feasibility.md §4 before reading a wider band as a "
+             "worse model.",
+    )
     sub = parser.add_subparsers(dest="command", required=True)
 
     sub.add_parser("preflight", help="what can run right now, and what it costs").set_defaults(func=cmd_preflight)
@@ -365,6 +395,9 @@ def main(argv: list[str] | None = None) -> int:
     run = sub.add_parser("run", help="run the gates in cost order")
     run.add_argument("--allow-synthetic", action="store_true", help="permit the meaningless self-test scorer")
     run.add_argument("--stop-after-g2", action="store_true", help="buy nothing past the specificity gate")
+    run.add_argument("--ignore-veto", action="store_true",
+                     help="run G1/G3/G4 even when G2 fails. Violates the task's cost policy, so the output is "
+                          "stamped NOT A VALID SUBMISSION and may not be written to the bench results dir.")
     run.add_argument("--no-cache", action="store_true", help="re-run every complex instead of reusing checkpoints")
     run.set_defaults(func=cmd_run)
 

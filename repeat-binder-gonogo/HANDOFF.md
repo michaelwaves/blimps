@@ -69,23 +69,38 @@ internal consistency checks and died to an external one.
 
 ---
 
-## 4. What was running when this stopped
+## 4. Deploy status — RFdiffusion3 is LIVE
 
-`rfdiffusion3-design` deploy to `proto-env`, via the library path.
-Log: `/private/tmp/claude-501/.../tasks/bib9qk6zk.output`. Last phase seen:
-`running function '_warmup'` (the one-time GPU execution; RFdiffusion3 pulls
-weights on first run, so it is slow).
+`rfdiffusion3-design` deployed successfully to `proto-env` at the end of the
+session, via the library path in §3:
 
-Check with `.venv/bin/python -c "from proto_tools.mcp import tools; print(tools.deployed_keys())"`.
+```
+RESULT: {'ok': True, 'app': 'proto-tools-rfdiffusion3',
+         'environment': 'proto-env', 'tool': 'rfdiffusion3-design'}
+```
+
+De novo design is unblocked. Nothing is currently running. Confirm with:
+
+```bash
+.venv/bin/python -c "from proto_tools.mcp import tools; print(sorted(tools.deployed_keys()))"
+```
+
+Deployed before this: boltz2 (prediction + affinity), esm2, esmfold, proteinmpnn.
 
 ---
 
-## 5. Ready to run the moment the deploy lands
+## 5. The next command to run
 
 ```bash
 .venv/bin/python gvpa_rfd3.py --arm constrained   # 28 GvpC-derived hotspots
 .venv/bin/python gvpa_rfd3.py --arm free          # no hotspots
 ```
+
+Script exists and is syntax-checked; it has **never been executed** — the deploy
+only landed at the end. Expect to debug the contig string on first run:
+`60-90,/0,A2-66,/0,B2-66,/0,C2-66,/0,D2-66,/0,E2-66` against a 325-residue,
+5-chain target. RFdiffusion3's schema is in §9 of this file's sibling notes; get
+it with `tools.get_tool_schema('rfdiffusion3-design')`.
 
 Both arms deliberately — G1 showed the scorer cannot localise an epitope on a
 repeat protein (0/6). If that carries over, the free arm scatters and the
@@ -94,8 +109,13 @@ would hide it.
 
 **Caveat that must stay attached to those hotspots:** they come from
 superimposing *Anabaena* GvpC (8GBS) onto a *Megaterium* GvpA surface — 72%
-identity, 1.76 Å Cα RMSD. A hypothesis about the site, not a measured
+identity, 1.76 A CA RMSD. A hypothesis about the site, not a measured
 Megaterium epitope.
+
+After the backbones: ProteinMPNN for sequences, Boltz-2 to co-fold and validate,
+then compare the footprint to the GvpC placement — **as spatial overlap, not
+DockQ**. The GvpC reference is a poly-UNK backbone with three contacts inside
+5 A; DockQ against it is meaningless.
 
 Also queued, not started: **G1b oracle**. Modify the Boltz-2 wrapper to expose
 pocket constraints, redeploy, run the 3 diagnosed failures with the true epitope

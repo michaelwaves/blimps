@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lattice-aware GvpA binder design</title>
+<style>
+  :root{--ink:#12202b;--muted:#5c6b75;--line:#d9e1e6;--paper:#f7f9fa;--cyan:#00aeba;--orange:#e97800;--red:#d62728;--green:#168a50;--amber:#b97700}
+  *{box-sizing:border-box} body{margin:0;background:#fff;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  main{max-width:1180px;margin:auto;padding:38px 42px 70px}.eyebrow{font-size:13px;font-weight:750;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
+  h1{font-size:44px;line-height:1.04;max-width:930px;margin:9px 0 14px;letter-spacing:-.035em} .lead{font-size:20px;line-height:1.42;max-width:910px;color:var(--muted);margin:0 0 34px}
+  h2{font-size:27px;letter-spacing:-.02em;margin:50px 0 18px}.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:stretch}
+  .stage{border-top:5px solid var(--ink);background:var(--paper);padding:15px 14px;min-height:132px;position:relative}.stage:not(:last-child):after{content:"→";position:absolute;right:-15px;top:48px;font-weight:800;font-size:22px;z-index:2}
+  .stage b{display:block;font-size:17px;margin-bottom:8px}.stage small{display:block;color:var(--muted);font-size:13px;line-height:1.35}.stage strong{color:var(--cyan)}
+  .gates{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.gate{border:1px solid var(--line);padding:12px 13px}.gate span{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}.gate b{font-size:20px}.pass b{color:var(--green)}.fail b{color:var(--red)}
+  .experiment{display:grid;grid-template-columns:1.15fr .85fr;gap:32px;align-items:start}.arm-buttons{display:flex;gap:18px;border-bottom:1px solid var(--line);margin-bottom:14px}
+  button{appearance:none;background:none;border:0;border-bottom:4px solid transparent;padding:10px 1px 9px;font:inherit;font-weight:750;color:var(--muted);cursor:pointer}button[aria-selected="true"]{color:var(--ink);border-color:var(--arm)}
+  .molecule{width:100%;aspect-ratio:1.6/1;object-fit:contain;background:#fff}.legend{display:flex;gap:18px;color:var(--muted);font-size:13px}.dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px}
+  .metrics{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}.metric{padding:17px 8px 15px 0;border-bottom:1px solid var(--line)}.metric:nth-child(even){padding-left:20px;border-left:1px solid var(--line)}
+  .metric strong{display:block;font-size:28px;letter-spacing:-.03em}.metric span{display:block;font-size:13px;color:var(--muted);margin-top:4px;line-height:1.3}.arm-note{font-size:16px;line-height:1.5;color:var(--muted);margin:19px 0 0}
+  .result-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px}.bars{border-left:1px solid var(--line);padding-left:22px}.bar-row{display:grid;grid-template-columns:104px 1fr 48px;align-items:center;gap:10px;margin:14px 0;font-size:14px}.track{height:18px;background:#edf1f3;position:relative}.fill{height:100%}.seed-plot{width:100%;height:auto;border:1px solid var(--line);background:#fff}.claim{border-left:7px solid var(--amber);background:#fff8e8;padding:20px 22px;font-size:20px;line-height:1.4;margin-top:34px}.claim b{display:block;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:6px}
+  footer{color:var(--muted);font-size:13px;margin-top:48px;padding-top:16px;border-top:1px solid var(--line)}
+  @media(max-width:820px){main{padding:28px 22px}h1{font-size:35px}.flow,.gates{grid-template-columns:1fr}.stage:not(:last-child):after{display:none}.experiment,.result-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">re:AGENT · Track C bio design</div>
+  <h1>Constraints steer a binder to the lattice. Controls stop us from calling it validated.</h1>
+  <p class="lead">A matched constrained-versus-free experiment on a five-chain GvpA patch, with evidence gates deciding what each model output is allowed to mean.</p>
+
+  <h2>Model architecture</h2>
+  <section class="flow" aria-label="Pipeline architecture">
+    <div class="stage"><b>1 · Assembly</b><small>7R1C-derived five-chain GvpA surface. A 28-residue site is transferred from cross-species GvpC as a <strong>hypothesis</strong>.</small></div>
+    <div class="stage"><b>2 · RFdiffusion3</b><small>8 constrained + 8 free de novo binder backbones. Same seeds, length range, and GPU budget.</small></div>
+    <div class="stage"><b>3 · Referee</b><small>Measure hotspot footprint and reject backbone clashes below 2 Å before buying more compute.</small></div>
+    <div class="stage"><b>4 · ProteinMPNN</b><small>Redesign binder chain only. Four sequences per backbone: <strong>64 candidates</strong>.</small></div>
+    <div class="stage"><b>5 · Boltz-2</b><small>Screen two distinct backbones per arm; confirm one winner per arm across three seeds.</small></div>
+  </section>
+
+  <h2>What the control run licenses</h2>
+  <section class="gates">
+    <div class="gate pass"><span>G5 · decoys</span><b>Pass</b><p>Scores carry signal.</p></div>
+    <div class="gate pass"><span>G2 · specificity</span><b>Pass</b><p>Specificity comparisons.</p></div>
+    <div class="gate fail"><span>G1 · interface</span><b>Fail</b><p>No pose/epitope claim.</p></div>
+    <div class="gate fail"><span>G3 · affinity</span><b>Fail</b><p>No affinity ranking.</p></div>
+    <div class="gate pass"><span>G4 · calibration</span><b>Pass</b><p>Triage follow-up spend.</p></div>
+  </section>
+
+  <h2>Matched design experiment</h2>
+  <section class="experiment">
+    <div>
+      <div class="arm-buttons" role="tablist">
+        <button id="tab-c" role="tab" aria-selected="true" style="--arm:var(--cyan)">Constrained arm</button>
+        <button id="tab-f" role="tab" aria-selected="false" style="--arm:var(--orange)">Free arm</button>
+      </div>
+      <img id="molecule" class="molecule" src="constrained_winner.png" alt="Constrained binder on GvpA lattice patch">
+      <div class="legend"><span><i class="dot" id="binder-dot" style="background:var(--cyan)"></i>Designed binder</span><span><i class="dot" style="background:var(--red)"></i>Hypothesized site</span><span><i class="dot" style="background:#b7bdc1"></i>GvpA patch</span></div>
+    </div>
+    <div>
+      <div class="metrics">
+        <div class="metric"><strong id="hits">6–10</strong><span>hotspot residues contacted per backbone</span></div>
+        <div class="metric"><strong id="distance">0.7–2.5 Å</strong><span>closest hotspot distance</span></div>
+        <div class="metric"><strong id="clashes">4 / 8</strong><span>backbones rejected for &lt;2 Å clash</span></div>
+        <div class="metric"><strong id="iptm">0.2605</strong><span>winner mean binder–target ipTM</span></div>
+      </div>
+      <p id="arm-note" class="arm-note">The site constraint changes where all eight backbones land, but creates a 50% steric-clash failure rate.</p>
+    </div>
+  </section>
+
+  <h2>Result: directionally better, absolutely uncertain</h2>
+  <section class="result-grid">
+    <div class="bars">
+      <div class="bar-row"><span>Constrained</span><div class="track"><div class="fill" style="width:65.1%;background:var(--cyan)"></div></div><b>0.2605</b></div>
+      <div class="bar-row"><span>Free</span><div class="track"><div class="fill" style="width:23.8%;background:var(--orange)"></div></div><b>0.0951</b></div>
+      <p class="arm-note">The constrained winner scores 2.7× higher on mean binder–target ipTM.</p>
+    </div>
+    <div>
+      <svg class="seed-plot" viewBox="0 0 500 210" role="img" aria-label="Boltz binder-target ipTM across three seeds">
+        <line x1="55" y1="170" x2="470" y2="170" stroke="#94a0a7"/><line x1="55" y1="25" x2="55" y2="170" stroke="#94a0a7"/>
+        <g fill="#5c6b75" font-size="12"><text x="17" y="174">0.0</text><text x="17" y="117">0.2</text><text x="17" y="59">0.4</text><text x="100" y="194">seed 0</text><text x="240" y="194">seed 1</text><text x="380" y="194">seed 2</text></g>
+        <polyline points="120,115 260,29 400,112" fill="none" stroke="#00aeba" stroke-width="4"/><circle cx="120" cy="115" r="7" fill="#00aeba"/><circle cx="260" cy="29" r="7" fill="#00aeba"/><circle cx="400" cy="112" r="7" fill="#00aeba"/>
+        <polyline points="120,129 260,149 400,129" fill="none" stroke="#e97800" stroke-width="4"/><circle cx="120" cy="129" r="7" fill="#e97800"/><circle cx="260" cy="149" r="7" fill="#e97800"/><circle cx="400" cy="129" r="7" fill="#e97800"/>
+        <text x="63" y="18" font-size="13" font-weight="700" fill="#12202b">binder–target ipTM</text>
+      </svg>
+    </div>
+  </section>
+
+  <div class="claim"><b>Scientific conclusion</b>The constraint reliably controls localization and improves the downstream triage score. High seed sensitivity, low absolute confidence, and the failed G1 control mean the output is a novel testable sequence—not a validated binder.</div>
+  <footer>64 novel sequences · 16 de novo backbones · completed 2026-08-16 · full provenance in pipeline_results.json and candidates.json</footer>
+</main>
+<script>
+const arms={
+  c:{img:'constrained_winner.png',alt:'Constrained binder on GvpA lattice patch',color:'var(--cyan)',hits:'6–10',distance:'0.7–2.5 Å',clashes:'4 / 8',iptm:'0.2605',note:'The site constraint changes where all eight backbones land, but creates a 50% steric-clash failure rate.'},
+  f:{img:'free_winner.png',alt:'Free binder away from hypothesized GvpC site',color:'var(--orange)',hits:'0',distance:'14.5–22.7 Å',clashes:'0 / 8',iptm:'0.0951',note:'Without hotspots, every backbone misses the hypothesized site; none has a sub-2 Å backbone clash.'}
+};
+function showArm(key){const a=arms[key];document.getElementById('molecule').src=a.img;document.getElementById('molecule').alt=a.alt;document.getElementById('binder-dot').style.background=a.color;for(const id of ['hits','distance','clashes','iptm'])document.getElementById(id).textContent=a[id];document.getElementById('arm-note').textContent=a.note;document.getElementById('tab-c').setAttribute('aria-selected',String(key==='c'));document.getElementById('tab-f').setAttribute('aria-selected',String(key==='f'));}
+document.getElementById('tab-c').addEventListener('click',()=>showArm('c'));document.getElementById('tab-f').addEventListener('click',()=>showArm('f'));
+</script>
+</body>
+</html>

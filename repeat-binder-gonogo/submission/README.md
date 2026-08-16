@@ -5,14 +5,14 @@ binder-scoring pipeline can be trusted, and a design run against a real target
 that inherits the answer.
 
 ```
-trajectory.jsonl    174 records, every phase, every dead end
+trajectory.jsonl    181 records, every phase, every dead end
 manifest.json       record counts, validation checks, artifact hashes
 artifacts/          every file a claim in the trajectory points at
 ```
 
 ## The trajectory is segmented, not pruned
 
-174 records across four phases. The control run alone is **seventeen separate
+181 records across four phases. The control run alone is **seventeen separate
 invocations** — `t` restarts on each, and thirty lines are byte-identical
 repeats of per-attempt setup.
 
@@ -24,15 +24,16 @@ narrative or filter to a single attempt without anything having been removed.
 
 | outcome | count |
 |---|---|
-| ok | 144 |
-| veto | 13 |
+| ok | 149 |
+| veto | 14 |
 | gap | 9 |
-| blocked | 8 |
+| blocked | 9 |
 
-The 30 non-`ok` records are the point, not the noise: four runs aborted on a
+The 32 non-`ok` records are the point, not the noise: four runs aborted on a
 Modal billing block, one deliberate veto override, a Tier A sweep killed at
-30/63 by an upstream connection reset, three declined deploys, and two of my own
-analysis errors caught and corrected.
+30/63 by an upstream connection reset, three initially declined deploys, and
+analysis errors caught and corrected. A later successful RFdiffusion3 deploy is
+also retained, so the trajectory records the state change rather than hiding it.
 
 The `gvpa-design` records are marked `logged: retrospective` — that work ran
 through standalone scripts outside the scribe, and the records were
@@ -74,63 +75,66 @@ recycles, selecting by the model's own ipTM with the deposit sealed out, moved
 C_1SVX from ipTM 0.664 → **0.927** with DockQ 0.0105 → **0.0106**. Knowledge
 limit, not sampling limit.
 
-## Part 2 — the GvpA design run
+## Part 2 — a matched GvpA binder-design experiment
 
-Target: a generated 5-rib GvpA surface patch — sequence-identical to **7R1C,
-*Bacillus megaterium***. Reference for the natural binder: **8GBS, *Anabaena***.
+Target: a generated 5-rib GvpA surface patch, sequence-identical to **7R1C,
+*Bacillus megaterium***. The natural-binder footprint is a spatial hypothesis
+transferred from **8GBS, *Anabaena*** by superposition (1.76 Å Cα RMSD, 72%
+identity). It is not a measured *Megaterium* epitope: 8GBS GvpC is a
+backbone-only poly-UNK trace with only three GvpA residues inside 5 Å, so it is
+used to define a region, never as a DockQ reference.
 
-That is a cross-species pairing, and it is a weakness of the setup rather than a
-detail. The GvpC footprint used below was obtained by superimposing *Anabaena*
-GvpC onto a *Megaterium* GvpA surface (1.76 Å Cα RMSD between the two GvpAs,
-72% identity). Any site derived that way is a hypothesis about where a
-*Megaterium* binder might go, not a measured *Megaterium* epitope.
+The earlier attempt stopped at inverse folding on that GvpC trace and produced
+no positional signal (+0.4 percentage points above a shuffled control). That
+failure remains in the trajectory. RFdiffusion3 was subsequently deployed, so
+the completed experiment now generates genuinely new binder backbones.
 
-**It is not de novo design, and is not reported as such.** RFdiffusion3 was
-declined at the approval prompt three times, so no backbone was generated. What
-ran is inverse folding on the GvpC backbone placement — fold and pose given,
-sequence designed.
+### Architecture
 
-That returned **+0.4 percentage points above a composition-shuffled baseline** —
-no positional signal. The cause was visible in advance: GvpC in 8GBS is a
-backbone-only poly-UNK trace with three GvpA residues inside 5 Å. There was no
-interface to design against, and DockQ against it would have been meaningless.
+```text
+7R1C-derived five-chain GvpA target
+        |
+        +-- constrained: 28 transferred spatial hotspots --> 8 RFdiffusion3 backbones
+        +-- free: no hotspots ----------------------------> 8 RFdiffusion3 backbones
+                                                            |
+                                                   geometry referee
+                                                   footprint + <2 Å clash gate
+                                                            |
+                                                   ProteinMPNN, chain A only
+                                                   4 seq/backbone = 64
+                                                            |
+                                                   select 2 backbones/arm
+                                                            |
+                                                   Boltz-2 seed-0 screen
+                                                   winners at seeds 1 and 2
+                                                            |
+                                                   result + uncertainty
+                                                   + claim boundary
+```
 
-**The curvature check, and the error it exposed in my own work.** A patch cut
-from a cylinder has to bow like one, and curvature is a property the generator
-never optimised against. Measuring the sagitta of subunit centroids along each
-rib gives an implied diameter of **35.6 nm**, with all five ribs agreeing
-exactly.
+The experiment changes one variable—the hotspot constraint—while matching the
+backbone count, sequence budget, seeds, and downstream selection policy.
 
-I first compared that against *Anabaena* GVs (85 ± 4 nm) and reported the patch
-as **2.4× over-curved**. That was wrong. The patch sequence is an exact match to
-**7R1C, *Bacillus megaterium***, not to 8GBS/*Anabaena* — I had assumed the
-species from the wrong reference file.
+| result | constrained | free |
+|---|---:|---:|
+| RFdiffusion3 backbones | 8 | 8 |
+| ProteinMPNN candidates | 32 | 32 |
+| hotspot residues contacted per backbone | **6–10** | **0** |
+| closest hotspot distance | **0.7–2.5 Å** | **14.5–22.7 Å** |
+| backbones with a <2 Å backbone clash | **4/8** | **0/8** |
+| winner mean binder-target ipTM, 3 seeds | **0.2605** | **0.0951** |
+| winner ipTM seed range | **0.1998** | **0.0539** |
 
-Against its actual source the patch is faithful:
+The constraint unambiguously controls localization and raises the downstream
+triage score 2.7-fold. It also creates a 50% steric failure rate. The surviving
+constrained winner remains low-confidence and highly seed-sensitive. The
+result is therefore **two novel, testable sequences and a localization
+experiment—not a validated binder**.
 
-| | radius | diameter |
-|---|---|---|
-| 7R1C deposited | 182.3 Å | **36.5 nm** |
-| generated patch | 177.9 Å | **35.6 nm** |
-
-2.4% apart. Arc-per-subunit at that radius is 12.3 Å, matching the 12.4 Å
-nearest-neighbour spacing measured independently. It is biologically plausible
-as well — the same paper puts the smallest Mega GVs near 36 nm (largest Halo
-≈ 7× smallest Mega, PMC10185304 L34). **There is no curvature defect.**
-
-Two errors were caught on the way to that number, both by an external check
-rather than by more analysis:
-
-- A first cylinder-axis sweep returned 12.6 nm over a "well constrained" 137°
-  arc. **PyMOL rendering** showed the patch is a flat sheet; a 137° arc would
-  look like a letter C. The fit had locked onto internal scatter.
-- The species mix-up above was caught by `docs/devils-advocate.md` C3, which
-  independently measured 183 Å and 362 Å radii for the two targets. The 183 Å
-  is 7R1C, and it matched what I had measured while attributing it to the wrong
-  organism.
-
-The honest summary of this part: the geometry validated, and the validation of
-the validation is what found the mistakes.
+The target geometry itself is sound. The generated patch measures 35.6 nm in
+diameter versus 36.5 nm in deposited 7R1C, a 2.4% difference. An earlier claim
+that it was 2.4× over-curved compared the wrong species (8GBS/Anabaena) and is
+explicitly withdrawn in the trajectory.
 
 ## Reproducing
 
@@ -139,6 +143,11 @@ python -m gonogo preflight    # free: what can run, what it costs, what blocks i
 python -m gonogo inputs       # free: resolve 23 complexes, re-derive the case set's claims
 python -m gonogo verify       # free: the bench's own verifier
 python gvpa_curvature.py      # free: the curvature measurement
+.venv/bin/python gvpa_rfd3.py --arm constrained --n-designs 8
+.venv/bin/python gvpa_rfd3.py --arm free --n-designs 8
+.venv/bin/python gvpa_full_pipeline.py mpnn --n-per-backbone 4
+.venv/bin/python gvpa_full_pipeline.py compile
+.venv/bin/python gvpa_full_pipeline.py boltz --top-per-arm 2
 ```
 
 `inputs` re-derives every factual claim in `cases.yaml` from primary sources and
@@ -151,9 +160,9 @@ Specificity claims, and triage of binding calls. **Not** epitope-directed design
 and **not** affinity ranking — G1 and G3 both fail, and those are the two a
 repeat-protein binder campaign actually needs.
 
-The GvpA run adds a second constraint. Its target geometry checked out, but the
-reference it was scored against did not: a poly-UNK backbone with three contacts
-inside 5 Å, transferred across species. Two of the three headline numbers I
-produced there were wrong on first pass, and both were caught by something
-outside the analysis — a rendering and an independent document. Neither was
-caught by running more of the same pipeline.
+The GvpA experiment adds evidence for controllable localization: constrained
+RFdiffusion3 backbones land on the nominated lattice footprint and free designs
+do not. Boltz-2 then provides a triage signal, but G1 and G3 prevent interpreting
+that signal as a correct pose, epitope, affinity ranking, or validated binder.
+The next decisive step is experimental expression and binding measurement of
+the constrained winner, with the free winner as the matched negative control.

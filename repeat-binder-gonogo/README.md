@@ -2,10 +2,36 @@
 
 Validate a binder-scoring pipeline against repeat-protein complexes whose
 outcomes are already known, and report whether it is fit to be trusted on novel
-designs. Nothing here is a design — these are controls, chosen because they are
-the cheapest systems on which a scoring model can be caught being wrong.
+designs. The controls are then applied to a matched, de novo GvpA lattice-binder
+experiment so every design claim stays inside the evidence they license.
 
 Scorer under test: **Boltz-2**, run on Modal via proto-tools.
+
+## GvpA design pipeline
+
+`gvpa_rfd3.py` generates eight hotspot-constrained and eight free binder
+backbones against a five-chain GvpA lattice patch. `gvpa_full_pipeline.py`
+applies a geometry/clash referee, designs four ProteinMPNN sequences per
+backbone, and screens distinct clash-free finalists with Boltz-2.
+
+The matched experiment produced 64 sequences. Constrained backbones contact
+6–10 nominated hotspot residues while free backbones contact none; the
+constrained winner's three-seed mean binder-target ipTM is 0.2605 versus 0.0951
+for the free control. Because G1 below fails on repeat proteins, these are
+triage results and testable sequences—not validated binders or poses.
+
+```bash
+python gvpa_rfd3.py --arm constrained --n-designs 8
+python gvpa_rfd3.py --arm free --n-designs 8
+python gvpa_full_pipeline.py mpnn --n-per-backbone 4
+python gvpa_full_pipeline.py compile
+python gvpa_full_pipeline.py boltz --top-per-arm 2
+```
+
+The repository commits the 16 materialized RFdiffusion backbones, compact
+candidate/result tables, and the browser demo. Raw Modal response payloads are
+excluded. The new stages require `numpy`, `biotite`, and `proto-tools` in
+addition to the benchmark dependencies below.
 
 ## Result
 
@@ -14,7 +40,7 @@ Scorer under test: **Boltz-2**, run on Modal via proto-tools.
 | **G5** | decoy rejection | **pass** — all 9 decoys below the weakest true positive (B2 = 66.75) |
 | **G2** | specificity: DARPin 4m3 × mouse vs human cathepsin B | **pass** — margin 34.67 > band 12.08, Welch t = 6.08 |
 | **G1** | interface recovery (DockQ vs deposit) | **fail** — 2/8 clear DockQ ≥ 0.49; median iRMSD 16.95 Å |
-| **G3** | affinity ranking | `not_run` — Tier A ladder incomplete; see below |
+| **G3** | affinity ranking | **fail** — per-pocket rho ranges from 0.667 to −0.245 |
 | **G4** | calibration | **pass** — AUC 0.775, but read it narrowly |
 
 Bench verifier: **5/5**.

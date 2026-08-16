@@ -73,9 +73,35 @@ GVPA_STEPS = [
     ("referee", "curvature check, corrected", "measured sagitta of subunit centroids along each rib instead; "
      "R = L^2/8s, no axis search to overfit. All five ribs agree exactly: chord 121.3 A, sagitta 10.35 A, "
      "implied diameter 35.6 nm.", "ok", "designs/gvpa/curvature.json"),
-    ("librarian", "literature comparison via paperclip", "Ana GVs measure 85 +/- 4 nm in diameter with a ~2.8 nm "
-     "shell (Dutka et al. 2023, PMC10185304 L22 and L83) -- the source study for 8GBS. The generated patch is "
-     "2.4x over-curved for its own species.", "ok", "designs/gvpa/curvature.json"),
+    ("referee", "withdraw wrong-species curvature comparison", "the first literature comparison used "
+     "8GBS/Anabaena (85 +/- 4 nm) even though the generated patch sequence is an exact match to "
+     "7R1C/Bacillus megaterium. The resulting 2.4x over-curved claim is withdrawn.", "blocked",
+     "designs/gvpa/curvature.json"),
+    ("referee", "validate curvature against the deposited source", "the patch measures 35.6 nm diameter "
+     "versus 36.5 nm in deposited 7R1C, a 2.4% difference. There is no curvature defect.", "ok",
+     "designs/gvpa/curvature.json"),
+    ("economist", "deploy rfdiffusion3", "deployment was later approved and the tool became live; the prior "
+     "blocked event remains above because it describes the earlier attempt, not the final state.", "ok",
+     "gvpa_rfd3.py"),
+    ("architect", "run matched constrained and free backbone generation", "RFdiffusion3 generated 8 de novo "
+     "binder backbones with 28 GvpC-derived spatial hotspots and 8 with no hotspots, using identical budgets "
+     "and seeds.", "ok", "designs/gvpa/full_pipeline/pipeline_results.json"),
+    ("referee", "score localization and sterics before sequence design", "every constrained backbone contacts "
+     "6-10 hotspot residues while every free backbone contacts zero; constrained designs are 0.7-2.5 A from "
+     "the footprint versus 14.5-22.7 A for free. The same constraint creates <2 A backbone clashes in 4/8 "
+     "constrained backbones versus 0/8 free, which are rejected before co-folding.", "ok",
+     "designs/gvpa/full_pipeline/candidates.json"),
+    ("architect", "design binder sequences with ProteinMPNN", "redesigned binder chain A only: 4 sequences "
+     "per backbone across 16 backbones, producing 64 sequence-backbone candidates.", "ok",
+     "designs/gvpa/full_pipeline/candidates.csv"),
+    ("economist", "screen and replicate finalists with Boltz-2", "screened two distinct clash-free backbones "
+     "per arm at seed 0, then confirmed one winner per arm at seeds 1 and 2; six total co-fold evaluations.",
+     "ok", "designs/gvpa/full_pipeline/pipeline_results.json"),
+    ("referee", "limit the final binder claim", "the constrained winner mean binder-target ipTM is 0.2605 "
+     "versus 0.0951 free (2.7x), but its seed range is 0.1998 and the repeat-protein interface-recovery gate "
+     "G1 failed. This is evidence that the constraint controls localization and improves triage, not evidence "
+     "of a validated binder, pose, epitope, or affinity ranking.", "veto",
+     "designs/gvpa/full_pipeline/pipeline_results.json"),
 ]
 
 
@@ -151,6 +177,8 @@ def main() -> int:
 
     # ---- copy the artifacts every claim points at ---------------------------
     artifacts = OUT / "artifacts"
+    if artifacts.exists():
+        shutil.rmtree(artifacts)
     artifacts.mkdir(exist_ok=True)
     for rel in ["bench/repeat-binder-gonogo/results/predictions.json",
                 "bench/repeat-binder-gonogo/results/predictions.n3-range-band.json",
@@ -163,7 +191,18 @@ def main() -> int:
                 "bench/repeat-binder-gonogo/REFERENCES.md",
                 "designs/gvpa/curvature.json",
                 "designs/gvpa/site.json",
-                "designs/gvpa/designed_sequences.json"]:
+                "designs/gvpa/designed_sequences.json",
+                "designs/gvpa/patch_axial.png",
+                "designs/gvpa/patch_side.png",
+                "designs/gvpa/target_gvpc.png",
+                "designs/gvpa/target_gvpc_rot90.png",
+                "designs/gvpa/full_pipeline/pipeline_results.json",
+                "designs/gvpa/full_pipeline/candidates.json",
+                "designs/gvpa/full_pipeline/candidates.csv",
+                "designs/gvpa/full_pipeline/best_binders.fasta",
+                "designs/gvpa/full_pipeline/demo.html",
+                "designs/gvpa/full_pipeline/constrained_winner.png",
+                "designs/gvpa/full_pipeline/free_winner.png"]:
         src = REPO / rel
         if src.exists():
             shutil.copyfile(src, artifacts / src.name)

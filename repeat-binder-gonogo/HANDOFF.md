@@ -149,24 +149,32 @@ Bench verifier **5/5**. `G5 pass · G2 pass · G1 fail · G3 fail · G4 pass`.
 
 ---
 
-## 7. GvpA design run — what it is and is not
+## 7. GvpA design run — completed state
 
-**Not de novo design.** RFdiffusion3 was blocked (see §3), so what ran was
-inverse folding on the GvpC backbone placement — fold and pose given, sequence
-designed. Result: **+0.4 pp above a composition-shuffled baseline**, i.e. no
-positional signal. Cause was predictable: GvpC in 8GBS is a backbone-only
-poly-UNK trace with **three** GvpA residues inside 5 Å. No interface to design
-against, and DockQ against it would be meaningless.
+The first attempt was inverse folding on the transferred GvpC backbone and had
+no positional signal (+0.4 pp over a shuffled baseline). That failed attempt is
+preserved in the trajectory. RFdiffusion3 was subsequently deployed and the
+completed experiment is genuinely de novo at the backbone level.
 
-Target prep is done and reusable: `designs/gvpa/gvpa_target.pdb`
-(5 subunits, 325 residues, chains A–E), `gvpc_reference.pdb`, `site.json`.
+Matched arms generated 8 constrained and 8 free backbones, followed by four
+ProteinMPNN sequences per backbone. A geometry referee rejects <2 A backbone
+clashes before Boltz-2 screening. Every constrained backbone contacts 6–10
+transferred hotspot residues; every free backbone contacts zero. The constrained
+winner has mean binder-target ipTM 0.2605 across three seeds versus 0.0951 free,
+but the 0.1998 constrained seed range and failed G1 gate limit this to triage.
+It is a novel testable sequence, not a validated binder or pose.
+
+Portable inputs and outputs live under `designs/gvpa/`: the five-chain target,
+GvpC spatial reference, 16 materialized RFdiffusion backbones, 64-candidate
+table, final FASTA, result JSON, and browser demo. Raw remote-model payloads are
+excluded from Git.
 
 ---
 
 ## 8. Git
 
-`blimps/` → `github.com/michaelwaves/blimps`, branch **`gonogo-control-demo`**,
-6 commits, **not pushed**. `main` untouched.
+`blimps/` → `github.com/michaelwaves/blimps`, branch **`gonogo-control-demo`**.
+`main` remains untouched; publish through a draft PR.
 
 ```
 46427c1  Withdraw the curvature finding: wrong species reference
@@ -177,25 +185,15 @@ b182a03  Close G1 with DockQ, pre-register G2's band, consolidate the submission
 783463f  Add repeat-binder-gonogo control run
 ```
 
-**Push is blocked on auth**: no `gh` CLI, HTTPS rejects password auth,
-`~/.ssh/id_rsa.pub` is 0 bytes. PR body drafted at `PR_BODY.md` (repo root, kept
-out of the repo deliberately).
-
-```bash
-cd /Users/jeewonyang/Documents/reAgent/blimps && git push -u origin gonogo-control-demo
-```
-
-Anything changed in the working tree must be rsynced into
-`blimps/repeat-binder-gonogo/` before committing — the staged copy has drifted
-several times. `package_submission.py` rebuilds `submission/` and validates it.
+`package_submission.py` deterministically rebuilds `submission/artifacts/` and
+validates the ordered trajectory before publication.
 
 ---
 
 ## 9. Open questions worth an agent's time
 
-1. Does the constrained arm land on the supplied site while the free arm
-   scatters? That is the live test of whether the G1 finding generalises to a
-   design target.
+1. Express the constrained winner and matched free control; test binding against
+   assembled gas vesicles and soluble GvpA.
 2. Is 7R1C's own 36.5 nm curvature right for Megaterium? Literature says Mega
    averages ~55 nm (85 − 30, PMC10185304 L23) but the small end reaches ~36 nm.
    The deposit sits at the small end — worth one paperclip query to settle.

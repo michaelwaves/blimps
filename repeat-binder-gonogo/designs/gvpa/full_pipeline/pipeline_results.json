@@ -1,0 +1,200 @@
+{
+  "experiment": "matched RFdiffusion3 constrained-vs-free binder design on a 5-chain GvpA patch",
+  "arms": {
+    "constrained": "28 cross-species GvpC-derived hotspots",
+    "free": "center-of-mass origin, no hotspots"
+  },
+  "counts": {
+    "backbones_per_arm": 8,
+    "sequences_per_backbone": 4,
+    "candidates": 64,
+    "boltz_screened": 4,
+    "boltz_confirmed": 2
+  },
+  "boltz_policy": "screen two distinct backbones per arm at seed 0; confirm the top score per arm at seeds 1 and 2",
+  "boltz_use_msa": false,
+  "screen": [
+    {
+      "candidate_id": "c02_s3",
+      "arm": "constrained",
+      "seed": 0,
+      "binder_target_iptm": 0.1904,
+      "complex_iptm": 0.2556,
+      "confidence_score": 0.4439,
+      "avg_pae_A": 20.079
+    },
+    {
+      "candidate_id": "c07_s3",
+      "arm": "constrained",
+      "seed": 0,
+      "binder_target_iptm": 0.1092,
+      "complex_iptm": 0.1836,
+      "confidence_score": 0.3974,
+      "avg_pae_A": 22.379
+    },
+    {
+      "candidate_id": "f00_s0",
+      "arm": "free",
+      "seed": 0,
+      "binder_target_iptm": 0.0614,
+      "complex_iptm": 0.1535,
+      "confidence_score": 0.3885,
+      "avg_pae_A": 24.157
+    },
+    {
+      "candidate_id": "f02_s1",
+      "arm": "free",
+      "seed": 0,
+      "binder_target_iptm": 0.1131,
+      "complex_iptm": 0.1299,
+      "confidence_score": 0.3705,
+      "avg_pae_A": 24.176
+    }
+  ],
+  "winners": [
+    {
+      "candidate_id": "c02_s3",
+      "arm": "constrained",
+      "backbone": 2,
+      "backbone_id": "c02",
+      "backbone_path": "designs/gvpa/full_pipeline/rfd3_inputs/c02.cif",
+      "sequence": "AAVVTLAPDPVWGWRVTALSPAAAALLAAVGGPTTVAGLNAALRAAGGDPARVPELVAAVAAGLRVVAA",
+      "length": 69,
+      "mpnn_perplexity": 1.9956,
+      "mpnn_sequence_recovery": 0.6232,
+      "contact_residues": [
+        "B64",
+        "B65",
+        "C51",
+        "C54",
+        "C55",
+        "C58",
+        "C59",
+        "C63",
+        "C64",
+        "C65",
+        "D55",
+        "D56",
+        "D58",
+        "D59",
+        "D65"
+      ],
+      "n_contact_residues": 15,
+      "target_chains_contacted": 3,
+      "hotspot_hits": [
+        "B64",
+        "B65",
+        "C55",
+        "C59",
+        "C64",
+        "C65",
+        "D56",
+        "D59",
+        "D65"
+      ],
+      "n_hotspot_hits": 9,
+      "contact_precision": 0.6,
+      "hotspot_recall": 0.3214,
+      "min_hotspot_distance_A": 2.514,
+      "min_target_distance_A": 2.514,
+      "min_backbone_distance_A": 3.09,
+      "backbone_clashes_lt2A": 0,
+      "boltz_replicates": [
+        {
+          "candidate_id": "c02_s3",
+          "arm": "constrained",
+          "seed": 0,
+          "binder_target_iptm": 0.1904,
+          "complex_iptm": 0.2556,
+          "confidence_score": 0.4439,
+          "avg_pae_A": 20.079
+        },
+        {
+          "candidate_id": "c02_s3",
+          "arm": "constrained",
+          "seed": 1,
+          "binder_target_iptm": 0.3902,
+          "complex_iptm": 0.3203,
+          "confidence_score": 0.4419,
+          "avg_pae_A": 18.494
+        },
+        {
+          "candidate_id": "c02_s3",
+          "arm": "constrained",
+          "seed": 2,
+          "binder_target_iptm": 0.201,
+          "complex_iptm": 0.2232,
+          "confidence_score": 0.4009,
+          "avg_pae_A": 22.256
+        }
+      ],
+      "boltz_binder_target_iptm_mean": 0.2605,
+      "boltz_binder_target_iptm_range": 0.1998,
+      "claim_limit": "triage only; G1 failed for repeat proteins, so this does not establish epitope recovery"
+    },
+    {
+      "candidate_id": "f02_s1",
+      "arm": "free",
+      "backbone": 2,
+      "backbone_id": "f02",
+      "backbone_path": "designs/gvpa/full_pipeline/rfd3_inputs/f02.cif",
+      "sequence": "AVTVTLAAGTSVTVTLDIPSSVIKPGQKVTVTLTHADGTTVTFEATVGATTNTITIPPLAKAGTWTVTV",
+      "length": 69,
+      "mpnn_perplexity": 2.1857,
+      "mpnn_sequence_recovery": 0.5797,
+      "contact_residues": [
+        "B10",
+        "B11",
+        "B6",
+        "B8",
+        "B9",
+        "C11",
+        "C14",
+        "C8",
+        "C9"
+      ],
+      "n_contact_residues": 9,
+      "target_chains_contacted": 2,
+      "hotspot_hits": [],
+      "n_hotspot_hits": 0,
+      "contact_precision": 0.0,
+      "hotspot_recall": 0.0,
+      "min_hotspot_distance_A": 20.435,
+      "min_target_distance_A": 1.934,
+      "min_backbone_distance_A": 3.215,
+      "backbone_clashes_lt2A": 0,
+      "boltz_replicates": [
+        {
+          "candidate_id": "f02_s1",
+          "arm": "free",
+          "seed": 0,
+          "binder_target_iptm": 0.1131,
+          "complex_iptm": 0.1299,
+          "confidence_score": 0.3705,
+          "avg_pae_A": 24.176
+        },
+        {
+          "candidate_id": "f02_s1",
+          "arm": "free",
+          "seed": 1,
+          "binder_target_iptm": 0.0592,
+          "complex_iptm": 0.1219,
+          "confidence_score": 0.3668,
+          "avg_pae_A": 24.809
+        },
+        {
+          "candidate_id": "f02_s1",
+          "arm": "free",
+          "seed": 2,
+          "binder_target_iptm": 0.1131,
+          "complex_iptm": 0.1299,
+          "confidence_score": 0.3705,
+          "avg_pae_A": 24.176
+        }
+      ],
+      "boltz_binder_target_iptm_mean": 0.0951,
+      "boltz_binder_target_iptm_range": 0.0539,
+      "claim_limit": "triage only; G1 failed for repeat proteins, so this does not establish epitope recovery"
+    }
+  ]
+}

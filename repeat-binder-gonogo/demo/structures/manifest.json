@@ -1,0 +1,91 @@
+{
+  "B1": {
+    "ok": true,
+    "file": "/Users/jeewonyang/Documents/reAgent/demo/structures/predicted_B1.cif",
+    "format": "cif",
+    "iptm": 0.8082230091094971,
+    "ptm": 0.9106794595718384,
+    "pair_chains_iptm": [
+      [
+        0.9854357242584229,
+        0.8082230091094971
+      ],
+      [
+        0.7854363918304443,
+        0.980925440788269
+      ]
+    ],
+    "avg_pae": 4.291684150695801,
+    "binder_name": "DARPin 4m3",
+    "target_name": "mouse cathepsin B (mature)",
+    "truth": {
+      "KD_nM": {
+        "pH6": 65.7,
+        "pH7": 108.3
+      },
+      "Ki_nM": {
+        "competitive": 26.7,
+        "noncompetitive": 47.25
+      },
+      "method": "SPR + kinetics"
+    }
+  },
+  "B4": {
+    "ok": true,
+    "file": "/Users/jeewonyang/Documents/reAgent/demo/structures/predicted_B4.cif",
+    "format": "cif",
+    "iptm": 0.6728907227516174,
+    "ptm": 0.8566445112228394,
+    "pair_chains_iptm": [
+      [
+        0.9859349131584167,
+        0.6728907227516174
+      ],
+      [
+        0.636677622795105,
+        0.9831908345222473
+      ]
+    ],
+    "avg_pae": 6.2387261390686035,
+    "binder_name": "DARPin 4m3",
+    "target_name": "human cathepsin B (mature)",
+    "truth": {
+      "outcome": "no binding, no inhibition at 1000x molar excess",
+      "selectivity_residues": {
+        "mouse": [
+          "I65",
+          "Q66"
+        ],
+        "human": [
+          "S65",
+          "M66"
+        ]
+      }
+    }
+  },
+  "C_4CJ2": {
+    "ok": true,
+    "file": "/Users/jeewonyang/Documents/reAgent/demo/structures/predicted_C_4CJ2.cif",
+    "format": "cif",
+    "iptm": 0.8803824186325073,
+    "ptm": 0.8942844867706299,
+    "pair_chains_iptm": [
+      [
+        0.9665075540542603,
+        0.8803824186325073
+      ],
+      [
+        0.7958141565322876,
+        0.9046804308891296
+      ]
+    ],
+    "avg_pae": 4.6307759284973145,
+    "binder_name": "AFFITIN H4",
+    "target_name": "LYSOZYME C",
+    "truth": {
+      "pdb": "4CJ2",
+      "resolution_A": 1.5,
+      "complex": "affitin H4 + hen egg white lysozyme"
+    }
+  }
+}

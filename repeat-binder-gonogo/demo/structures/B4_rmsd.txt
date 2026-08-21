@@ -1,0 +1,2 @@
+B4: DARPin 4m3 + human cathepsin B (no binding observed) vs the DEPOSITED MOUSE complex (83%% identical target, aligned as a reference frame only -- human cathepsin B was never crystallized with this DARPin)
+target-chain alignment RMSD: 0.31 A over 1467 atoms

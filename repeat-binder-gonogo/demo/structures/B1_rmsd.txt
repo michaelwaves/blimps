@@ -1,0 +1,2 @@
+B1: DARPin 4m3 predicted vs deposited (9S60, true 65.7 nM binder)
+target-chain alignment RMSD: 0.33 A over 1529 atoms

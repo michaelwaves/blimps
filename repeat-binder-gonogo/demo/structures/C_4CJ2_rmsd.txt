@@ -1,0 +1,2 @@
+C_4CJ2: affitin H4 predicted vs deposited (4CJ2, hen egg lysozyme) -- positive control
+target-chain alignment RMSD: 0.24 A over 774 atoms
